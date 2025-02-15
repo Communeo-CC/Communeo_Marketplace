@@ -32,7 +32,7 @@ function Navbar() {
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">liverr</span>
+            <span className="text">Communeo</span>
           </Link>
           <span className="dot">.</span>
         </div>
