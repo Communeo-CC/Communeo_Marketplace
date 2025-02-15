@@ -22,7 +22,7 @@ function App() {
         <Outlet />
         <Footer />
       </div>
-    );
+    );h
   };
 
   const router = createBrowserRouter([
