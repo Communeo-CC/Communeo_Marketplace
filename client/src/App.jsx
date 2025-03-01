@@ -19,6 +19,8 @@ import {
 } from "@tanstack/react-query";
 import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
+import Freelancer from "./pages/freelancer/Freelancer";
+
 function App() {
   const queryClient = new QueryClient();
 
@@ -42,6 +44,10 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/freelancer",
+          element: <Freelancer />,
         },
         {
           path: "/gigs",
