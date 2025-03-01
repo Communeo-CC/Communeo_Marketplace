@@ -5,10 +5,8 @@ import { Layout, Pointer, Zap } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 
-
-
 const Home = ({
-  badge = "shadcnblocks.com",
+  badge = "New Release",
   heading = "A Collection of Components Built With Shadcn & Tailwind",
   description = "Join us to build flawless web solutions.",
   tabs = [
@@ -84,7 +82,7 @@ const Home = ({
               <TabsContent
                 key={tab.value}
                 value={tab.value}
-                className="content-grid"
+                className="tabs-content-item content-grid"
               >
                 <div className="content-text">
                   <Badge variant="outline" className="w-fit bg-background">
@@ -110,5 +108,4 @@ const Home = ({
   );
 };
 
-export default Home ;
-
+export default Home;
