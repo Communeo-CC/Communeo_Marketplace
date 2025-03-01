@@ -7,7 +7,7 @@ import CatCard from "../../components/catCard/CatCard";
 import ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects } from "../../data";
 
-function Home() {
+function Freelancer() {
   return (
     <div className="freelancer">
       <Featured />
@@ -193,4 +193,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Freelancer;
