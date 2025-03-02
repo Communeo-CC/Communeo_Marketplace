@@ -1,0 +1,33 @@
+.stat-card {
+  @include card-base;
+  transition: all 0.2s;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+  
+  .stat-content {
+    padding-top: $spacing-6;
+    @include flex(row, flex-start, center, $spacing-4);
+    
+    .stat-icon {
+      padding: $spacing-3;
+      background-color: rgba($color-primary, 0.1);
+      border-radius: $border-radius-full;
+      color: $color-primary;
+    }
+    
+    .stat-info {
+      .stat-label {
+        font-size: $font-size-sm;
+        color: $color-muted-foreground;
+      }
+      
+      .stat-value {
+        font-size: $font-size-2xl;
+        font-weight: 700;
+      }
+    }
+  }
+}
