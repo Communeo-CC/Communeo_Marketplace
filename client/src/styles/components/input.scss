@@ -1,0 +1,40 @@
+.input {
+  @include input-base;
+}
+
+.input-wrapper {
+  position: relative;
+  
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-muted-foreground;
+    
+    &-left {
+      left: $spacing-3;
+      
+      & + .input {
+        padding-left: $spacing-9;
+      }
+    }
+    
+    &-right {
+      right: $spacing-3;
+    }
+  }
+}
+
+.label {
+  display: block;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  margin-bottom: $spacing-2;
+}
+
+.textarea {
+  @include input-base;
+  min-height: 60px;
+  resize: vertical;
+  padding: $spacing-2 $spacing-3;
+}
