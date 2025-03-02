@@ -1,0 +1,94 @@
+.video-analysis {
+  @include flex(column, flex-start, stretch, $spacing-6);
+  overflow-y: auto;
+  max-height: calc(100vh - 12rem);
+  padding: $spacing-4;
+  
+  .video-header {
+    @include flex(column, flex-start, stretch, $spacing-4);
+    
+    .video-thumbnail {
+      aspect-ratio: 16 / 9;
+      border-radius: $border-radius-lg;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .video-info {
+      @include flex(column, flex-start, flex-start, $spacing-3);
+      
+      @include responsive(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      
+      .video-title-container {
+        .video-title {
+          font-size: $font-size-2xl;
+          font-weight: 700;
+        }
+        
+        .video-date {
+          color: $color-muted-foreground;
+          margin-top: $spacing-1;
+        }
+      }
+    }
+  }
+  
+  .video-stats {
+    @include grid(2, $spacing-4);
+    padding: $spacing-4 $spacing-6;
+    background-color: rgba($color-muted, 0.1);
+    border-radius: $border-radius-lg;
+    
+    @include responsive(md) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    .stat-item {
+      text-align: center;
+      @include flex(column, center, center, $spacing-2);
+      
+      .stat-label {
+        font-size: $font-size-lg;
+        font-weight: 600;
+      }
+      
+      .stat-value {
+        font-size: $font-size-2xl;
+        font-weight: 700;
+        
+        @include responsive(md) {
+          font-size: $font-size-3xl;
+        }
+      }
+    }
+  }
+  
+  .video-description {
+    .description-title {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      margin-bottom: $spacing-3;
+    }
+    
+    .description-content {
+      background-color: rgba($color-muted, 0.1);
+      border-radius: $border-radius-lg;
+      padding: $spacing-4;
+      
+      p {
+        font-size: $font-size-sm;
+        color: $color-muted-foreground;
+        white-space: pre-wrap;
+      }
+    }
+  }
+}
