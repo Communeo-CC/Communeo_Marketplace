@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Featured.scss";
 import { useNavigate } from "react-router-dom";
+import GIF3 from "../../assets/GIF3.gif";
+
 
 function Featured() {
   const [input, setInput] = useState("");
@@ -36,7 +38,7 @@ function Featured() {
           </div>
         </div>
         <div className="right">
-          <img src="./img/man.png" alt="" />
+          <img src={GIF3} alt="Gif" />
         </div>
       </div>
     </div>
