@@ -5,6 +5,7 @@
     max-width: 1200px;
     margin: 0 auto;
 
+    // Header Styles (unchanged)
     .header {
       display: flex;
       flex-direction: column;
@@ -32,6 +33,7 @@
       }
     }
 
+    // Tabs Container
     .tabs {
       margin-top: 2rem;
 
@@ -57,24 +59,21 @@
         padding: 0.75rem 1.25rem;
         font-size: 0.875rem;
         font-weight: 600;
-        // Force the text/icon color to be black:
-        color: black !important;
+        color: black !important; // Force label to be black
         border: 1px solid var(--border);
         transition: all 0.3s ease-in-out;
         cursor: pointer;
 
         &[data-state="active"] {
           background-color: hsl(var(--primary));
-          // Keep text color black even when active:
-          color: black !important;
+          color: black !important; // Keep text black when active
           border-color: var(--primary);
           box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         &:hover {
           background-color: hsl(var(--primary-light));
-          // Keep text color black on hover:
-          color: black !important;
+          color: black !important; // Keep text black on hover
           border-color: var(--border);
           transform: translateY(-2px);
         }
@@ -94,57 +93,72 @@
           padding: 4rem;
         }
 
-        // Target direct children (the TabsContent elements)
+        // Use grid for active tab content
         > .tabs-content-item[data-state="inactive"] {
           display: none;
         }
         > .tabs-content-item[data-state="active"] {
-          display: block;
+          display: grid;
         }
       }
     }
 
+    /* Content Layout inside each Tab */
     .content-grid {
       display: grid;
       gap: 3rem;
       align-items: center;
       justify-items: center;
       text-align: center;
-
+      
+      /* On desktop: two columns (each 50% width) */
       @media (min-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 50% 50%;
+        text-align: left;
+        justify-items: stretch;
       }
-
+      
+      /* Make text container full width of its grid cell */
       .content-text {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-
+        width: 100%;
+        // Enhanced styling for title and description:
         h3 {
-          font-size: 1.875rem;
-          font-weight: 600;
-
+          font-size: 2rem;       // Increased font size for a bolder look
+          font-weight: 700;      // Bold weight
+          margin-bottom: 0.5rem; // Extra spacing after the title
+          letter-spacing: -0.5px;
+          line-height: 1.2;
+          color: var(--primary-foreground);
+          
           @media (min-width: 1024px) {
             font-size: 2.5rem;
           }
         }
-
+        
         p {
           font-size: 1.125rem;
-          line-height: 1.6;
+          line-height: 1.8;         // Increased line-height for readability
+          margin-bottom: 1.5rem;      // More space after the description
+          color: var(--secondary-foreground, #555); // Use a secondary text color or fallback to dark gray
         }
-
+        
         .button {
           margin-top: 1rem;
           width: fit-content;
           padding: 0.75rem 1.5rem;
           border-radius: 8px;
           transition: all 0.2s ease;
-
+          
           &:hover {
             transform: scale(1.05);
           }
         }
+      }
+      
+      img {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 1rem;
       }
     }
   }
