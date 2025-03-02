@@ -1,0 +1,71 @@
+.tabs {
+  @include flex(column, flex-start, stretch, $spacing-6);
+  
+  &-list {
+    display: inline-flex;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius-lg;
+    background-color: $color-muted;
+    padding: $spacing-1;
+    color: $color-muted-foreground;
+    margin-bottom: $spacing-4;
+    
+    &-full {
+      width: 100%;
+      justify-content: flex-start;
+      border-bottom: 1px solid $color-border;
+      border-radius: 0;
+      padding: 0;
+      height: 3rem;
+    }
+  }
+  
+  &-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: $border-radius-md;
+    padding: 0 $spacing-3;
+    height: 100%;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+    
+    &:hover {
+      color: $color-foreground;
+    }
+    
+    &[data-state="active"] {
+      background-color: $color-background;
+      color: $color-foreground;
+      box-shadow: $shadow-sm;
+      
+      &.border-bottom {
+        border-bottom: 2px solid $color-primary;
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+    
+    .trigger-icon {
+      margin-right: $spacing-2;
+    }
+  }
+  
+  &-content {
+    margin-top: $spacing-2;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &[data-state="inactive"] {
+      display: none;
+    }
+  }
+}
