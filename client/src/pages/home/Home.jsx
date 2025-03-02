@@ -46,10 +46,14 @@ const Home = ({
         title: "Maximize Your Reach with the Right Influencers.",
         description:
           "Discover and collaborate with influencers who align with your brand. Create impactful campaigns that engage and convert your target audience.",
-        buttonText: "Find Influencers",
+        buttonText: (
+            <Link className="link" to="/influencer">
+              Find Influencers
+            </Link>
+        ),
         buttonLink: "/influencers",
-        imageSrc: GIF1,
-        imageAlt: "Gif",
+      imageSrc: GIF1,
+      imageAlt: "Gif",
       },
     },
     {
@@ -70,39 +74,39 @@ const Home = ({
   ],
 }) => {
   return (
-    <section className="feature108">
-      <div className="container">
-        <div className="header">
+    <section className="m_feature108">
+      <div className="m_container">
+        <div className="m_header">
           <Badge variant="outline">{badge}</Badge>
           <h1>{heading}</h1>
           <p>{description}</p>
         </div>
-        <Tabs defaultValue={tabs[0].value} className="tabs">
-          <TabsList className="tabs-list">
+        <Tabs defaultValue={tabs[0].value} className="m_tabs">
+          <TabsList className="m_tabs-list">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="tabs-trigger"
+                className="m_tabs-trigger"
               >
                 {tab.icon} {tab.label}
               </TabsTrigger>
             ))}
           </TabsList>
-          <div className="tabs-content">
+          <div className="m_tabs-content">
             {tabs.map((tab) => (
               <TabsContent
                 key={tab.value}
                 value={tab.value}
-                className="tabs-content-item content-grid"
+                className="m_tabs-content-item m_content-grid"
               >
-                <div className="content-text">
+                <div className="m_content-text">
                   <Badge variant="outline" className="w-fit bg-background">
                     {tab.content.badge}
                   </Badge>
                   <h3>{tab.content.title}</h3>
                   <p>{tab.content.description}</p>
-                  <Button as="a" href={tab.content.buttonLink} className="button" size="lg">
+                  <Button as="a" href={tab.content.buttonLink} className="m_button" size="lg">
                     {tab.content.buttonText}
                   </Button>
                 </div>
