@@ -4,6 +4,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import { Layout, Pointer, Zap } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
+import sanuriGif from "../../assets/sanuri.gif";
+import GIF1 from "../../assets/GIF1.gif";
+import GIF2 from "../../assets/GIF2.gif";
 
 const Home = ({
   badge = "",
@@ -20,9 +23,8 @@ const Home = ({
         description:
           "Discover new web trends that help you craft sleek, highly functional sites that drive traffic and convert leads into customers.",
         buttonText: "See Plans",
-        imageSrc:
-          "https://shadcnblocks.com/images/block/placeholder-dark-1.svg",
-        imageAlt: "placeholder",
+      imageSrc: sanuriGif,
+      imageAlt: "Sanuri Gif",
       },
     },
     {
@@ -35,9 +37,8 @@ const Home = ({
         description:
           "Use stellar design to easily engage users and strengthen their loyalty. Create a seamless experience that keeps them coming back for more.",
         buttonText: "See Tools",
-        imageSrc:
-          "https://shadcnblocks.com/images/block/placeholder-dark-2.svg",
-        imageAlt: "placeholder",
+        imageSrc: GIF1,
+        imageAlt: "Sanuri Gif",
       },
     },
     {
@@ -50,9 +51,8 @@ const Home = ({
         description:
           "Lift your brand with modern tech that grabs attention and drives action. Create a digital experience that stands out from the crowd.",
         buttonText: "See Options",
-        imageSrc:
-          "https://shadcnblocks.com/images/block/placeholder-dark-3.svg",
-        imageAlt: "placeholder",
+        imageSrc: GIF2,
+        imageAlt: "Sanuri Gif",
       },
     },
   ],
