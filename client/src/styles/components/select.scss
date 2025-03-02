@@ -1,0 +1,94 @@
+.select {
+  &-trigger {
+    @include input-base;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .select-icon {
+      height: 1rem;
+      width: 1rem;
+      opacity: 0.5;
+    }
+  }
+  
+  &-content {
+    position: relative;
+    z-index: $z-index-50;
+    min-width: 8rem;
+    overflow: hidden;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    background-color: $color-popover;
+    color: $color-popover-foreground;
+    box-shadow: $shadow-md;
+    animation: selectContentShow 0.2s ease;
+  }
+  
+  &-viewport {
+    padding: $spacing-1;
+  }
+  
+  &-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    cursor: default;
+    user-select: none;
+    align-items: center;
+    border-radius: $border-radius-sm;
+    padding: $spacing-1 + $spacing-0-5 $spacing-8 $spacing-1 + $spacing-0-5 $spacing-2;
+    font-size: $font-size-sm;
+    outline: none;
+    
+    &:focus {
+      background-color: $color-accent;
+      color: $color-accent-foreground;
+    }
+    
+    &-indicator {
+      position: absolute;
+      left: $spacing-2;
+      display: flex;
+      height: 0.875rem;
+      width: 0.875rem;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    &-text {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    
+    &[data-disabled] {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+  
+  &-label {
+    padding: $spacing-1 + $spacing-0-5 $spacing-8 $spacing-1 + $spacing-0-5 $spacing-2;
+    font-size: $font-size-sm;
+    font-weight: 600;
+  }
+  
+  &-separator {
+    margin: -1px;
+    margin-top: $spacing-1;
+    margin-bottom: $spacing-1;
+    height: 1px;
+    background-color: $color-muted;
+  }
+}
+
+@keyframes selectContentShow {
+  from {
+    opacity: 0;
+    transform: translateY($spacing-1);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
