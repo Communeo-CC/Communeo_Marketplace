@@ -21,6 +21,7 @@ import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
 import Freelancer from "./pages/freelancer/Freelancer";
 import ScrollToTop from "./ScrollToTop"; // Import the ScrollToTop component
+import Influencer from "./pages/influencerH/Influencer";
 
 function App() {
   const queryClient = new QueryClient();
@@ -50,6 +51,10 @@ function App() {
         {
           path: "/freelancer",
           element: <Freelancer />,
+        },
+        {
+          path: "/influencer",
+          element: <Influencer />,
         },
         {
           path: "/gigs",

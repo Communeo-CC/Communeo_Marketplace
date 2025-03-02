@@ -1,0 +1,34 @@
+.card {
+  @include card-base;
+  margin-bottom: $spacing-6;
+  
+  &-header {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-6;
+  }
+  
+  &-title {
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  
+  &-description {
+    font-size: $font-size-sm;
+    color: $color-muted-foreground;
+    margin-top: $spacing-1;
+  }
+  
+  &-content {
+    padding: $spacing-6;
+    padding-top: 0;
+  }
+  
+  &-footer {
+    display: flex;
+    align-items: center;
+    padding: $spacing-6;
+    padding-top: 0;
+  }
+}

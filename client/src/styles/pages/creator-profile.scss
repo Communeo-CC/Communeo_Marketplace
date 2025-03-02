@@ -1,0 +1,97 @@
+.creator-profile {
+  @include flex(column, flex-start, stretch, $spacing-6);
+  
+  .profile-header {
+    @include flex(row, space-between, center);
+    margin-bottom: $spacing-4;
+  }
+  
+  .profile-card {
+    @include card-base;
+    background: linear-gradient(to right, rgba($color-primary, 0.1), transparent);
+    
+    .profile-content {
+      @include flex(row, flex-start, center, $spacing-6);
+      padding: $spacing-6;
+      
+      @include responsive(sm) {
+        flex-direction: row;
+      }
+      
+      @include responsive(md) {
+        padding: $spacing-8;
+      }
+      
+      .profile-avatar {
+        width: 6rem;
+        height: 6rem;
+        border-radius: $border-radius-full;
+        box-shadow: 0 0 0 4px rgba($color-primary, 0.2);
+        object-fit: cover;
+      }
+      
+      .profile-info {
+        flex: 1;
+        
+        .profile-title {
+          font-size: $font-size-2xl;
+          font-weight: 700;
+        }
+        
+        .profile-description {
+          color: $color-muted-foreground;
+          margin-top: $spacing-2;
+          @include line-clamp(2);
+        }
+      }
+    }
+  }
+  
+  .stats-grid {
+    @include grid(1, $spacing-4);
+    
+    @include responsive(md) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  
+  .videos-grid {
+    @include grid(1, $spacing-4);
+    
+    @include responsive(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    @include responsive(lg) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  
+  .loading-container {
+    @include flex(row, center, center);
+    min-height: 400px;
+    
+    .loading-spinner {
+      width: 2rem;
+      height: 2rem;
+      animation: spin 1s linear infinite;
+      color: $color-primary;
+    }
+  }
+  
+  .error-card {
+    border-color: $color-destructive;
+    
+    .error-content {
+      @include flex(row, center, center);
+      padding: $spacing-6;
+      color: $color-destructive;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

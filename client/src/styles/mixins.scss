@@ -1,0 +1,102 @@
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin grid($columns: 1, $gap: 0) {
+  display: grid;
+  grid-template-columns: repeat($columns, minmax(0, 1fr));
+  @if $gap != 0 {
+    gap: $gap;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: $breakpoint-2xl) {
+      @content;
+    }
+  }
+}
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-md;
+  font-weight: 500;
+  font-size: $font-size-sm;
+  padding: $spacing-2 $spacing-4;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin card-base {
+  border-radius: $border-radius-lg;
+  border: 1px solid $color-border;
+  background-color: $color-card;
+  color: $color-card-foreground;
+  box-shadow: $shadow;
+  overflow: hidden;
+}
+
+@mixin input-base {
+  width: 100%;
+  height: 2.25rem;
+  padding: $spacing-2 $spacing-3;
+  border-radius: $border-radius-md;
+  border: 1px solid $color-input;
+  background-color: transparent;
+  font-size: $font-size-sm;
+  
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

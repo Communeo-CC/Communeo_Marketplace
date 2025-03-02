@@ -10,6 +10,8 @@ import reviewRoute from "./routes/review.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import healthRoute from "./routes/health.route.js";
+import { router as sideProjectRouter } from './routes/api.js';  // Import side project routes
 
 const app = express();
 dotenv.config();
@@ -28,6 +30,7 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/api/health", healthRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/gigs", gigRoute);
@@ -35,6 +38,9 @@ app.use("/api/orders", orderRoute);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/reviews", reviewRoute);
+
+// Side Project Routes
+app.use("/api/side", sideProjectRouter);  // Mount side project API under /api/side
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
