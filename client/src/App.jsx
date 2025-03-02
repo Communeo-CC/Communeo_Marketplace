@@ -20,6 +20,7 @@ import {
 import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
 import Freelancer from "./pages/freelancer/Freelancer";
+import ScrollToTop from "./ScrollToTop"; // Import the ScrollToTop component
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
       <div className="app">
         <QueryClientProvider client={queryClient}>
           <Navbar />
+          <ScrollToTop /> {/* Ensure to call ScrollToTop here */}
           <Outlet />
           <Footer />
         </QueryClientProvider>
