@@ -1,0 +1,58 @@
+.app {
+  min-height: 100vh;
+  background-color: $color-background;
+  
+  .header {
+    border-bottom: 1px solid $color-border;
+    background: linear-gradient(to right, $color-primary-light, transparent);
+    
+    .header-content {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: $spacing-6 $spacing-4;
+      
+      .app-title {
+        font-size: $font-size-3xl;
+        font-weight: 700;
+        margin-bottom: $spacing-4;
+      }
+      
+      .stats-grid {
+        @include grid(1, $spacing-4);
+        
+        @include responsive(sm) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        
+        .stat-content {
+          padding: $spacing-4;
+          background-color: white;
+          border-radius: $border-radius-lg;
+          box-shadow: $shadow;
+          
+          .stat-value {
+            font-size: $font-size-2xl;
+            font-weight: 700;
+            color: $color-primary;
+          }
+          
+          .stat-label {
+            font-weight: 600;
+            margin-bottom: $spacing-1;
+          }
+          
+          .stat-sublabel {
+            font-size: $font-size-sm;
+            color: $color-muted-foreground;
+          }
+        }
+      }
+    }
+  }
+  
+  .main-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: $spacing-8 $spacing-4;
+  }
+}
