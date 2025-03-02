@@ -1,58 +1,70 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
-import { Layout, Pointer, Zap } from "lucide-react";
+import { Layout, Pointer, Zap, Handshake , Youtube } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import sanuriGif from "../../assets/sanuri.gif";
 import GIF1 from "../../assets/GIF1.gif";
 import GIF2 from "../../assets/GIF2.gif";
+import Freelancers from "../freelancer/Freelancer";
+
 
 const Home = ({
   badge = "",
-  heading = "A Collection of Components Built With Shadcn & Tailwind",
-  description = "Join us to build flawless web solutions.",
+  heading = "Revolutionizing Marketing Through Smart Connections",
+  description = "Join us to connect, collaborate, and grow.",
   tabs = [
     {
       value: "tab-1",
-      icon: <Zap className="h-auto w-4 shrink-0" />,
-      label: "Boost Revenue",
+      icon: <Handshake className="h-auto w-4 shrink-0" />,
+      label: "Freelancer Marketplace",
+      component: Freelancers,
       content: {
-        badge: "Modern Tactics",
-        title: "Make your site a true standout.",
+        badge:"",
+        title: "Find the Perfect Freelancer for Your Needs.",
         description:
-          "Discover new web trends that help you craft sleek, highly functional sites that drive traffic and convert leads into customers.",
-        buttonText: "See Plans",
+          "Connect with skilled freelancers who can bring your marketing vision to life. From graphic designers to content creators, find the right experts for your project. ",
+        buttonText: (
+            <Link className="link" to="/freelancer">
+              Explore Freelancers
+            </Link>
+        ),
+        buttonLink: "/freelancers",
+
       imageSrc: sanuriGif,
-      imageAlt: "Sanuri Gif",
+      imageAlt: "Gif",
       },
     },
     {
       value: "tab-2",
-      icon: <Pointer className="h-auto w-4 shrink-0" />,
-      label: "Higher Engagement",
+      icon: <Youtube className="h-auto w-4 shrink-0" />,
+      label: "Influencer Marketplace",
       content: {
-        badge: "Expert Features",
-        title: "Boost your site with top-tier design.",
+        badge: "",
+        title: "Maximize Your Reach with the Right Influencers.",
         description:
-          "Use stellar design to easily engage users and strengthen their loyalty. Create a seamless experience that keeps them coming back for more.",
-        buttonText: "See Tools",
+          "Discover and collaborate with influencers who align with your brand. Create impactful campaigns that engage and convert your target audience.",
+        buttonText: "Find Influencers",
+        buttonLink: "/influencers",
         imageSrc: GIF1,
-        imageAlt: "Sanuri Gif",
+        imageAlt: "Gif",
       },
     },
     {
       value: "tab-3",
-      icon: <Layout className="h-auto w-4 shrink-0" />,
-      label: "Stunning Layouts",
+      icon: <Zap className="h-auto w-4 shrink-0" />,
+      label: "AI-Powered Statistics",
       content: {
-        badge: "Elite Solutions",
-        title: "Build an advanced web experience.",
+        badge: "",
+        title: "Unlock AI-Powered Marketing Analytics.",
         description:
-          "Lift your brand with modern tech that grabs attention and drives action. Create a digital experience that stands out from the crowd.",
-        buttonText: "See Options",
+          "Leverage AI-driven insights to optimize your marketing strategy. Analyze trends, measure campaign performance, and make data-backed decisions.",
+        buttonText: "Get AI Insights",
+        buttonLink: "/ai-insights",
         imageSrc: GIF2,
-        imageAlt: "Sanuri Gif",
+        imageAlt: "Gif",
       },
     },
   ],
@@ -90,7 +102,7 @@ const Home = ({
                   </Badge>
                   <h3>{tab.content.title}</h3>
                   <p>{tab.content.description}</p>
-                  <Button className="button" size="lg">
+                  <Button as="a" href={tab.content.buttonLink} className="button" size="lg">
                     {tab.content.buttonText}
                   </Button>
                 </div>
