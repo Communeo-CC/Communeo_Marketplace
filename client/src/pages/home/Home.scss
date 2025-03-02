@@ -1,12 +1,12 @@
-.feature108 {
+.m_feature108 {
   padding: 6rem 1rem;
 
-  .container {
+  .m_container {
     max-width: 1200px;
     margin: 0 auto;
 
     // Header Styles (unchanged)
-    .header {
+    .m_header {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,7 +34,7 @@
     }
 
     // Tabs Container
-    .tabs {
+    .m_tabs {
       margin-top: 2rem;
 
       &-list {
@@ -95,17 +95,17 @@
         }
 
         // Use grid for active tab content
-        > .tabs-content-item[data-state="inactive"] {
+        > .m_tabs-content-item[data-state="inactive"] {
           display: none;
         }
-        > .tabs-content-item[data-state="active"] {
+        > .m_tabs-content-item[data-state="active"] {
           display: grid;
         }
       }
     }
 
     /* Content Layout inside each Tab */
-    .content-grid {
+    .m_content-grid {
       display: grid;
       gap: 3rem;
       align-items: center;
@@ -120,7 +120,7 @@
       }
       
       /* Make text container full width of its grid cell */
-      .content-text {
+      .m_content-text {
         width: 100%;
         // Enhanced styling for title and description:
         h3 {
@@ -143,7 +143,7 @@
           color: var(--secondary-foreground, #555); // Use a secondary text color or fallback to dark gray
         }
         
-        .button {
+        .m_button {
           margin-top: 1rem;
           width: fit-content;
           padding: 0.75rem 1.5rem;
