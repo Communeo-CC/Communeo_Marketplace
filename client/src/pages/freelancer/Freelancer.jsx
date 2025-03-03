@@ -11,7 +11,7 @@ function Freelancer() {
   return (
     <div className="freelancer">
       <Featured />
-      <TrustedBy />
+      
       <Slide slidesToShow={5} arrowsScroll={5}>
         {cards.map((card) => (
           <CatCard key={card.id} card={card} />
@@ -151,7 +151,7 @@ function Freelancer() {
         <div className="container">
           <div className="item">
             <h1>
-              fiverr <i>business</i>
+              Communeo <i>business</i>
             </h1>
             <h1>
               A business solution designed for <i>teams</i>
@@ -174,7 +174,7 @@ function Freelancer() {
               <img src="./img/check.png" alt="" />
               Manage teamwork and boost productivity with one powerful workspace
             </div>
-            <button>Explore Fiverr Business</button>
+            <button>Explore Communeo </button>
           </div>
           <div className="item">
             <img
