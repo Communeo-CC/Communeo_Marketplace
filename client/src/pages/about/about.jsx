@@ -1,6 +1,6 @@
 import React from 'react';
-import './About.scss';
-import teamImg from '../../assets/images/team.jpg'; // You'll need to add this image to your assets folder
+import './about.scss';
+import teamImg from "../../assets/sanuri.gif"; // You'll need to add this image to your assets folder
 
 const About = () => {
   const teamMembers = [

@@ -1,45 +1,325 @@
-.login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@import '../../styles/variables.scss'; // Assuming you have a variables file with brand colors
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
   
-    form {
-      width: 360px;
-      padding: 100px 0px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
   
-      h1 {
-        color: gray;
-        margin-bottom: 20px;
+  .underline {
+    height: 4px;
+    width: 100px;
+    background: linear-gradient(90deg, #3498db, #8e44ad);
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+}
+
+// Mission Section
+.about-mission {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  
+  .mission-content {
+    flex: 1;
+    
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: #3498db;
       }
-  
-      label {
-        color: gray;
-        font-size: 18px;
-      }
-  
-      input,
-      textarea {
-        padding: 20px;
-        border: 1px solid rgb(216, 214, 214);
-      }
-  
-      button {
-        border: none;
-        padding: 20px;
-        color: white;
-        font-weight: 500;
-        font-size: 18px;
-        background-color: #1dbf73;
-        cursor: pointer;
-      }
-  
-      span{
-        color: red;
-        font-size: 12px;
-      }
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
     }
   }
   
+  .mission-image {
+    flex: 1;
+    
+    .image-container {
+      height: 100%;
+      min-height: 300px;
+      background-image: url('../../assets/images/mission.jpg'); // Add this image
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// Problem Section
+.about-problem {
+  margin-bottom: 4rem;
+  
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .problem-cards {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+    
+    .problem-card {
+      flex: 1;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      
+      .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      
+      h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+      
+      p {
+        color: #666;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+// Solution Section
+.about-solution {
+  margin-bottom: 4rem;
+  
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .solution-content {
+    display: flex;
+    gap: 3rem;
+    
+    @media (max-width: 768px) {
+      flex-direction: column-reverse;
+    }
+    
+    .solution-features {
+      flex: 1;
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          margin-bottom: 2rem;
+          
+          .feature-highlight {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #3498db;
+          }
+          
+          p {
+            color: #666;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+    
+    .solution-image {
+      flex: 1;
+      
+      .image-container {
+        height: 100%;
+        min-height: 300px;
+        background-image: url("../../assets/sanuri.gif"); // Add this image
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+// Team Section
+.about-team {
+  margin-bottom: 4rem;
+  
+  h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .team-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    color: #666;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+  
+  .team-photo {
+    margin-bottom: 3rem;
+    text-align: center;
+    
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  .team-members {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+    
+    .member-card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+      }
+      
+      .member-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #3498db, #8e44ad);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0 auto 1rem;
+      }
+      
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        color: #666;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Vision Section
+.about-future {
+  margin-bottom: 4rem;
+  background-color: #f9f9f9;
+  padding: 3rem;
+  border-radius: 10px;
+  text-align: center;
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  p {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+}
+
+// Contact Section
+.about-contact {
+  text-align: center;
+  padding: 3rem 0;
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: #666;
+  }
+  
+  .contact-btn {
+    background: linear-gradient(45deg, #3498db, #8e44ad);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
