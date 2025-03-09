@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import Gigs from "./pages/gigs/Gigs";
 import Gig from "./pages/gig/Gig";
 import Login from "./pages/login/Login";
+import About from "./pages/about/about";
 import Register from "./pages/register/Register";
 import Add from "./pages/add/Add";
 import Orders from "./pages/orders/Orders";
@@ -47,6 +48,10 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/about",
+          element: <About />,
         },
         {
           path: "/freelancer",
