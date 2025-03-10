@@ -8,6 +8,7 @@ import { Users, Video, Settings as SettingsIcon } from 'lucide-react';
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
+import TrendingCreatorsCarousel from '../../components/TrendingCreatorsCarousel';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -129,6 +130,7 @@ function Influencer() {
           </TabsContent>
         </Tabs>
       </div>
+      <TrendingCreatorsCarousel/>
     </div>
   );
 }
