@@ -8,6 +8,7 @@ import { Users, Video, Settings as SettingsIcon } from 'lucide-react';
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
+import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -42,7 +43,10 @@ function Influencer() {
   );
 
   return (
-    <div className="app">
+    <div classname = "influencer">
+      <InfluencerFeatured />
+
+      <div className="app">
       <div className="header">
         <div className="header-content">
           <h1 className="app-title text-gradient">
@@ -128,6 +132,7 @@ function Influencer() {
             />
           </TabsContent>
         </Tabs>
+        </div>
       </div>
     </div>
   );
