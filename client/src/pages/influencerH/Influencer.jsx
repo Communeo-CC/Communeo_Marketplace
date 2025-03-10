@@ -4,7 +4,7 @@ import { CreatorsList } from '../../components/components_yt/CreatorsList';
 import { VideoStatistics } from '../../components/components_yt/VideoStatistics';
 import { AdminPanel } from '../../components/components_yt/AdminPanel';
 import { CreatorProfile } from '../../components/components_yt/CreatorProfile';
-import { Users, Video, Settings as SettingsIcon } from 'lucide-react';
+import { Users, Video, Settings as SettingsIcon, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
@@ -41,6 +41,12 @@ function Influencer() {
     sum + parseInt(creator.subscriberCount || '0'), 0
   );
 
+  // Find the top-performing video based on views
+  const topVideo = videos.length > 0 
+    ? videos.reduce((max, video) => 
+        parseInt(video.viewCount || '0') > parseInt(max.viewCount || '0') ? video : max, videos[0])
+    : null;
+
   return (
     <div className="app">
       <div className="header">
@@ -66,30 +72,38 @@ function Influencer() {
               </CardContent>
             </Card>
           </div>
+
+          {/* New Section - Top Performing Video */}
+          <div className="top-video-section">
+            <h2 className="section-title">🔥 Top Performing Video</h2>
+            {topVideo ? (
+              <Card>
+                <CardContent className="stat-content">
+                  <div className="stat-value">{topVideo.title}</div>
+                  <div className="stat-label">Views: {formatNumber(topVideo.viewCount)}</div>
+                  <div className="stat-sublabel">Uploaded by: {topVideo.channelTitle}</div>
+                </CardContent>
+              </Card>
+            ) : (
+              <p className="no-data">No video data available</p>
+            )}
+          </div>
+
         </div>
       </div>
       
       <div className="main-content">
         <Tabs defaultValue="creators" className="tabs">
           <TabsList className="tabs-list-full">
-            <TabsTrigger 
-              value="creators"
-              className="tabs-trigger"
-            >
+            <TabsTrigger value="creators" className="tabs-trigger">
               <Users className="trigger-icon" />
               Creators List
             </TabsTrigger>
-            <TabsTrigger 
-              value="video-stats"
-              className="tabs-trigger"
-            >
+            <TabsTrigger value="video-stats" className="tabs-trigger">
               <Video className="trigger-icon" />
               Video Statistics
             </TabsTrigger>
-            <TabsTrigger 
-              value="admin"
-              className="tabs-trigger"
-            >
+            <TabsTrigger value="admin" className="tabs-trigger">
               <SettingsIcon className="trigger-icon" />
               Admin Panel
             </TabsTrigger>

@@ -20,3 +20,78 @@
 @import './pages/admin-panel';
 @import './pages/creators-list';
 @import './pages/video-analysis';
+
+:root {
+    --primary-color: #ff8000; // Orange
+    --secondary-color: #ff7505; // Yellow
+    --background-color: #2e2a2a; // Black
+    --text-color: #993800; // White
+    --card-bg: #d8d8d8fb; // Darker black shade
+    --tab-hover: #FFB347; // Light orange for hover effects
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .app-title {
+    color: var(--primary-color);
+  }
+  
+  .header {
+    background: var(--background-color);
+    border-bottom: 2px solid var(--primary-color);
+  }
+  
+  .stats-grid .stat-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+  }
+  
+  .tabs-list-full {
+    background: var(--card-bg);
+  }
+  
+  .tabs-trigger {
+    color: var(--text-color);
+    &:hover {
+      background: var(--tab-hover);
+    }
+  }
+  
+  .trigger-icon {
+    color: var(--primary-color);
+  }
+  
+  .tabs-trigger[data-state="active"] {
+    background: var(--primary-color);
+    color: var(--background-color);
+  }
+  
+  .card {
+    background: var(--card-bg);
+    color: var(--text-color);
+  }
+  
+  .stat-label {
+    color: var(--secondary-color);
+  }
+  .top-video-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+  }
+  
+  .no-data {
+    color: var(--text-color);
+    opacity: 0.7;
+  }
+  
