@@ -10,8 +10,7 @@ const Footer = () => {
           <div className="footer-company">
             <h2 className="footer-title">Communeo</h2>
             <p className="footer-description">
-              Bringing communities together through shared experiences, meaningful connections, and collaborative
-              growth.
+            Empowering brands and influencers with seamless collaboration, AI-driven insights, and data-backed growth.
             </p>
             <div className="social-links">
               <a href="#" className="social-link">
@@ -71,7 +70,7 @@ const Footer = () => {
             <ul className="footer-list">
               <li className="contact-item">
                 <i className="icon-map-pin"></i>
-                <span>123 Community Ave, City, Country</span>
+                <span>Address</span>
               </li>
               <li className="contact-item">
                 <i className="icon-phone"></i>
@@ -79,15 +78,15 @@ const Footer = () => {
               </li>
               <li className="contact-item">
                 <i className="icon-mail"></i>
-                <span>hello@communeo.com</span>
+                <span>communeo.live</span>
               </li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="footer-newsletter">
-            <h3 className="footer-heading">Newsletter</h3>
-            <p className="newsletter-text">Stay updated with our latest news and events.</p>
+            <h3 className="footer-heading">Stay in the loop</h3>
+            <p className="newsletter-text">Get the latest influencer marketing trends, platform updates, and exclusive insights straight to your inbox.</p>
             <form className="newsletter-form">
               <input type="email" placeholder="Your email address" className="newsletter-input" />
               <button type="submit" className="newsletter-button">
