@@ -6,10 +6,10 @@
       padding: 100px 0px;
   
       &.dark {
-        background-color: #0d084d;
+        background-color:  rgb(255, 116, 16);
   
         h1 {
-          color: white !important;
+          color: rgb(12, 11, 11) !important;
         }
   
         i {
@@ -18,19 +18,19 @@
   
         p {
           margin-bottom: 20px;
-          color: white !important;
+          color: rgb(17, 15, 15) !important;
         }
   
         .title {
-          color: white !important;
+          color: rgb(14, 12, 12) !important;
           font-weight: 300 !important;
           font-size: 14px !important;
         }
   
         button {
-          background-color: #FF6347;
+          background-color: #ff5608;
           border: none;
-          color: white;
+          color: rgb(20, 16, 16);
           padding: 10px 20px;
           border-radius: 5px;
           width: max-content;
@@ -107,7 +107,7 @@
         width: 1400px;
   
         h1{
-          color: #555;
+          color: #0c0b0b;
         }
   
         .items {
@@ -135,7 +135,7 @@
             .line{
               width: 50px;
               height: 2px;
-              background-color: lightgray;
+              background-color: orange;
               transition: all .3s ease;
             }
   
