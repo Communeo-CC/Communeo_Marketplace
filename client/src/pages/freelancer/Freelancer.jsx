@@ -153,9 +153,9 @@ function Freelancer() {
             <h1>
               Communeo <i>business</i>
             </h1>
-            <h1>
+            <h2>
               A business solution designed for <i>teams</i>
-            </h1>
+            </h2>
             <p>
               Upgrade to a curated experience packed with tools and benefits,
               dedicated to businesses

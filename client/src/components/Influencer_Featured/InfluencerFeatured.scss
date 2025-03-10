@@ -3,8 +3,10 @@
   display: flex;
   justify-content: center;
 
-  background: linear-gradient(to right, #ff6600 , #ffd700 ); 
+  background: linear-gradient(145deg, #ff9d00 75% , #fb771f 25% ); 
   padding: 20px;
+  color: rgb(17, 16, 16);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.3);
 
   .container {
     width: 1400px;
@@ -32,7 +34,7 @@
     }
 
     .search {
-      background-color: white;
+      background-color: #fb771f;
       border-radius: 5px;
       display: flex;
       align-items: center;
@@ -40,6 +42,8 @@
       overflow: hidden;
 
       .searchInput {
+        background-color: #fb771f;
+        border-radius: 5px;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -51,11 +55,12 @@
         }
 
         input {
-          border: none;
+          background-color: #fb771f;
+          border: 5px;
           outline: none;
 
           &::placeholder {
-            color: gray;
+            color: rgb(16, 15, 15);
           }
         }
       }
@@ -64,8 +69,8 @@
         width: 120px;
           height: 50px;
           border: none;
-          background-color: #fe5a0e;
-          color: white;
+          background-color: #ff5608;
+          color: rgb(22, 21, 21);
           align-self: flex-end;
           cursor: pointer;
       }
@@ -82,8 +87,8 @@
 
       button {
         width: max-content;
-        color: white;
-        border: 1px solid white;
+        color: black;
+        border: 1px solid rgb(12, 12, 12);
         padding: 5px 10px;
         border-radius: 20px;
         background-color: transparent;
