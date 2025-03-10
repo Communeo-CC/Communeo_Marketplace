@@ -23,13 +23,13 @@
 
     h1 {
       font-size: 50px;
-      color: rgb(255, 255, 255);
+      // color: rgb(255, 255, 255);
       // margin-bottom: 20px;
 
       span {
         font-style: italic;
         font-weight: 500;
-        color: #ffffff; // Change this to your desired color for the span
+        color: black; // Change this to your desired color for the span
       }
     }
 
@@ -82,7 +82,7 @@
       gap: 10px;
       span {
         width: max-content;
-        color: white;
+        color: black;
       }
 
       button {
