@@ -54,6 +54,9 @@ function Influencer() {
           <h1 className="app-title text-gradient">
             YouTube Creator Analytics
           </h1>
+          <h2>Track, analyze and optimize your YouTube creator network</h2><br>
+          </br>
+          z
           
           <div className="stats-grid">
             <Card>
@@ -71,6 +74,23 @@ function Influencer() {
                 <div className="stat-sublabel">Total creators tracked on YouTube</div>
               </CardContent>
             </Card>
+
+            <Card>
+              <CardContent className="stat-content">
+                <div className="stat-value">{creators.length}</div>
+                <div className="stat-label">Total Views</div>
+                <div className="stat-sublabel">Combined video views</div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="stat-content">
+                <div className="stat-value">{creators.length}</div>
+                <div className="stat-label">Engagement rate</div>
+                <div className="stat-sublabel">Average across all videos</div>
+              </CardContent>
+            </Card>
+
           </div>
 
           {/* New Section - Top Performing Video */}
@@ -80,6 +100,8 @@ function Influencer() {
               <Card>
                 <CardContent className="stat-content">
                   <div className="stat-value">{topVideo.title}</div>
+                  width={320}
+                  height={180}
                   <div className="stat-label">Views: {formatNumber(topVideo.viewCount)}</div>
                   <div className="stat-sublabel">Uploaded by: {topVideo.channelTitle}</div>
                 </CardContent>
@@ -91,6 +113,8 @@ function Influencer() {
 
         </div>
       </div>
+
+      
       
       <div className="main-content">
         <Tabs defaultValue="creators" className="tabs">
