@@ -1,15 +1,59 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './about.scss';
-import teamImg from "../../assets/sanuri.gif"; // You'll need to add this image to your assets folder
 
 const About = () => {
+  const videoRef = useRef(null);
+  
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    // Play the video when component mounts
+    video.play().catch(err => {
+      console.log('Autoplay prevented:', err);
+      // Some browsers require user interaction before autoplay
+      // You might want to show a message to the user in this case
+    });
+    
+  }, []); // Empty dependency array means this effect runs only once on mount
+  
   const teamMembers = [
-    { name: "Visal Vithanage", role: "Project Lead" },
-    { name: "Thamindu Wickramaarachchi", role: "Full Stack Developer" },
-    { name: "Kaveesha Liyanaarachchi", role: "UI/UX Designer" },
-    { name: "Vidul Wickramasinghe", role: "Backend Developer" },
-    { name: "Hirushi Perera", role: "Frontend Developer" },
-    { name: "Sanuri Perera", role: "Marketing Specialist" }
+    { 
+      name: "Kaveesha Liyanaarachchi", 
+      role: "UI/UX Designer",
+      image: "./img/kaveesha.jpg",
+      linkedin: "https://www.linkedin.com/in/kaveesha-liyanaarachchi/"
+    },
+    { 
+      name: "Sanuri Perera", 
+      role: "Full Stack Developer",
+      image: "./img/sanuri1.jpg",
+      linkedin: "https://www.linkedin.com/in/sanuri-perera/"
+    },
+    { 
+      name: "Hirushi Perera", 
+      role: "Frontend Developer",
+      image: "./img/hirushi1.jpg",
+      linkedin: "https://www.linkedin.com/in/hirushi-perera/"
+    },
+    { 
+      name: "Visal Vithanage", 
+      role: "Project Lead",
+      image: "./img/visal.jpg",
+      linkedin: "https://www.linkedin.com/in/visal-vithanage/"
+    },
+    { 
+      name: "Vidul Wickramasinghe", 
+      role: "Backend Developer",
+      image: "./img/vidul1.jpg",
+      linkedin: "https://www.linkedin.com/in/vidul-wickramasinghe/"
+    },
+    { 
+      name: "Thamindu Wickramaarachchi", 
+      role: "Marketing Specialist",
+      image: "./img/thamindu.jpg",
+      linkedin: "https://www.linkedin.com/in/thamindu-wickramaarachchi/"
+    }
   ];
 
   return (
@@ -42,17 +86,33 @@ const About = () => {
         <h2>The Problem We're Solving</h2>
         <div className="problem-cards">
           <div className="problem-card">
-            <div className="icon">💸</div>
+            <div className="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+              </svg>
+            </div>
             <h3>High Marketing Costs</h3>
             <p>Traditional marketing agencies charge premium rates with minimal transparency</p>
           </div>
           <div className="problem-card">
-            <div className="icon">🔍</div>
+            <div className="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
             <h3>Difficult Connections</h3>
             <p>Businesses struggle to find the right influencers for their target audience</p>
           </div>
           <div className="problem-card">
-            <div className="icon">🌐</div>
+            <div className="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#FF8C00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+            </div>
             <h3>Cultural & Language Gaps</h3>
             <p>Global platforms often miss local cultural nuances and language preferences</p>
           </div>
@@ -89,25 +149,49 @@ const About = () => {
       </section>
 
       <section className="about-team">
+        <div className="team-video-container">
+          <video 
+            ref={videoRef}
+            controls
+            autoPlay
+            loop
+            muted
+            className="team-video"
+            poster="/path-to-poster-image.jpg"
+          >
+            <source src="./img/about.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
         <h2>Meet Our Team</h2>
         <p className="team-intro">
-          We are CS-04, a group of passionate developers and marketers from the University of Westminster,
+          We are group of passionate developers and marketers from the University of Westminster,
           committed to revolutionizing social media marketing in Sri Lanka.
         </p>
-        
-        <div className="team-photo">
-          {/* Replace with actual team photo */}
-          <img src={teamImg} alt="Communeo Team" />
-        </div>
         
         <div className="team-members">
           {teamMembers.map((member, index) => (
             <div className="member-card" key={index}>
-              <div className="member-avatar">
-                {member.name.charAt(0)}
+              <div className="member-image-container">
+                <div className="image-border">
+                  <img 
+                    src={member.image} 
+                    alt={`${member.name} - ${member.role}`} 
+                    className="member-image"
+                  />
+                </div>
               </div>
               <h3>{member.name}</h3>
-              <p>{member.role}</p>
+              <p className="member-role">{member.role}</p>
+              <a 
+                href={member.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="linkedin-button"
+              >
+                Connect on LinkedIn
+              </a>
             </div>
           ))}
         </div>
