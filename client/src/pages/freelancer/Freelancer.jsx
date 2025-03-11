@@ -64,7 +64,7 @@ function Freelancer() {
             </p>
           </div>
           <div className="item">
-            <video src="./img/video.mp4" controls />
+            <video src="./img/video.mp4" controls autoPlay />
           </div>
         </div>
       </div>
