@@ -1,6 +1,6 @@
 .freelancer {
     .features {
-      background-color: #f1fdf7;
+      background-color: #ff9d00;
       display: flex;
       justify-content: center;
       padding: 100px 0px;
@@ -60,25 +60,25 @@
             width: 100%;
           }
           h1 {
-            font-weight: 500;
+            font-weight: 550;
             margin-bottom: 10px;
           }
           .title {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-weight: 500;
-            font-size: 18px;
-            color: #666;
+            font-weight: 600;
+            font-size: 20px;
+            color: #f6310a;
             img {
               width: 24px;
               height: 24px;
             }
           }
           p {
-            font-size: 18px;
-            font-weight: 300;
-            color: gray;
+            font-size: 16px;
+            font-weight: 350;
+            color: rgb(8, 8, 8);
             line-height: 28px;
             letter-spacing: 1px;
           }

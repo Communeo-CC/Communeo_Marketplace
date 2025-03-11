@@ -6,25 +6,40 @@
   .container {
     width: 1400px;
     position: relative;
-  }
-
-  .carousel-initialized {
-    position: static;
-  }
-
-  .carousel-prev,
-  .carousel-next {
-    width: 50px;
-    height: 50px;
-    background-color: rgb(243, 243, 243);
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-
-  .carousel-prev {
-    left: -25px;
+    
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      
+      .filter-buttons {
+        display: inline-flex;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 5px;
+        
+        .filter-btn {
+          padding: 10px 20px;
+          border: none;
+          background: none;
+          cursor: pointer;
+          font-size: 16px;
+          border-radius: 4px;
+          color: #555;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          
+          &:hover {
+            background-color: #f0f0f0;
+          }
+          
+          &.active {
+            background-color: rgb(255, 116, 16);
+            color: rgb(20, 19, 19);
+          }
+        }
+      }
+    }
   }
 }
