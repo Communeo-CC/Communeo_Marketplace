@@ -8,6 +8,7 @@ import { Users, Video, Settings as SettingsIcon, TrendingUp } from 'lucide-react
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
+import { TestimonialShowcase } from '../../components/TestimonialShowcase/TestimonialShowcase';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -166,7 +167,8 @@ function Influencer() {
             />
           </TabsContent>
         </Tabs>
-      </div>
+      </div> 
+      <TestimonialShowcase />     
     </div>
   );
 }
