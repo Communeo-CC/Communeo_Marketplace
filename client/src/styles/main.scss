@@ -20,3 +20,112 @@
 @import './pages/admin-panel';
 @import './pages/creators-list';
 @import './pages/video-analysis';
+
+
+:root {
+  --primary-color: #ff8000; // Orange
+  --secondary-color: #ff7505; // Yellow
+  --background-color: #2e2a2a; // Black
+  --text-color: #993800; // Dark orange
+  --card-bg: #d8d8d8fb; // Light gray
+  --tab-hover: #FFB347; // Light orange for hover effects
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.youtube-analytics-app {
+  min-height: 100vh;
+}
+
+.app-header {
+  background: var(--background-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stats-overview {
+  .stat-card {
+    background: var(--card-bg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-value {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.tabs-list-full {
+  background: var(--card-bg);
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.tabs-trigger {
+  color: var(--text-color);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  
+  &:hover {
+    background: var(--tab-hover);
+  }
+  
+  &[data-state="active"] {
+    background: var(--primary-color);
+    color: var(--background-color);
+    
+    .trigger-icon {
+      color: var(--background-color);
+    }
+  }
+}
+
+.trigger-icon {
+  color: var(--primary-color);
+}
+
+.top-video-section {
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  
+  .section-title {
+    color: var(--secondary-color);
+  }
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .stats-overview {
+    grid-template-columns: 1fr;
+  }
+  
+  .tabs-trigger {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+  }
+}
+
