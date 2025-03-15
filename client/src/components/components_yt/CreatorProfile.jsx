@@ -138,7 +138,7 @@ export function CreatorProfile({ apiKey, creators }) {
       <Card>
         <CardHeader>
           <div className="flex-between">
-            <CardTitle style={{ paddingLeft: '30px', paddingBottom: '30px', paddingTop:'20px'}}>Latest Videos</CardTitle>
+            <CardTitle style={{ paddingLeft: '30px', paddingBottom: '30px', paddingTop:'20px'}}>Latest Videos -{'>>'}</CardTitle>
 
           </div>
         </CardHeader>
