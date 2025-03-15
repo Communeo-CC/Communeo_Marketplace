@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { StatCard } from './ui/stat-card';
 import { VideoCard } from './ui/video-card';
@@ -9,7 +10,9 @@ import { Users, Eye, Activity, Loader2, ArrowLeft, Video, Youtube } from 'lucide
 import { formatNumber } from '../../utils/formatNumber';
 import { VideoAnalysis } from './VideoAnalysis';
 
-export function CreatorProfile({ apiKey, channelId, onBack }) {
+export function CreatorProfile({ apiKey, creators }) {
+  const { creatorId } = useParams();
+  const navigate = useNavigate();
   const [channelData, setChannelData] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -19,13 +22,12 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
     const fetchData = async () => {
       try {
         const [channelDetails, videos] = await Promise.all([
-          fetchChannelDetails(channelId, apiKey),
-          fetchChannelVideos(channelId, apiKey)
+          fetchChannelDetails(creatorId, apiKey),
+          fetchChannelVideos(creatorId, apiKey)
         ]);
 
-        const savedCreators = JSON.parse(localStorage.getItem('youtubeCreators') || '[]');
-        const savedCreator = savedCreators.find(c => c.id === channelId);
-        const about = savedCreator?.about || '';
+        const creator = creators.find(c => c.id === creatorId);
+        const about = creator?.about || '';
 
         const avgEngagementRate = videos.reduce((sum, video) => sum + video.engagementRate, 0) / videos.length;
 
@@ -43,10 +45,10 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
     };
 
     fetchData();
-  }, [channelId, apiKey]);
+  }, [creatorId, apiKey, creators]);
 
   const openYouTubeChannel = () => {
-    window.open(`https://youtube.com/channel/${channelId}`, '_blank');
+    window.open(`https://youtube.com/channel/${creatorId}`, '_blank');
   };
 
   if (loading) {
@@ -76,7 +78,7 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
       <div className="profile-header">
         <Button 
           variant="ghost" 
-          onClick={onBack}
+          onClick={() => navigate('/')}
         >
           <ArrowLeft className="btn-icon" />
           Back to Creators
