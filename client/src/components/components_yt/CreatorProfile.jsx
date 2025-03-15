@@ -74,7 +74,7 @@ export function CreatorProfile({ apiKey, creators }) {
   if (!channelData) return null;
 
   return (
-    <div className="creator-profile" style={{ paddingLeft: '10px', paddingBottom: '10px' }}>
+    <div className="creator-profile" >
       <div className="profile-header">
         <Button 
           variant="ghost" 
@@ -138,10 +138,7 @@ export function CreatorProfile({ apiKey, creators }) {
       <Card>
         <CardHeader>
           <div className="flex-between">
-            <CardTitle>Latest Videos</CardTitle>
-            <Button onClick={() => navigate(`/influencer/${creatorId}/${channelData.title}`)}>
-              View All
-            </Button>
+            <CardTitle style={{ paddingLeft: '30px', paddingBottom: '30px', paddingTop:'20px'}}>Latest Videos</CardTitle>
 
           </div>
         </CardHeader>
