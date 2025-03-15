@@ -14,14 +14,11 @@ import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Pay from "./pages/pay/Pay";
 import Success from "./pages/success/Success";
 import Freelancer from "./pages/freelancer/Freelancer";
-import ScrollToTop from "./ScrollToTop"; // Import the ScrollToTop component
+import ScrollToTop from "./ScrollToTop";
 import Influencer from "./pages/influencerH/Influencer";
 
 function App() {
@@ -32,7 +29,7 @@ function App() {
       <div className="app">
         <QueryClientProvider client={queryClient}>
           <Navbar />
-          <ScrollToTop /> {/* Ensure to call ScrollToTop here */}
+          <ScrollToTop />
           <Outlet />
           <Footer />
         </QueryClientProvider>
@@ -45,66 +42,21 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/about",
-          element: <About />,
-        },
-        {
-          path: "/freelancer",
-          element: <Freelancer />,
-        },
-        {
-          path: "/influencer",
-          element: <Influencer />,
-        },
-        {
-          path: "/gigs",
-          element: <Gigs />,
-        },
-        {
-          path: "/myGigs",
-          element: <MyGigs />,
-        },
-        {
-          path: "/orders",
-          element: <Orders />,
-        },
-        {
-          path: "/messages",
-          element: <Messages />,
-        },
-        {
-          path: "/message/:id",
-          element: <Message />,
-        },
-        {
-          path: "/add",
-          element: <Add />,
-        },
-        {
-          path: "/gig/:id",
-          element: <Gig />,
-        },
-        {
-          path: "/register",
-          element: <Register />,
-        },
-        {
-          path: "/login",
-          element: <Login />,
-        },
-        {
-          path: "/pay/:id",
-          element: <Pay />,
-        },
-        {
-          path: "/success",
-          element: <Success />,
-        },
+        { path: "/", element: <Home /> },
+        { path: "/about", element: <About /> },
+        { path: "/freelancer", element: <Freelancer /> },
+        { path: "/influencer/*",element: <Influencer /> },
+        { path: "/gigs", element: <Gigs /> },
+        { path: "/myGigs", element: <MyGigs /> },
+        { path: "/orders", element: <Orders /> },
+        { path: "/messages", element: <Messages /> },
+        { path: "/message/:id", element: <Message /> },
+        { path: "/add", element: <Add /> },
+        { path: "/gig/:id", element: <Gig /> },
+        { path: "/register", element: <Register /> },
+        { path: "/login", element: <Login /> },
+        { path: "/pay/:id", element: <Pay /> },
+        { path: "/success", element: <Success /> },
       ],
     },
   ]);
