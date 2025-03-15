@@ -1,15 +1,15 @@
 .freelancer {
     .features {
-      background-color: #f1fdf7;
+      background-color: #ff9d00;
       display: flex;
       justify-content: center;
       padding: 100px 0px;
   
       &.dark {
-        background-color: #0d084d;
+        background-color:  rgb(255, 116, 16);
   
         h1 {
-          color: white !important;
+          color: rgb(12, 11, 11) !important;
         }
   
         i {
@@ -18,19 +18,19 @@
   
         p {
           margin-bottom: 20px;
-          color: white !important;
+          color: rgb(17, 15, 15) !important;
         }
   
         .title {
-          color: white !important;
+          color: rgb(14, 12, 12) !important;
           font-weight: 300 !important;
           font-size: 14px !important;
         }
   
         button {
-          background-color: #FF6347;
+          background-color: #ff5608;
           border: none;
-          color: white;
+          color: rgb(20, 16, 16);
           padding: 10px 20px;
           border-radius: 5px;
           width: max-content;
@@ -60,25 +60,25 @@
             width: 100%;
           }
           h1 {
-            font-weight: 500;
+            font-weight: 550;
             margin-bottom: 10px;
           }
           .title {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-weight: 500;
-            font-size: 18px;
-            color: #666;
+            font-weight: 600;
+            font-size: 20px;
+            color: #f6310a;
             img {
               width: 24px;
               height: 24px;
             }
           }
           p {
-            font-size: 18px;
-            font-weight: 300;
-            color: gray;
+            font-size: 16px;
+            font-weight: 350;
+            color: rgb(8, 8, 8);
             line-height: 28px;
             letter-spacing: 1px;
           }
@@ -107,7 +107,7 @@
         width: 1400px;
   
         h1{
-          color: #555;
+          color: #0c0b0b;
         }
   
         .items {
@@ -135,7 +135,7 @@
             .line{
               width: 50px;
               height: 2px;
-              background-color: lightgray;
+              background-color: orange;
               transition: all .3s ease;
             }
   
