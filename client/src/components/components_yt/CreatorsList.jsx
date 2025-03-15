@@ -9,7 +9,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const SUBSCRIBER_RANGES = {
-  'all': 'All Creators',
+  'all': 'All Influencers',
   '0-1000': '0 - 1K',
   '1000-10000': '1K - 10K',
   '10000-100000': '10K - 100K',
@@ -104,7 +104,7 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
 
   const handleViewProfile = (creator) => {
     const urlSafeTitle = creator.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    navigate(`/creator/${creator.id}/${urlSafeTitle}`);
+    navigate(`/influencer/${creator.id}/${urlSafeTitle}`);
   };
 
   return (
@@ -112,7 +112,7 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
       <Card>
         <CardHeader>
           <div className="filter-header">
-            <CardTitle>Creators List</CardTitle>
+            <CardTitle>Influencers List</CardTitle>
             <div className="filter-controls">
               {activeFilters.length > 0 && (
                 <div className="active-filters">
@@ -148,7 +148,7 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
           <div className="search-container">
             <Search className="search-icon" />
             <Input
-              placeholder="Search creators..."
+              placeholder="Search influencers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
@@ -217,7 +217,7 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
 
             {filteredCreators.length === 0 && (
               <div className="empty-state">
-                No creators found matching your criteria
+                No influencers found matching your criteria
               </div>
             )}
           </div>
@@ -229,7 +229,7 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
           <DialogHeader>
             <DialogTitle>
               <Filter className="dialog-icon" />
-              Filter Creators
+              Filter Influencers
             </DialogTitle>
           </DialogHeader>
           <div className="filter-form">
