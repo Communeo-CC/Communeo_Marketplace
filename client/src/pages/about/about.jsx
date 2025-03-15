@@ -2,20 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './about.scss';
 
 const About = () => {
-  const videoRef = useRef(null);
-  
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    
-    // Play the video when component mounts
-    video.play().catch(err => {
-      console.log('Autoplay prevented:', err);
-      // Some browsers require user interaction before autoplay
-      // You might want to show a message to the user in this case
-    });
-    
-  }, []); // Empty dependency array means this effect runs only once on mount
+
   
   const teamMembers = [
     { 
@@ -149,20 +136,6 @@ const About = () => {
       </section>
 
       <section className="about-team">
-        <div className="team-video-container">
-          <video 
-            ref={videoRef}
-            controls
-            autoPlay
-            loop
-            muted
-            className="team-video"
-            poster="/path-to-poster-image.jpg"
-          >
-            <source src="./img/about.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
 
         <h2>Meet Our Team</h2>
         <p className="team-intro">
