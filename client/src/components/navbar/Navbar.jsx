@@ -52,7 +52,10 @@ function Navbar() {
         
         {/* Desktop Links */}
         <div className="links">
+          
+        <Link className="link" to="/about">
           <span>About Us </span>
+          </Link>
           <a href="https://communeo.live" target="_blank" rel="noopener noreferrer">Communeo Group</a>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {currentUser ? (

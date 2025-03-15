@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #a53b14;
-  color: white;
+  color: rgb(255, 255, 255);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -12,13 +12,18 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &.active {
-    background-color: white;
+    background-color: rgb(255, 116, 16);
     color: black;
 
     button {
-      background-color: white !important;
-      color: #a53b14 !important;
-      border: 1px solid #a53b14 !important;
+      background-color:rgb(255, 116, 16)!important;
+      color: #0f0e0e !important;
+      border: 1px solid #0d0d0d !important;
+    }
+
+    .dot {
+      font-weight: bold !important;
+      color: #070707 !important;
     }
   }
 
