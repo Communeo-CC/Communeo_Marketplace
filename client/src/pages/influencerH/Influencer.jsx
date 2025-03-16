@@ -9,7 +9,6 @@ import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
 
-import { TestimonialShowcase } from '../../components/TestimonialShowcase/TestimonialShowcase';
 import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
 
 
@@ -175,8 +174,7 @@ function Influencer() {
         </Tabs>
 
       </div> 
-      <TestimonialShowcase />     
-
+      </div>
     </div>
   );
 }
