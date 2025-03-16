@@ -8,7 +8,7 @@ import { Users, Video, Settings as SettingsIcon, TrendingUp } from 'lucide-react
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
-
+import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
 
 
@@ -175,6 +175,7 @@ function Influencer() {
 
       </div> 
       </div>
+      <VideoAnalyticsSummary />
     </div>
   );
 }
