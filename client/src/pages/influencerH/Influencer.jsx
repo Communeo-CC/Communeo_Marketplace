@@ -9,7 +9,6 @@ import { Users, Video, Settings as SettingsIcon } from 'lucide-react';
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
-import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
 
