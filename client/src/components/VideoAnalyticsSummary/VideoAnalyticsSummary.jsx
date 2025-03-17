@@ -9,28 +9,32 @@ const VideoResources = () => {
         title: "Growth Strategies for Content Creators",
         description: "Learn proven methods to expand your audience and increase engagement.",
         icon: "📈",
-        linkText: "Read Guide"
+        linkText: "Read Guide",
+        link: "https://socialbuzzhive.com/25-creator-ideas-and-strategies-to-captivate-your-audience-in-2025/"
       },
       {
         id: 2,
         title: "Video Optimization Checklist",
         description: "Essential steps to ensure your videos perform well across all platforms.",
         icon: "✅",
-        linkText: "Download PDF"
+        linkText: "Do it now",
+        link: "https://checklist.gg/templates/youtube-video-optimization-checklist"
       },
       {
         id: 3,
         title: "Audience Retention Masterclass",
         description: "Discover techniques to keep viewers watching longer.",
         icon: "⏱️",
-        linkText: "Register Now"
+        linkText: "More Details",
+        link: "https://www.youtube.com/watch?v=nhnqTfPDlBE#:~:text=Get%20practical%20tips%20on%20creating%20a%20content%20schedule%2C,explore%20effective%20techniques%20for%20keeping%20your%20audience%20engaged."
       },
       {
         id: 4,
         title: "Monetization Calculator",
         description: "Estimate potential earnings based on your current analytics.",
         icon: "💰",
-        linkText: "Try Calculator"
+        linkText: "Try Calculator",
+        link: "https://www.lenostube.com/en/youtube-money-calculator/"
       }
     ];
   
@@ -50,7 +54,9 @@ const VideoResources = () => {
                   <h3 className="resource-title">{resource.title}</h3>
                   <p className="resource-description">{resource.description}</p>
                 </div>
-                <a href="#" className="resource-link">{resource.linkText}</a>
+                <a href={resource.link} className="resource-link" target="_blank" rel="noopener noreferrer">
+                  {resource.linkText}
+                </a>
               </div>
             ))}
           </div>
@@ -67,4 +73,4 @@ const VideoResources = () => {
     );
   };
   
-  export default VideoResources;
+export default VideoResources;
