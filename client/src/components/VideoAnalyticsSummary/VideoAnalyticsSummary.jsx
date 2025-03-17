@@ -1,67 +1,70 @@
 import React from 'react';
 import './VideoAnalyticsSummary.scss';
 
-const VideoAnalyticsSummary = () => {
-  // Sample data - replace with your actual data
-  const analyticsData = {
-    totalViews: 24859,
-    averageWatchTime: '4:32',
-    completionRate: 68,
-    engagement: 76,
-    topDevices: [
-      { name: 'Mobile', percentage: 65 },
-      { name: 'Desktop', percentage: 30 },
-      { name: 'Tablet', percentage: 5 }
-    ]
-  };
-
-  return (
-    <section className="video-analytics-summary">
-      <div className="container">
-        <h2 className="section-title">Video Performance Summary</h2>
-        
-        <div className="summary-cards">
-          <div className="summary-card">
-            <h3>Total Views</h3>
-            <div className="metric">{analyticsData.totalViews.toLocaleString()}</div>
+const VideoResources = () => {
+    // Sample resources that would complement video analytics
+    const resources = [
+      {
+        id: 1,
+        title: "Growth Strategies for Content Creators",
+        description: "Learn proven methods to expand your audience and increase engagement.",
+        icon: "📈",
+        linkText: "Read Guide"
+      },
+      {
+        id: 2,
+        title: "Video Optimization Checklist",
+        description: "Essential steps to ensure your videos perform well across all platforms.",
+        icon: "✅",
+        linkText: "Download PDF"
+      },
+      {
+        id: 3,
+        title: "Audience Retention Masterclass",
+        description: "Discover techniques to keep viewers watching longer.",
+        icon: "⏱️",
+        linkText: "Register Now"
+      },
+      {
+        id: 4,
+        title: "Monetization Calculator",
+        description: "Estimate potential earnings based on your current analytics.",
+        icon: "💰",
+        linkText: "Try Calculator"
+      }
+    ];
+  
+    return (
+      <section className="video-resources">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Resources to Improve Your Performance</h2>
+            <p className="section-subtitle">Tools and guides to help you grow your channel</p>
           </div>
           
-          <div className="summary-card">
-            <h3>Average Watch Time</h3>
-            <div className="metric">{analyticsData.averageWatchTime}</div>
-          </div>
-          
-          <div className="summary-card">
-            <h3>Completion Rate</h3>
-            <div className="metric">{analyticsData.completionRate}%</div>
-          </div>
-          
-          <div className="summary-card">
-            <h3>Engagement Score</h3>
-            <div className="metric">{analyticsData.engagement}%</div>
-          </div>
-        </div>
-        
-        <div className="device-breakdown">
-          <h3>Audience by Device</h3>
-          <div className="device-bars">
-            {analyticsData.topDevices.map((device, index) => (
-              <div className="device-bar-container" key={index}>
-                <div className="device-label">{device.name}</div>
-                <div className="device-bar-wrapper">
-                  <div 
-                    className="device-bar" 
-                    style={{ width: `${device.percentage}%` }}
-                  ></div>
-                  <span className="device-percentage">{device.percentage}%</span>
+          <div className="resource-grid">
+            {resources.map(resource => (
+              <div className="resource-card" key={resource.id}>
+                <div className="resource-icon">{resource.icon}</div>
+                <div className="resource-info">
+                  <h3 className="resource-title">{resource.title}</h3>
+                  <p className="resource-description">{resource.description}</p>
                 </div>
+                <a href="#" className="resource-link">{resource.linkText}</a>
               </div>
             ))}
           </div>
+          
+          <div className="help-callout">
+            <div className="callout-content">
+              <h3>Need personalized advice?</h3>
+              <p>Schedule a consultation with one of our content strategists to analyze your specific analytics data.</p>
+            </div>
+            <button className="schedule-btn">Schedule Consultation</button>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
-
-export default VideoAnalyticsSummary;
+      </section>
+    );
+  };
+  
+  export default VideoResources;
