@@ -14,12 +14,12 @@ function Navbar() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   };
 
-  //useEffect(() => {
-    //window.addEventListener("scroll", isActive);
-    //return () => {
-      //window.removeEventListener("scroll", isActive);
-   // };
-  //}, []);
+  useEffect(() => {
+    window.addEventListener("scroll", isActive);
+    return () => {
+      window.removeEventListener("scroll", isActive);
+   };
+  }, []);
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
