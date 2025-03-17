@@ -4,8 +4,6 @@
       display: flex;
       justify-content: center;
       padding: 100px 0px;
-
-      
   
       &.dark {
         background: linear-gradient(180deg, #ff6600 , #ffd700 );
@@ -14,22 +12,16 @@
           font-size: 45px;
           text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
           color: white !important;
-          animation: fadeIn 1s ease-in-out forwards;
-          animation-delay: 0.5s;
         }
 
         h2{
           font-size: 25px;
           
           color: white !important;
-          animation: fadeIn 1s ease-in-out forwards;
-          animation-delay: 0.5s;
         }
   
         i {
           font-weight: 300;
-          animation: fadeIn 1s ease-in-out forwards;
-          animation-delay: 0.5s;
         }
   
         p {
@@ -116,6 +108,8 @@
               width: 24px;
               height: 24px;
             }
+
+            
           }
           p {
             font-size: 18px;
