@@ -12,18 +12,18 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &.active {
-    background-color: rgb(255, 116, 16);
-    color: black;
+    background-color: #a53b14;
+    color: rgb(255, 255, 255);
 
     button {
-      background-color:rgb(255, 116, 16)!important;
-      color: #0f0e0e !important;
-      border: 1px solid #0d0d0d !important;
+      background-color:#a53b14!important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
     }
 
     .dot {
       font-weight: bold !important;
-      color: #070707 !important;
+      color: #ffffff !important;
     }
   }
 
