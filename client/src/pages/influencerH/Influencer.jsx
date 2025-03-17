@@ -10,6 +10,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import '../../styles/main.scss'
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
+import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 
 
 function Influencer() {
@@ -176,6 +177,7 @@ function Influencer() {
       </div> 
       </div>
       <VideoAnalyticsSummary />
+      <UpcomingFeatures />
     </div>
   );
 }
