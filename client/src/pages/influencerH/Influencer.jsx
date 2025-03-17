@@ -50,7 +50,7 @@ function Influencer() {
       <div className="header">
         <div className="header-content">
           <h1 className="app-title text-gradient">
-            Influencer Analytics Hub
+            YouTube Creator Analytics
           </h1>
           
           <div className="stats-grid">
