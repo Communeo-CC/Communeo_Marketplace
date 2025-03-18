@@ -3,57 +3,49 @@ export const cards = [
     id: 1,
     title: "AI Artists",
     desc: "Add talent to AI",
-    img: "./img/AI.jpg",
-    category: "creative"
+    img: "https://images.pexels.com/photos/7532110/pexels-photo-7532110.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 2,
     title: "Logo Design",
-    desc: "Build your brand",
-    img: "./img/logo.jpg",
-    category: "creative"
+    desc: "Build yor brand",
+    img: "https://images.pexels.com/photos/11295165/pexels-photo-11295165.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 3,
     title: "WordPress",
     desc: "Customize your site",
-    img: "./img/wordpress.png",
-    category: "technical"
+    img: "https://images.pexels.com/photos/4371669/pexels-photo-4371669.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 4,
     title: "Voice Over",
     desc: "Share your message",
-    img: "./img/voice.jpg",
-    category: "creative"
+    img: "https://images.pexels.com/photos/7608079/pexels-photo-7608079.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 5,
     title: "Video Explainer",
     desc: "Engage your audience",
-    img: "./img/vedio.jpg",
-    category: "creative"
+    img: "https://images.pexels.com/photos/13388047/pexels-photo-13388047.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 6,
     title: "Social Media",
     desc: "Reach more customers",
-    img: "./img/socialmedia.jpg",
-    category: "marketing"
+    img: "https://images.pexels.com/photos/11378899/pexels-photo-11378899.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 7,
     title: "SEO",
     desc: "Unlock growth online",
-    img: "./img/CEO.jpg",
-    category: "marketing"
+    img: "https://images.pexels.com/photos/4820241/pexels-photo-4820241.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
   {
     id: 8,
     title: "Illustration",
-    desc: "Color your dreams",
-    img: "./img/illustator.jpg",
-    category: "creative"
+    desc: "Color you dreams",
+    img: "https://images.pexels.com/photos/15032623/pexels-photo-15032623.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
   },
 ];
 
@@ -64,7 +56,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Web and Mobile Design",
     username: "Anna Bell",
-    category: "technical"
   },
   {
     id: 2,
@@ -72,7 +63,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Logo Design",
     username: "Morton Green",
-    category: "creative"
   },
   {
     id: 3,
@@ -80,7 +70,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Animated GIFs",
     username: "Emmett Potter",
-    category: "creative"
   },
   {
     id: 4,
@@ -88,7 +77,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Packaging Design",
     username: "Freddie Johnston",
-    category: "creative"
   },
   {
     id: 5,
@@ -96,7 +84,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Social Media Design",
     username: "Audrey Richards",
-    category: "marketing"
   },
   {
     id: 6,
@@ -104,7 +91,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Illustration",
     username: "Dalton Hudson",
-    category: "creative"
   },
   {
     id: 7,
@@ -112,7 +98,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Book Design",
     username: "Hannah Dougherty",
-    category: "creative"
   },
   {
     id: 8,
@@ -120,7 +105,6 @@ export const projects = [
     pp: "https://images.pexels.com/photos/1680175/pexels-photo-1680175.jpeg?auto=compress&cs=tinysrgb&w=1600",
     cat: "Digital Marketing",
     username: "Ward Brewer",
-    category: "marketing"
   },
 ];
 
@@ -133,7 +117,6 @@ export const gigs = [
     price: 59,
     star: 5,
     username: "Anna Bell",
-    category: "creative"
   },
   {
     id: 2,
@@ -143,10 +126,7 @@ export const gigs = [
     price: 79,
     star: 5,
     username: "Lannie Coleman",
-    category: "creative"
   },
-  // Rest of gigs array remains unchanged
-
   {
     id: 3,
     img: "https://images.pexels.com/photos/8797307/pexels-photo-8797307.jpeg?auto=compress&cs=tinysrgb&w=1600",

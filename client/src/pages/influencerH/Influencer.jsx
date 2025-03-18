@@ -11,6 +11,8 @@ import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
+import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
+
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -47,6 +49,7 @@ function Influencer() {
 
   return (
     <div className="app">
+      <InfluencerFeatured />
       <div className="header">
         <div className="header-content">
           <h1 className="app-title text-gradient">
@@ -64,9 +67,9 @@ function Influencer() {
             
             <Card>
               <CardContent className="stat-content">
-                <div className="stat-value">{influencers.length}</div>
-                <div className="stat-label">Tracked Influencers</div>
-                <div className="stat-sublabel">Active content creators</div>
+              <div className="stat-value">{influencers.length}</div>
+                <div className="stat-label">Active Creators</div>
+                <div className="stat-sublabel">Total creators tracked on YouTube</div>
               </CardContent>
             </Card>
           </div>

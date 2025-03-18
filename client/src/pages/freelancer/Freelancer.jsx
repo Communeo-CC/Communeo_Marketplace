@@ -8,24 +8,15 @@ import ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects } from "../../data";
 
 function Freelancer() {
-  // Define categories for filtering
-  const cardCategories = ["all", "creative", "marketing", "technical"];
-  const projectCategories = ["all", "creative", "marketing", "technical"];
-
   return (
     <div className="freelancer">
       <Featured />
       
-      <Slide 
-        slidesToShow={5} 
-        arrowsScroll={5} 
-        categories={cardCategories}
-      >
+      <Slide slidesToShow={5} arrowsScroll={5}>
         {cards.map((card) => (
           <CatCard key={card.id} card={card} />
         ))}
       </Slide>
-      
       <div className="features">
         <div className="container">
           <div className="item">
@@ -64,11 +55,10 @@ function Freelancer() {
             </p>
           </div>
           <div className="item">
-            <video src="./img/video.mp4" controls autoPlay />
+            <video src="./img/video.mp4" controls />
           </div>
         </div>
       </div>
-      
       <div className="explore">
         <div className="container">
           <h1>Explore the marketplace</h1>
@@ -87,6 +77,7 @@ function Freelancer() {
                 alt=""
               />
               <div className="line"></div>
+
               <span>Digital Marketing</span>
             </div>
             <div className="item">
@@ -156,16 +147,15 @@ function Freelancer() {
           </div>
         </div>
       </div>
-      
       <div className="features dark">
         <div className="container">
           <div className="item">
             <h1>
               Communeo <i>business</i>
             </h1>
-            <h1>
-              A business solution designed for <i>teams</i>
-            </h1>
+            <h2>
+              A business solution designed for teams
+            </h2>
             <p>
               Upgrade to a curated experience packed with tools and benefits,
               dedicated to businesses
@@ -194,12 +184,7 @@ function Freelancer() {
           </div>
         </div>
       </div>
-      
-      <Slide 
-        slidesToShow={4} 
-        arrowsScroll={4}
-        categories={projectCategories}
-      >
+      <Slide slidesToShow={4} arrowsScroll={4}>
         {projects.map((card) => (
           <ProjectCard key={card.id} card={card} />
         ))}

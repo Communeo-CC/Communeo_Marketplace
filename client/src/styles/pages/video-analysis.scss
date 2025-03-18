@@ -1,7 +1,7 @@
 .video-analysis {
   @include flex(column, flex-start, stretch, $spacing-6);
   overflow-y: auto;
-  max-height: calc(90vh - 12rem);
+  max-height: calc(100vh - 12rem);
   padding: $spacing-4;
   
   .video-header {
