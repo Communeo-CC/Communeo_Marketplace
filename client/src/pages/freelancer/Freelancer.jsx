@@ -65,7 +65,7 @@ function Freelancer() {
           <div className="items">
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/graphics-design.d32a2f8.svg"
+                src="./img/1.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -73,7 +73,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/online-marketing.74e221b.svg"
+                src="./img/2.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -82,7 +82,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/writing-translation.32ebe2e.svg"
+                src="./img/3.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -90,7 +90,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/video-animation.f0d9d71.svg"
+                src="./img/4.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -98,7 +98,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/music-audio.320af20.svg"
+                src="./img/5.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -106,7 +106,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/programming.9362366.svg"
+                src="./img/6.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -114,7 +114,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/business.bbdf319.svg"
+                src="./img/7.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -122,7 +122,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/lifestyle.745b575.svg"
+                src="./img/8.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -130,7 +130,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/data.718910f.svg"
+                src="./img/9.svg"
                 alt=""
               />
               <div className="line"></div>
@@ -138,7 +138,7 @@ function Freelancer() {
             </div>
             <div className="item">
               <img
-                src="https://fiverr-res.cloudinary.com/npm-assets/@fiverr/logged_out_homepage_perseus/apps/photography.01cf943.svg"
+                src="./img/10.svg"
                 alt=""
               />
               <div className="line"></div>
