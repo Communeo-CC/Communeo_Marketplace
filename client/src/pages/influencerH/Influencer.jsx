@@ -13,6 +13,7 @@ import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures
 import '../../styles/main.scss'
 import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
 
+
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
   const [influencers, setInfluencers] = useState([]);
@@ -52,7 +53,7 @@ function Influencer() {
       <div className="header">
         <div className="header-content">
           <h1 className="app-title text-gradient">
-            YouTube Creator Analytics
+            Influencer Analytics Hub
           </h1>
           
           <div className="stats-grid">
