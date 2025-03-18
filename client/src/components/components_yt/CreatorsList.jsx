@@ -1,14 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { Users, Search, SlidersHorizontal, Filter, ExternalLink, Youtube } from 'lucide-react';
+import { Users, Search, SlidersHorizontal, Filter, ExternalLink, Youtube, ArrowUpDown } from 'lucide-react';
 import { formatNumber } from '../../utils/formatNumber';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const SUBSCRIBER_RANGES = {
-  'all': 'All Creators',
+  'all': 'All Influencers',
   '0-1000': '0 - 1K',
   '1000-10000': '1K - 10K',
   '10000-100000': '10K - 100K',
@@ -16,11 +17,22 @@ const SUBSCRIBER_RANGES = {
   '1000000+': '1M+'
 };
 
-export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChange }) {
+const SORT_OPTIONS = {
+  'name-asc': 'Name (A-Z)',
+  'name-desc': 'Name (Z-A)',
+  'subscribers-desc': 'Most Subscribers',
+  'subscribers-asc': 'Least Subscribers',
+  'views-desc': 'Most Views',
+  'views-asc': 'Least Views'
+};
+
+export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [subscriberRange, setSubscriberRange] = useState('all');
   const [activeFilters, setActiveFilters] = useState([]);
+  const [sortBy, setSortBy] = useState('name-asc');
 
   const isInSubscriberRange = (subscriberCount) => {
     const count = parseInt(subscriberCount);
@@ -57,14 +69,42 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
     setShowFilters(false);
   };
 
-  const filteredCreators = creators.filter(creator => {
-    const matchesSearch = creator.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesSubscribers = isInSubscriberRange(creator.subscriberCount);
-    return matchesSearch && matchesSubscribers;
-  });
+  const sortCreators = (creators) => {
+    return [...creators].sort((a, b) => {
+      switch (sortBy) {
+        case 'name-asc':
+          return a.title.localeCompare(b.title);
+        case 'name-desc':
+          return b.title.localeCompare(a.title);
+        case 'subscribers-desc':
+          return parseInt(b.subscriberCount) - parseInt(a.subscriberCount);
+        case 'subscribers-asc':
+          return parseInt(a.subscriberCount) - parseInt(b.subscriberCount);
+        case 'views-desc':
+          return parseInt(b.viewCount) - parseInt(a.viewCount);
+        case 'views-asc':
+          return parseInt(a.viewCount) - parseInt(b.viewCount);
+        default:
+          return 0;
+      }
+    });
+  };
+
+  const filteredCreators = sortCreators(
+    creators.filter(creator => {
+      const matchesSearch = creator.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSubscribers = isInSubscriberRange(creator.subscriberCount);
+      return matchesSearch && matchesSubscribers;
+    })
+  );
 
   const openYouTubeChannel = (channelId) => {
     window.open(`https://youtube.com/channel/${channelId}`, '_blank');
+  };
+
+  const handleViewProfile = (creator) => {
+    const urlSafeTitle = creator.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    navigate(`/influencer/${creator.id}/${urlSafeTitle}`);
   };
 
   return (
@@ -72,7 +112,7 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
       <Card>
         <CardHeader>
           <div className="filter-header">
-            <CardTitle>Creators List</CardTitle>
+            <CardTitle>Influencers List</CardTitle>
             <div className="filter-controls">
               {activeFilters.length > 0 && (
                 <div className="active-filters">
@@ -82,10 +122,25 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
                   </span>
                 </div>
               )}
-              <Button variant="outline" size="sm" onClick={() => setShowFilters(true)}>
-                <SlidersHorizontal className="btn-icon" />
-                Filters
-              </Button>
+              <div className="flex items-center gap-2">
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-[180px]">
+                    <ArrowUpDown className="mr-2 h-4 w-4" />
+                    <SelectValue placeholder="Sort by..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(SORT_OPTIONS).map(([value, label]) => (
+                      <SelectItem key={value} value={value}>
+                        {label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Button variant="outline" size="sm" onClick={() => setShowFilters(true)}>
+                  <SlidersHorizontal className="btn-icon" />
+                  Filters
+                </Button>
+              </div>
             </div>
           </div>
         </CardHeader>
@@ -93,7 +148,7 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
           <div className="search-container">
             <Search className="search-icon" />
             <Input
-              placeholder="Search creators..."
+              placeholder="Search influencers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
@@ -148,7 +203,7 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
                         <Button
                           variant="default"
                           size="sm"
-                          onClick={() => onSelectCreator(creator.id)}
+                          onClick={() => handleViewProfile(creator)}
                         >
                           <ExternalLink className="btn-icon" />
                           View Profile
@@ -162,7 +217,7 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
 
             {filteredCreators.length === 0 && (
               <div className="empty-state">
-                No creators found matching your criteria
+                No influencers found matching your criteria
               </div>
             )}
           </div>
@@ -174,7 +229,7 @@ export function CreatorsList({ apiKey, creators, onSelectCreator, onCreatorsChan
           <DialogHeader>
             <DialogTitle>
               <Filter className="dialog-icon" />
-              Filter Creators
+              Filter Influencers
             </DialogTitle>
           </DialogHeader>
           <div className="filter-form">
