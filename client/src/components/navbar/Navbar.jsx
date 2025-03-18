@@ -44,9 +44,18 @@ function Navbar() {
           <span className="dot">.</span>
         </div>
         <div className="links">
+          
+          <Link className="link" to="/about">
           <span>About Us </span>
-          <a href="https://communeo.live" target="_blank" rel="noopener noreferrer">Communeo Group</a>
-          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          </Link>
+          <Link className="link" to="/freelancer">
+          <span>Freelancers </span>
+          </Link>
+          <Link className="link" to="/influencer">
+          <span>Influencers </span>
+          </Link>
+          {!currentUser?.isSeller && <Link className="link" to="/register">Become a Seller</Link>}
+
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
               <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
