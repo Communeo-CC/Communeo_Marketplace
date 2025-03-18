@@ -11,6 +11,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
+import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -46,11 +47,13 @@ function Influencer() {
   );
 
   return (
+    <div classname = "Influencer">
+      <InfluencerFeatured />
     <div className="app">
       <div className="header">
         <div className="header-content">
           <h1 className="app-title text-gradient">
-            Influencer Analytics Hub
+            YouTube Creator Analytics
           </h1>
           
           <div className="stats-grid">
@@ -129,6 +132,7 @@ function Influencer() {
       </div>
         <VideoAnalyticsSummary />
         <UpcomingFeatures />
+    </div>
     </div>
   );
 }
