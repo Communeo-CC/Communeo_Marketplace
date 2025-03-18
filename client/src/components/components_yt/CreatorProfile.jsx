@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { StatCard } from './ui/stat-card';
 import { VideoCard } from './ui/video-card';
@@ -9,7 +10,9 @@ import { Users, Eye, Activity, Loader2, ArrowLeft, Video, Youtube } from 'lucide
 import { formatNumber } from '../../utils/formatNumber';
 import { VideoAnalysis } from './VideoAnalysis';
 
-export function CreatorProfile({ apiKey, channelId, onBack }) {
+export function CreatorProfile({ apiKey, creators }) {
+  const { creatorId } = useParams();
+  const navigate = useNavigate();
   const [channelData, setChannelData] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -19,13 +22,12 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
     const fetchData = async () => {
       try {
         const [channelDetails, videos] = await Promise.all([
-          fetchChannelDetails(channelId, apiKey),
-          fetchChannelVideos(channelId, apiKey)
+          fetchChannelDetails(creatorId, apiKey),
+          fetchChannelVideos(creatorId, apiKey)
         ]);
 
-        const savedCreators = JSON.parse(localStorage.getItem('youtubeCreators') || '[]');
-        const savedCreator = savedCreators.find(c => c.id === channelId);
-        const about = savedCreator?.about || '';
+        const creator = creators.find(c => c.id === creatorId);
+        const about = creator?.about || '';
 
         const avgEngagementRate = videos.reduce((sum, video) => sum + video.engagementRate, 0) / videos.length;
 
@@ -36,17 +38,17 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
           about
         });
       } catch (err) {
-        setError('Error fetching channel data');
+        setError('Error fetching influencer data');
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [channelId, apiKey]);
+  }, [creatorId, apiKey, creators]);
 
   const openYouTubeChannel = () => {
-    window.open(`https://youtube.com/channel/${channelId}`, '_blank');
+    window.open(`https://youtube.com/channel/${creatorId}`, '_blank');
   };
 
   if (loading) {
@@ -72,14 +74,14 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
   if (!channelData) return null;
 
   return (
-    <div className="creator-profile">
+    <div className="creator-profile" >
       <div className="profile-header">
         <Button 
           variant="ghost" 
-          onClick={onBack}
+          onClick={() => navigate('/influencer')}
         >
           <ArrowLeft className="btn-icon" />
-          Back to Creators
+          Back to Influencers
         </Button>
         <Button
           variant="outline"
@@ -100,7 +102,7 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
           <div className="profile-info">
             <h2 className="profile-title">{channelData.title}</h2>
             <p className="profile-description">
-              {channelData.description}
+              {channelData.description || 'Professional content creator and influencer'}
             </p>
           </div>
         </CardContent>
@@ -111,31 +113,33 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
           title="Subscribers"
           value={formatNumber(parseInt(channelData.subscriberCount))}
           icon={<Users className="w-5 h-5" />}
+          tooltip="Total YouTube subscribers"
         />
         <StatCard
           title="Total Views"
           value={formatNumber(parseInt(channelData.viewCount))}
           icon={<Eye className="w-5 h-5" />}
+          tooltip="Lifetime video views"
         />
         <StatCard
           title="Total Videos"
           value={formatNumber(parseInt(channelData.videoCount))}
           icon={<Video className="w-5 h-5" />}
+          tooltip="Total published videos"
         />
         <StatCard
           title="Avg. Engagement Rate"
           value={`${channelData.avgEngagementRate.toFixed(1)}%`}
           icon={<Activity className="w-5 h-5" />}
+          tooltip="Average viewer engagement rate"
         />
       </div>
 
       <Card>
         <CardHeader>
           <div className="flex-between">
-            <CardTitle>Latest Videos</CardTitle>
-            <p className="videos-count">
-              Showing {channelData.recentVideos.length} most recent videos
-            </p>
+            <CardTitle style={{ paddingLeft: '30px', paddingBottom: '30px', paddingTop:'20px'}}>Latest Videos -{'>>'}</CardTitle>
+
           </div>
         </CardHeader>
         <CardContent>
@@ -154,7 +158,7 @@ export function CreatorProfile({ apiKey, channelId, onBack }) {
       <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
         <DialogContent className="dialog-content-large">
           <DialogHeader>
-            <DialogTitle>Video Analysis</DialogTitle>
+            <DialogTitle>Content Performance</DialogTitle>
           </DialogHeader>
           {selectedVideo && <VideoAnalysis video={selectedVideo} />}
         </DialogContent>
