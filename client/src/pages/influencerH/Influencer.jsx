@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/components_yt/ui/tabs";
 import { CreatorsList } from '../../components/components_yt/CreatorsList';
 import { VideoStatistics } from '../../components/components_yt/VideoStatistics';
@@ -8,23 +7,19 @@ import { CreatorProfile } from '../../components/components_yt/CreatorProfile';
 import { Users, Video, Settings as SettingsIcon } from 'lucide-react';
 import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
-import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
-import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
 import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
 
-
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
-  const [influencers, setInfluencers] = useState([]);
+  const [creators, setCreators] = useState([]);
   const [videos, setVideos] = useState([]);
-  const navigate = useNavigate();
-  const params = useParams();
+  const [selectedCreatorId, setSelectedCreatorId] = useState(null);
 
   useEffect(() => {
-    const savedInfluencers = localStorage.getItem('youtubeInfluencers');
-    if (savedInfluencers) {
-      setInfluencers(JSON.parse(savedInfluencers));
+    const savedCreators = localStorage.getItem('youtubeCreators');
+    if (savedCreators) {
+      setCreators(JSON.parse(savedCreators));
     }
 
     const savedVideos = localStorage.getItem('youtubeVideos');
@@ -33,9 +28,9 @@ function Influencer() {
     }
   }, []);
 
-  const handleInfluencersChange = (newInfluencers) => {
-    setInfluencers(newInfluencers);
-    localStorage.setItem('youtubeInfluencers', JSON.stringify(newInfluencers));
+  const handleCreatorsChange = (newCreators) => {
+    setCreators(newCreators);
+    localStorage.setItem('youtubeCreators', JSON.stringify(newCreators));
   };
 
   const handleVideosChange = (newVideos) => {
@@ -43,12 +38,11 @@ function Influencer() {
     localStorage.setItem('youtubeVideos', JSON.stringify(newVideos));
   };
 
-  const totalSubscribers = influencers.reduce((sum, influencer) => 
-    sum + parseInt(influencer.subscriberCount || '0'), 0
+  const totalSubscribers = creators.reduce((sum, creator) => 
+    sum + parseInt(creator.subscriberCount || '0'), 0
   );
 
   return (
-
     <div classname = "influencer">
       <InfluencerFeatured />
 
@@ -64,15 +58,15 @@ function Influencer() {
               <CardContent className="stat-content">
                 <div className="stat-value">{formatNumber(totalSubscribers)}</div>
                 <div className="stat-label">Total Reach</div>
-                <div className="stat-sublabel">Combined social following</div>
+                <div className="stat-sublabel">Combined followers on YouTube</div>
               </CardContent>
             </Card>
             
             <Card>
               <CardContent className="stat-content">
-                <div className="stat-value">{influencers.length}</div>
-                <div className="stat-label">Tracked Influencers</div>
-                <div className="stat-sublabel">Active content creators</div>
+                <div className="stat-value">{creators.length}</div>
+                <div className="stat-label">Active Creators</div>
+                <div className="stat-sublabel">Total creators tracked on YouTube</div>
               </CardContent>
             </Card>
           </div>
@@ -80,40 +74,55 @@ function Influencer() {
       </div>
       
       <div className="main-content">
-        <Routes>
-          <Route path=":creatorId/:creatorName" element={
-            <CreatorProfile 
-              apiKey={apiKey}
-              creators={influencers}
-              onBack={() => navigate('/influencer')}
-            />
-          } />
+        <Tabs defaultValue="creators" className="tabs">
+          <TabsList className="tabs-list-full">
+            <TabsTrigger 
+              value="creators"
+              className="tabs-trigger"
+            >
+              <Users className="trigger-icon" />
+              Creators List
+            </TabsTrigger>
+            <TabsTrigger 
+              value="video-stats"
+              className="tabs-trigger"
+            >
+              <Video className="trigger-icon" />
+              Video Statistics
+            </TabsTrigger>
+            <TabsTrigger 
+              value="admin"
+              className="tabs-trigger"
+            >
+              <SettingsIcon className="trigger-icon" />
+              Admin Panel
+            </TabsTrigger>
+          </TabsList>
           
-          <Route index element={
-            <Tabs defaultValue="influencers" className="tabs">
-              <TabsList className="tabs-list-full">
-                <TabsTrigger value="influencers" className="tabs-trigger">
-                  <Users className="trigger-icon" />
-                  Influencers
-                </TabsTrigger>
-                <TabsTrigger value="video-stats" className="tabs-trigger">
-                  <Video className="trigger-icon" />
-                  Content Analytics
-                </TabsTrigger>
-                <TabsTrigger value="admin" className="tabs-trigger">
-                  <SettingsIcon className="trigger-icon" />
-                  Management
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="influencers">
-                <CreatorsList 
-                  apiKey={apiKey}
-                  creators={influencers}
-                  onCreatorsChange={handleInfluencersChange}
-                />
-              </TabsContent>
+          <TabsContent value="creators">
+            {selectedCreatorId ? (
+              <CreatorProfile 
+                apiKey={apiKey}
+                channelId={selectedCreatorId}
+                onBack={() => setSelectedCreatorId(null)}
+              />
+            ) : (
+              <CreatorsList 
+                apiKey={apiKey}
+                creators={creators}
+                onSelectCreator={setSelectedCreatorId}
+                onCreatorsChange={handleCreatorsChange}
+              />
+            )}
+          </TabsContent>
 
+          <TabsContent value="video-stats">
+            <VideoStatistics 
+              apiKey={apiKey}
+              videos={videos}
+              onVideosChange={handleVideosChange}
+            />
+          </TabsContent>
 
           <TabsContent value="admin">
             <AdminPanel 
@@ -124,11 +133,7 @@ function Influencer() {
           </TabsContent>
         </Tabs>
         </div>
-
       </div>
-        <VideoAnalyticsSummary />
-        <UpcomingFeatures />
-    </div>
     </div>
   );
 }
