@@ -20,3 +20,112 @@
 @import './pages/admin-panel';
 @import './pages/creators-list';
 @import './pages/video-analysis';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color: #ff6600;
+  --secondary-color: #1a1a2e;
+  --light-bg: #f9f9f9;
+  --card-bg: #ffffff;
+  width: 100vw;
+  --gradient-text: linear-gradient(45deg, #ff6600, #ff3300);
+}
+
+
+.app-title {
+  font-size: 28px;
+  width: 100vw;
+  font-weight: 600;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.stat-content {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.stat-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--secondary-color);
+}
+
+.stat-sublabel {
+  font-size: 14px;
+  color: #666;
+}
+
+.main-content {
+  width: 100vw;
+  margin-top: 20px;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tabs-list-full {
+  display: flex;
+  justify-content: center;
+  background: var(--primary-color);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.tabs-trigger {
+  background: none;
+  width: 100vw;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tabs-trigger:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+.trigger-icon {
+  margin-right: 8px;
+}
+
+.tabs-content {
+  margin-top: 15px;
+}
+
+button {
+  background: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #cc5200;
+}
