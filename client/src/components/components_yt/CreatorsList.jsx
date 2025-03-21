@@ -4,9 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { Users, Search, SlidersHorizontal, Filter, ExternalLink, Youtube, ArrowUpDown } from 'lucide-react';
+import { Users, Search, SlidersHorizontal, Filter, ExternalLink, Youtube, ArrowUpDown, MessagesSquare, } from 'lucide-react';
 import { formatNumber } from '../../utils/formatNumber';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { MessageCircle } from 'lucide-react';
+
 
 const SUBSCRIBER_RANGES = {
   'all': 'All Influencers',
@@ -192,21 +194,22 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
                         {creator.about || 'No notes added yet'}
                       </p>
                       <div className="creator-actions">
+                        
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => openYouTubeChannel(creator.id)}
+                          onClick={() => handleViewProfile(creator)}
                         >
-                          <Youtube className="btn-icon" />
-                          View Channel
+                          <ExternalLink className="btn-icon" />
+                          View Profile
                         </Button>
                         <Button
                           variant="default"
                           size="sm"
                           onClick={() => handleViewProfile(creator)}
                         >
-                          <ExternalLink className="btn-icon" />
-                          View Profile
+                          <MessagesSquare className="btn-icon" />
+                          Connect Now
                         </Button>
                       </div>
                     </div>
