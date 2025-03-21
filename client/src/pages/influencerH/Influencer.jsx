@@ -47,11 +47,15 @@ function Influencer() {
     sum + parseInt(influencer.subscriberCount || '0'), 0
   );
 
+  const isCreatorProfileRoute = location.pathname.includes('/influencer/');
+
   return (
     <div className="app">
-      <InfluencerFeatured />
+      {!isCreatorProfileRoute && <InfluencerFeatured />}
+      {!isCreatorProfileRoute && 
       <div className="header">
         <div className="header-content">
+        
           <h1 className="app-title text-gradient">
             Influencer Analytics Hub
           </h1>
@@ -74,7 +78,7 @@ function Influencer() {
             </Card>
           </div>
         </div>
-      </div>
+      </div>}
       
       <div className="main-content">
         <Routes>
@@ -130,8 +134,8 @@ function Influencer() {
           } />
         </Routes>
       </div>
-        <VideoAnalyticsSummary />
-        <UpcomingFeatures />
+        {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
+        {!isCreatorProfileRoute && <UpcomingFeatures />}
     </div>
   );
 }
