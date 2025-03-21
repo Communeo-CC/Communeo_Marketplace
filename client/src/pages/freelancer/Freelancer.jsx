@@ -29,14 +29,7 @@ function Freelancer() {
               Find high-quality services at every price point. No hourly rates,
               just project-based pricing.
             </p>
-            <div className="title">
-              <img src="./img/check.png" alt="" />
-              Quality work done quickly
-            </div>
-            <p>
-              Find the right freelancer to begin working on your project within
-              minutes.
-            </p>
+
             <div className="title">
               <img src="./img/check.png" alt="" />
               Protected payments, every time
