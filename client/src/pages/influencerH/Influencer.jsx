@@ -11,6 +11,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
+import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
 
 
 function Influencer() {
