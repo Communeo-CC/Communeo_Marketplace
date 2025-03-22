@@ -32,8 +32,19 @@
       color: white;
       font-weight: 500;
       font-size: 18px;
-      background-color: #1dbf73;
+      background-color: #a53b14d2;
       cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #a53b14;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
     }
 
     span{
