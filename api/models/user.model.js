@@ -11,6 +11,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
   },
   password: {
     type: String,
@@ -19,10 +20,6 @@ const userSchema = new Schema({
   img: {
     type: String,
     required: false,
-  },
-  country: {
-    type: String,
-    required: true,
   },
   phone: {
     type: String,
@@ -35,6 +32,17 @@ const userSchema = new Schema({
   isSeller: {
     type: Boolean,
     default:false
+  },
+  userrole: {
+    type: String,
+    enum: ["BusinessOwner", "Influencer", "Freelancer"],
+    default: "Business Owner",
+  },
+  channelId: {
+    type: String,
+    required: function () {
+      return this.userrole === "Influencer"; // Conditionally required
+    },
   },
 },{
   timestamps:true
