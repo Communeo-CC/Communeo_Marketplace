@@ -11,11 +11,10 @@ function Register() {
     email: "",
     password: "",
     img: "",
-    userrole: "user",
-    isSeller: false,
+    userrole: "BusinessOwner",
     desc: "",
-    channelId: "",
-  });
+ 
+    channelId: "", });
 
   const navigate = useNavigate();
 
@@ -67,7 +66,7 @@ function Register() {
           <input name="password" type="password" onChange={handleChange} />
           <label htmlFor="">Profile Picture</label>
           <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          <label htmlFor="">User Role</label>
+            <label htmlFor="">User Role</label>
             <select
               name="userrole"
               onChange={handleChange}
@@ -88,8 +87,7 @@ function Register() {
                 required
               />
             </>
-          )}
-          <button type="submit">Register</button>
+          )}         <button type="submit">Register</button>
         </div>
         <div className="right">
           <h1>I want to become a seller</h1>
