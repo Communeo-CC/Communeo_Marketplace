@@ -11,7 +11,6 @@ import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
-import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
 
 
 function Influencer() {
@@ -48,12 +47,13 @@ function Influencer() {
   );
 
   return (
-    <div className="app">
+    <div classname = "Influencer">
       <InfluencerFeatured />
+    <div className="app">
       <div className="header">
         <div className="header-content">
           <h1 className="app-title text-gradient">
-            Influencer Analytics Hub
+            YouTube Creator Analytics
           </h1>
           
           <div className="stats-grid">
@@ -67,9 +67,9 @@ function Influencer() {
             
             <Card>
               <CardContent className="stat-content">
-              <div className="stat-value">{influencers.length}</div>
-                <div className="stat-label">Active Creators</div>
-                <div className="stat-sublabel">Total creators tracked on YouTube</div>
+                <div className="stat-value">{influencers.length}</div>
+                <div className="stat-label">Tracked Influencers</div>
+                <div className="stat-sublabel">Active content creators</div>
               </CardContent>
             </Card>
           </div>
@@ -132,6 +132,7 @@ function Influencer() {
       </div>
         <VideoAnalyticsSummary />
         <UpcomingFeatures />
+    </div>
     </div>
   );
 }
