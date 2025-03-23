@@ -8,10 +8,12 @@ import conversationRoute from "./routes/conversation.route.js";
 import messageRoute from "./routes/message.route.js";
 import reviewRoute from "./routes/review.route.js";
 import authRoute from "./routes/auth.route.js";
+import channelRoute from "./routes/channel.route.js";
+import videoRoute from "./routes/video.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import healthRoute from "./routes/health.route.js";
-import { router as sideProjectRouter } from './routes/api.js';  // Import side project routes
+import { router as sideProjectRouter } from './routes/api.js';
 
 // Import User and Channel models
 import User from "./models/user.model.js";
@@ -45,6 +47,8 @@ app.use("/api/orders", orderRoute);
 app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/reviews", reviewRoute);
+app.use("/api/channels", channelRoute);
+app.use("/api/videos", videoRoute);
 
 // Side Project Routes
 app.use("/api/side", sideProjectRouter);  // Mount side project API under /api/side
