@@ -173,9 +173,36 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
   };
 
   const extractVideoId = (url) => {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
+    try {
+      // Handle different YouTube URL formats
+      let videoId = null;
+      
+      // Regular YouTube watch URL
+      if (url.includes('youtube.com/watch?v=')) {
+        const urlObj = new URL(url);
+        videoId = urlObj.searchParams.get('v');
+      }
+      // Shortened youtu.be URL
+      else if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+      }
+      // Embed URL
+      else if (url.includes('youtube.com/embed/')) {
+        videoId = url.split('embed/')[1].split('?')[0];
+      }
+      // Direct video ID
+      else if (url.match(/^[a-zA-Z0-9_-]{11}$/)) {
+        videoId = url;
+      }
+
+      // Validate video ID format
+      if (videoId && videoId.length === 11) {
+        return videoId;
+      }
+      return null;
+    } catch (error) {
+      return null;
+    }
   };
 
   const fetchVideoDetails = async (videoId) => {
@@ -207,19 +234,24 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
     setVideoLoading(true);
 
     try {
-      if (!videoUrl.trim()) {
+      const input = videoUrl.trim();
+      if (!input) {
         throw new Error('Please enter a video URL');
       }
 
-      const videoId = extractVideoId(videoUrl.trim());
+      // Store the original URL
+      const originalUrl = input;
+
+      const videoId = extractVideoId(input);
       if (!videoId) {
-        throw new Error('Invalid YouTube video URL');
+        throw new Error('Invalid YouTube video URL. Please enter a valid YouTube URL (e.g., https://youtube.com/watch?v=..., https://youtu.be/...)');
       }
 
       const videoDetails = await fetchVideoDetails(videoId);
       
-      // Save to database
+      // Save to database with original URL
       const response = await newRequest.post('/videos', {
+        url: originalUrl, // Use the original URL
         videoId: videoId,
         title: videoDetails.title,
         channelId: videoDetails.channelId,
@@ -232,13 +264,15 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
       // Add to videos list with database ID
       const newVideo = {
         ...videoDetails,
+        url: originalUrl, // Include the original URL
         _id: response.data._id,
         addedAt: new Date().toISOString()
       };
 
-      setVideos(prev => [...prev, newVideo]);
+      setVideos(prev => [newVideo, ...prev]);
       setVideoUrl('');
     } catch (err) {
+      console.error('Error adding video:', err);
       setVideoError(err.response?.data?.message || err.message);
     } finally {
       setVideoLoading(false);
@@ -297,7 +331,12 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
             <Input
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
-              placeholder="Enter YouTube video URL"
+              placeholder="Enter YouTube video URL or ID (e.g., youtube.com/watch?v=... or youtu.be/...)"
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleAddVideo();
+                }
+              }}
             />
             <Button onClick={handleAddVideo} disabled={videoLoading}>
               <Plus className="btn-icon" />
@@ -314,7 +353,7 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
           </div>
           {videoError && <p className="error-message">{videoError}</p>}
           <p className="help-text">
-            Paste the full YouTube video URL to analyze its performance metrics.
+            Supported formats: youtube.com/watch?v=..., youtu.be/..., youtube.com/embed/..., or direct video ID
           </p>
           
           <div className="videos-list">
