@@ -34,7 +34,7 @@ export const fetchChannelVideos = async (channelId, apiKey) => {
 
   const uploadsPlaylistId = channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
 
-  // Get the latest 50 videos from the uploads playlist
+  // Get the latest 100 videos from the uploads playlist
   const playlistResponse = await axios.get(
     `${YOUTUBE_API_BASE}/playlistItems?part=snippet&playlistId=${uploadsPlaylistId}&maxResults=100&key=${apiKey}`
   );

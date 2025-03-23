@@ -1,15 +1,47 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { Eye, ThumbsUp, MessageCircle, Activity, ExternalLink, Youtube } from 'lucide-react';
 import { formatNumber } from '../../utils/formatNumber';
 import { Button } from './ui/button';
+import newRequest from '../../utils/newRequest';
 
-export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
+export function VideoStatistics({ apiKey }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  // Fetch videos on component mount
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = async () => {
+    try {
+      setLoading(true);
+      const response = await newRequest.get('/videos');
+      setVideos(response.data);
+    } catch (err) {
+      setError('Failed to fetch videos');
+      console.error('Error fetching videos:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const openYouTubeVideo = (videoId) => {
     window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+  };
+
+  // Calculate engagement rate
+  const calculateEngagementRate = (video) => {
+    const views = parseInt(video.statistics.viewCount) || 0;
+    const likes = parseInt(video.statistics.likeCount) || 0;
+    const comments = parseInt(video.statistics.commentCount) || 0;
+    
+    if (views === 0) return 0;
+    return ((likes + comments) / views) * 100;
   };
 
   return (
@@ -19,9 +51,21 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
           <CardTitle>Video List</CardTitle>
         </CardHeader>
         <CardContent>
+          {loading && (
+            <div className="loading-state">
+              Loading videos...
+            </div>
+          )}
+          
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
+
           <div className="videos-list">
-            {videos.map((video) => (
-              <Card key={video.id} className="video-item">
+            {!loading && videos.map((video) => (
+              <Card key={video._id} className="video-item">
                 <CardContent className="video-content">
                   <div className="video-thumbnail-container">
                     <div className="video-thumbnail">
@@ -34,25 +78,25 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
                       <div className="stat-item">
                         <Eye className="stat-icon" />
                         <span className="stat-value">
-                          {formatNumber(parseInt(video.viewCount))}
+                          {formatNumber(parseInt(video.statistics.viewCount))}
                         </span>
                       </div>
                       <div className="stat-item">
                         <ThumbsUp className="stat-icon" />
                         <span className="stat-value">
-                          {formatNumber(parseInt(video.likeCount))}
+                          {formatNumber(parseInt(video.statistics.likeCount))}
                         </span>
                       </div>
                       <div className="stat-item">
                         <MessageCircle className="stat-icon" />
                         <span className="stat-value">
-                          {formatNumber(parseInt(video.commentCount))}
+                          {formatNumber(parseInt(video.statistics.commentCount))}
                         </span>
                       </div>
                       <div className="stat-item">
                         <Activity className="stat-icon" />
                         <span className="stat-value">
-                          {video.engagementRate.toFixed(1)}%
+                          {calculateEngagementRate(video).toFixed(1)}%
                         </span>
                       </div>
                     </div>
@@ -60,7 +104,7 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
                   <div className="video-info">
                     <h3 className="video-title">{video.title}</h3>
                     <p className="video-meta">
-                      {video.channelTitle} • {video.publishedAt}
+                      {video.channelTitle} • {new Date(video.publishedAt).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="video-actions">
@@ -75,7 +119,7 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => openYouTubeVideo(video.id)}
+                      onClick={() => openYouTubeVideo(video.videoId)}
                     >
                       <Youtube className="btn-icon" />
                       View Video
@@ -85,7 +129,7 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
               </Card>
             ))}
 
-            {videos.length === 0 && (
+            {!loading && videos.length === 0 && (
               <div className="empty-state">
                 No videos added yet
               </div>
@@ -112,11 +156,11 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
                   <div className="video-title-container">
                     <h2 className="video-title">{selectedVideo.title}</h2>
                     <p className="video-date">
-                      by {selectedVideo.channelTitle} • Published on {selectedVideo.publishedAt}
+                      by {selectedVideo.channelTitle} • Published on {new Date(selectedVideo.publishedAt).toLocaleDateString()}
                     </p>
                   </div>
                   <Button 
-                    onClick={() => openYouTubeVideo(selectedVideo.id)}
+                    onClick={() => openYouTubeVideo(selectedVideo.videoId)}
                   >
                     <Youtube className="btn-icon" />
                     View Video
@@ -128,25 +172,25 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
                 <div className="stat-item">
                   <h3 className="stat-label">Views</h3>
                   <p className="stat-value">
-                    {formatNumber(parseInt(selectedVideo.viewCount))}
+                    {formatNumber(parseInt(selectedVideo.statistics.viewCount))}
                   </p>
                 </div>
                 <div className="stat-item">
                   <h3 className="stat-label">Likes</h3>
                   <p className="stat-value">
-                    {formatNumber(parseInt(selectedVideo.likeCount))}
+                    {formatNumber(parseInt(selectedVideo.statistics.likeCount))}
                   </p>
                 </div>
                 <div className="stat-item">
                   <h3 className="stat-label">Comments</h3>
                   <p className="stat-value">
-                    {formatNumber(parseInt(selectedVideo.commentCount))}
+                    {formatNumber(parseInt(selectedVideo.statistics.commentCount))}
                   </p>
                 </div>
                 <div className="stat-item">
                   <h3 className="stat-label">Engagement Rate</h3>
                   <p className="stat-value">
-                    {selectedVideo.engagementRate.toFixed(1)}%
+                    {calculateEngagementRate(selectedVideo).toFixed(1)}%
                   </p>
                 </div>
               </div>
@@ -154,7 +198,7 @@ export function VideoStatistics({ apiKey, videos = [], onVideosChange }) {
               <div className="video-description">
                 <h3 className="description-title">Description</h3>
                 <div className="description-content">
-                  <p>{selectedVideo.description}</p>
+                  <p>{selectedVideo.description || 'No description available.'}</p>
                 </div>
               </div>
             </div>
