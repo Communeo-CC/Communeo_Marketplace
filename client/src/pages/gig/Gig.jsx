@@ -42,7 +42,7 @@ function Gig() {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              Fiverr {">"} Graphics & Design {">"}
+              Communeo {">"} Digital Marketing {">"} {data.cat}
             </span>
             <h1>{data.title}</h1>
             {isLoadingUser ? (
@@ -54,7 +54,7 @@ function Gig() {
                 <img
                   className="pp"
                   src={dataUser.img || "/img/noavatar.jpg"}
-                  alt=""
+                  alt={dataUser.username}
                 />
                 <span>{dataUser.username}</span>
                 {!isNaN(data.totalStars / data.starNumber) && (
@@ -62,18 +62,21 @@ function Gig() {
                     {Array(Math.round(data.totalStars / data.starNumber))
                       .fill()
                       .map((item, i) => (
-                        <img src="/img/star.png" alt="" key={i} />
+                        <img src="/img/star.png" alt="star" key={i} />
                       ))}
                     <span>{Math.round(data.totalStars / data.starNumber)}</span>
                   </div>
                 )}
               </div>
             )}
-            <Slider slidesToShow={1} arrowsScroll={1} className="slider">
-              {data.images.map((img) => (
-                <img key={img} src={img} alt="" />
-              ))}
-            </Slider>
+            <div className="slider">
+              <Slider slidesToShow={1} arrowsScroll={1}>
+                {data.cover && <img key="cover" src={data.cover} alt="Cover" />}
+                {data.images?.map((img) => (
+                  <img key={img} src={img} alt="Gallery" />
+                ))}
+              </Slider>
+            </div>
             <h2>About This Gig</h2>
             <p>{data.desc}</p>
             {isLoadingUser ? (
@@ -84,7 +87,7 @@ function Gig() {
               <div className="seller">
                 <h2>About The Seller</h2>
                 <div className="user">
-                  <img src={dataUser.img || "/img/noavatar.jpg"} alt="" />
+                  <img src={dataUser.img || "/img/noavatar.jpg"} alt={dataUser.username} />
                   <div className="info">
                     <span>{dataUser.username}</span>
                     {!isNaN(data.totalStars / data.starNumber) && (
@@ -92,7 +95,7 @@ function Gig() {
                         {Array(Math.round(data.totalStars / data.starNumber))
                           .fill()
                           .map((item, i) => (
-                            <img src="/img/star.png" alt="" key={i} />
+                            <img src="/img/star.png" alt="star" key={i} />
                           ))}
                         <span>
                           {Math.round(data.totalStars / data.starNumber)}
@@ -140,24 +143,24 @@ function Gig() {
             <p>{data.shortDesc}</p>
             <div className="details">
               <div className="item">
-                <img src="/img/clock.png" alt="" />
-                <span>{data.deliveryDate} Days Delivery</span>
+                <img src="/img/clock.png" alt="delivery" />
+                <span>{data.deliveryTime} Days Delivery</span>
               </div>
               <div className="item">
-                <img src="/img/recycle.png" alt="" />
+                <img src="/img/recycle.png" alt="revisions" />
                 <span>{data.revisionNumber} Revisions</span>
               </div>
             </div>
             <div className="features">
-              {data.features.map((feature) => (
+              {data.features?.map((feature) => (
                 <div className="item" key={feature}>
-                  <img src="/img/greencheck.png" alt="" />
+                  <img src="/img/greencheck.png" alt="feature" />
                   <span>{feature}</span>
                 </div>
               ))}
             </div>
             <Link to={`/pay/${id}`}>
-            <button>Continue</button>
+              <button>Continue</button>
             </Link>
           </div>
         </div>

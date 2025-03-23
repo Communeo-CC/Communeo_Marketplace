@@ -222,6 +222,48 @@ export function CreatorsList() {
     navigate(`/influencer/${creator.id}/${urlSafeTitle}`);
   };
 
+  const handleContact = async (creator) => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+
+    if (!creator.userId) {
+      alert("This influencer hasn't registered on the platform yet.");
+      return;
+    }
+
+    try {
+      // Generate a unique conversation ID that's consistent regardless of who initiates
+      const conversationId = [currentUser._id, creator.userId].sort().join('_');
+      
+      try {
+        // Try to get existing conversation
+        const res = await newRequest.get(`/conversations/single/${conversationId}`);
+        navigate(`/message/${res.data.id}`);
+      } catch (err) {
+        if (err.response?.status === 404) {
+          // Create new conversation
+          const res = await newRequest.post(`/conversations/`, {
+            to: creator.userId,
+            sellerId: creator.userId, // Influencer is considered the seller
+            buyerId: currentUser._id,
+            id: conversationId
+          });
+          navigate(`/message/${res.data.id}`);
+        } else {
+          console.error("Error creating conversation:", err);
+          alert("Failed to start conversation. Please try again.");
+        }
+      }
+    } catch (err) {
+      console.error("Error in handleContact:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   return (
     <div className="creators-list">
       <Card>
@@ -339,7 +381,7 @@ export function CreatorsList() {
                         <Button
                           variant="default"
                           size="sm"
-                          onClick={() => handleViewProfile(creator)}
+                          onClick={() => handleContact(creator)}
                         >
                           <MessagesSquare className="btn-icon" />
                           Connect Now
