@@ -59,83 +59,66 @@ function Freelancer() {
             <div className="item">
               <img
                 src="./img/1.svg"
-                alt=""
+                alt="Social Media Marketing"
               />
               <div className="line"></div>
-              <span>Graphics & Design</span>
-            </div>
-            <div className="item">
-              <img
-                src="./img/2.svg"
-                alt=""
-              />
-              <div className="line"></div>
-
-              <span>Digital Marketing</span>
-            </div>
-            <div className="item">
-              <img
-                src="./img/3.svg"
-                alt=""
-              />
-              <div className="line"></div>
-              <span>Writing & Translation</span>
-            </div>
-            <div className="item">
-              <img
-                src="./img/4.svg"
-                alt=""
-              />
-              <div className="line"></div>
-              <span>Video & Animation</span>
-            </div>
-            <div className="item">
-              <img
-                src="./img/5.svg"
-                alt=""
-              />
-              <div className="line"></div>
-              <span>Music & Audio</span>
+              <span>Social Media Marketing</span>
             </div>
             <div className="item">
               <img
                 src="./img/6.svg"
-                alt=""
+                alt="SEO & Analytics"
               />
               <div className="line"></div>
-              <span>Programming & Tech</span>
+              <span>SEO & Analytics</span>
+            </div>
+            <div className="item">
+              <img
+                src="./img/4.svg"
+                alt="Content Marketing"
+              />
+              <div className="line"></div>
+              <span>Content Marketing</span>
+            </div>
+            <div className="item">
+              <img
+                src="./img/3.svg"
+                alt="Email Marketing"
+              />
+              <div className="line"></div>
+              <span>Email Marketing</span>
+            </div>
+            <div className="item">
+              <img
+                src="./img/5.svg"
+                alt="PPC & Paid Advertising"
+              />
+              <div className="line"></div>
+              <span>PPC & Paid Advertising</span>
+            </div>
+            <div className="item">
+              <img
+                src="./img/2.svg"
+                alt="Influencer Marketing"
+              />
+              <div className="line"></div>
+              <span>Influencer Marketing</span>
             </div>
             <div className="item">
               <img
                 src="./img/7.svg"
-                alt=""
+                alt="Marketing Strategy"
               />
               <div className="line"></div>
-              <span>Business</span>
+              <span>Marketing Strategy</span>
             </div>
             <div className="item">
               <img
                 src="./img/8.svg"
-                alt=""
+                alt="Brand Marketing"
               />
               <div className="line"></div>
-              <span>Lifestyle</span>
-            </div>
-            <div className="item">
-              <img
-                src="./img/9.svg"
-                alt=""
-              />
-              <div className="line"></div>
-              <span>Data</span>
-            </div>
-            <div className="item">
-              <img
-                src="./img/10.svg"
-                alt=""
-              />
-              <div className="line"></div>
-              <span>Photography</span>
+              <span>Brand Marketing</span>
             </div>
           </div>
         </div>
