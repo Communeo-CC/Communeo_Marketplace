@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const videoSchema = new Schema({
-  id: {
+  videoId: {
     type: String,
     required: true,
     unique: true,
@@ -12,6 +12,10 @@ const videoSchema = new Schema({
     required: true,
   },
   thumbnailUrl: {
+    type: String,
+    required: true,
+  },
+  channelId: {
     type: String,
     required: true,
   },
@@ -27,6 +31,10 @@ const videoSchema = new Schema({
   publishedAt: {
     type: Date,
     required: true,
+  },
+  addedAt: {
+    type: Date,
+    default: Date.now,
   }
 }, {
   timestamps: true,
