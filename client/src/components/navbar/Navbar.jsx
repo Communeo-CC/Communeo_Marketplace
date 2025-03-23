@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
 import "./Navbar.scss";
@@ -6,6 +6,7 @@ import "./Navbar.scss";
 function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const { pathname } = useLocation();
 
@@ -15,8 +16,18 @@ function Navbar() {
 
   useEffect(() => {
     window.addEventListener("scroll", isActive);
+    
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    
     return () => {
       window.removeEventListener("scroll", isActive);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -57,11 +68,13 @@ function Navbar() {
           {!currentUser?.isSeller && <Link className="link" to="/register">Become a Seller</Link>}
 
           {currentUser ? (
-            <div className="user" onClick={() => setOpen(!open)}>
+            <div className="user" ref={menuRef} onClick={() => setOpen(!open)}>
               <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
-              <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
+                  <div className="user-info">
+                    <span className="username">{currentUser?.username}</span>
+                  </div>
                   {currentUser.isSeller && (
                     <>
                       <Link className="link" to="/mygigs">
