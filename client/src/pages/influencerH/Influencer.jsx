@@ -130,7 +130,8 @@ function Influencer() {
             </Tabs>
           } />
         </Routes>
-      </div>
+      </div> 
+       
         <QuickActions />
         <VideoAnalyticsSummary />
         <UpcomingFeatures />
