@@ -47,7 +47,7 @@
 
         &:focus {
           outline: none;
-          border-color: #1dbf73;
+          border-color: #e48443;
         }
       }
 
@@ -72,7 +72,7 @@
           padding: 8px;
           background-color: #fff;
           border-radius: 4px;
-          border-left: 3px solid #1dbf73;
+          border-left: 3px solid #e48443;
         }
       }
 
@@ -82,17 +82,17 @@
         color: white;
         font-weight: 500;
         font-size: 18px;
-        background-color: #1dbf73;
+        background-color:#e48443;
         cursor: pointer;
         border-radius: 4px;
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: #19a463;
+          background-color: #e48443;
         }
 
         &:disabled {
-          background-color: #1dbf7380;
+          background-color: #e48443;
           cursor: not-allowed;
         }
       }
@@ -139,11 +139,11 @@
           }
 
           input:checked + .slider {
-            background-color: #1dbf73;
+            background-color: #e48443;
           }
 
           input:focus + .slider {
-            box-shadow: 0 0 1px #1dbf73;
+            box-shadow: 0 0 1px #e48443;
           }
 
           input:checked + .slider:before {
@@ -188,7 +188,7 @@
 
     .verify-button {
       padding: 10px 20px;
-      background-color: #1dbf73;
+      background-color: #e48443;
       color: white;
       border: none;
       border-radius: 5px;
@@ -198,7 +198,7 @@
       font-weight: 500;
 
       &:hover {
-        background-color: #19a463;
+        background-color: #a53b14;
         transform: translateY(-1px);
       }
 
@@ -245,7 +245,7 @@
       height: 60px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid #1dbf73;
+      border: 2px solid #e48443;
     }
 
     .channel-info {
@@ -269,7 +269,7 @@
       position: absolute;
       top: -10px;
       right: -10px;
-      background-color: #1dbf73;
+      background-color: #e48443;
       color: white;
       padding: 5px 10px;
       border-radius: 15px;
@@ -293,6 +293,6 @@
     padding: 10px;
     background-color: #fff;
     border-radius: 4px;
-    border-left: 3px solid #1dbf73;
+    border-left: 3px solid #e48443;
   }
 }
