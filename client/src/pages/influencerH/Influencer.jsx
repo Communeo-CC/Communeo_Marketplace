@@ -10,9 +10,8 @@ import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
-import '../../styles/main.scss'
+import '../../styles/main.scss';
 import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
-
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -34,6 +33,7 @@ function Influencer() {
   }, []);
 
   const handleInfluencersChange = (newInfluencers) => {
+    console.log('New influencers data:', newInfluencers);
     setInfluencers(newInfluencers);
     localStorage.setItem('youtubeInfluencers', JSON.stringify(newInfluencers));
   };
@@ -43,9 +43,11 @@ function Influencer() {
     localStorage.setItem('youtubeVideos', JSON.stringify(newVideos));
   };
 
-  const totalSubscribers = influencers.reduce((sum, influencer) => 
-    sum + parseInt(influencer.subscriberCount || '0'), 0
-  );
+  // Calculate total subscribers from influencers' statistics
+  const totalSubscribers = influencers.reduce((sum, influencer) => {
+    const subscriberCount = influencer.statistics?.subscriberCount || '0';
+    return sum + parseInt(subscriberCount);
+  }, 0);
 
   const isCreatorProfileRoute = location.pathname.includes('/influencer/');
 
@@ -55,8 +57,6 @@ function Influencer() {
       {!isCreatorProfileRoute && 
       <div className="header">
         <div className="header-content">
-        
-          
           <div className="stats-grid" style={{ paddingTop: '30px' }}>
             <Card>
               <CardContent className="stat-content">
@@ -68,7 +68,7 @@ function Influencer() {
             
             <Card>
               <CardContent className="stat-content">
-              <div className="stat-value">{influencers.length}</div>
+                <div className="stat-value">{influencers.length}</div>
                 <div className="stat-label">Active Creators</div>
                 <div className="stat-sublabel">Total creators tracked on YouTube</div>
               </CardContent>
@@ -76,63 +76,70 @@ function Influencer() {
           </div>
         </div>
       </div>}
-      
+
       <div className="main-content">
         <Routes>
-          <Route path=":creatorId/:creatorName" element={
-            <CreatorProfile 
-              apiKey={apiKey}
-              creators={influencers}
-              onBack={() => navigate('/influencer')}
-            />
-          } />
-          
-          <Route index element={
-            <Tabs defaultValue="influencers" className="tabs">
-              <TabsList className="tabs-list-full">
-                <TabsTrigger value="influencers" className="tabs-trigger">
-                  <Users className="trigger-icon" />
-                  Influencers
-                </TabsTrigger>
-                <TabsTrigger value="video-stats" className="tabs-trigger">
-                  <Video className="trigger-icon" />
-                  Content Analytics
-                </TabsTrigger>
-                <TabsTrigger value="admin" className="tabs-trigger">
-                  <SettingsIcon className="trigger-icon" />
-                  Management
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="influencers">
-                <CreatorsList 
-                  apiKey={apiKey}
-                  creators={influencers}
-                  onCreatorsChange={handleInfluencersChange}
-                />
-              </TabsContent>
+          <Route
+            path=":creatorId/:creatorName"
+            element={
+              <CreatorProfile
+                apiKey={apiKey}
+                creators={influencers}
+                onBack={() => navigate('/influencer')}
+              />
+            }
+          />
 
-              <TabsContent value="video-stats">
-                <VideoStatistics 
-                  apiKey={apiKey}
-                  videos={videos}
-                  onVideosChange={handleVideosChange}
-                />
-              </TabsContent>
+          <Route
+            index
+            element={
+              <Tabs defaultValue="influencers" className="tabs">
+                <TabsList className="tabs-list-full">
+                  <TabsTrigger value="influencers" className="tabs-trigger">
+                    <Users className="trigger-icon" />
+                    Influencers
+                  </TabsTrigger>
+                  <TabsTrigger value="video-stats" className="tabs-trigger">
+                    <Video className="trigger-icon" />
+                    Content Analytics
+                  </TabsTrigger>
+                  <TabsTrigger value="admin" className="tabs-trigger">
+                    <SettingsIcon className="trigger-icon" />
+                    Management
+                  </TabsTrigger>
+                </TabsList>
 
-              <TabsContent value="admin">
-                <AdminPanel 
-                  apiKey={apiKey}
-                  onCreatorsChange={handleInfluencersChange}
-                  onVideosChange={handleVideosChange}
-                />
-              </TabsContent>
-            </Tabs>
-          } />
+                <TabsContent value="influencers">
+                  <CreatorsList
+                    apiKey={apiKey}
+                    creators={influencers}
+                    onCreatorsChange={handleInfluencersChange}
+                  />
+                </TabsContent>
+
+                <TabsContent value="video-stats">
+                  <VideoStatistics
+                    apiKey={apiKey}
+                    videos={videos}
+                    onVideosChange={handleVideosChange}
+                  />
+                </TabsContent>
+
+                <TabsContent value="admin">
+                  <AdminPanel
+                    apiKey={apiKey}
+                    onCreatorsChange={handleInfluencersChange}
+                    onVideosChange={handleVideosChange}
+                  />
+                </TabsContent>
+              </Tabs>
+            }
+          />
         </Routes>
       </div>
-        {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
-        {!isCreatorProfileRoute && <UpcomingFeatures />}
+
+      {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
+      {!isCreatorProfileRoute && <UpcomingFeatures />}
     </div>
   );
 }
