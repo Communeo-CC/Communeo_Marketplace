@@ -56,11 +56,8 @@ function Influencer() {
       <div className="header">
         <div className="header-content">
         
-          <h1 className="app-title text-gradient">
-            Influencer Analytics Hub
-          </h1>
           
-          <div className="stats-grid">
+          <div className="stats-grid" style={{ paddingTop: '30px' }}>
             <Card>
               <CardContent className="stat-content">
                 <div className="stat-value">{formatNumber(totalSubscribers)}</div>
