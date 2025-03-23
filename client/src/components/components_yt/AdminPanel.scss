@@ -1,0 +1,121 @@
+.admin-panel {
+  .add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .help-text {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+  }
+
+  .error-message {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .creators-list, .videos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .creator-item, .video-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: white;
+
+    &:hover {
+      background: #f9f9f9;
+    }
+  }
+
+  .item-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .creator-avatar, .video-thumbnail {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .video-thumbnail {
+    border-radius: 4px;
+  }
+
+  .item-info {
+    flex: 1;
+  }
+
+  .item-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .item-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin: 4px 0 0 0;
+  }
+
+  .creator-details {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+
+    p {
+      margin: 2px 0;
+    }
+  }
+
+  .status-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+
+    &.registered {
+      background-color: #14a536;
+      color: white;
+    }
+
+    &.unregistered {
+      background-color: #666;
+      color: white;
+    }
+  }
+
+  .creator-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 24px;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+} 
