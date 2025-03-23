@@ -6,6 +6,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
 
+const categories = [
+  { value: "social-media", label: "Social Media Marketing" },
+  { value: "seo-analytics", label: "SEO & Analytics" },
+  { value: "content", label: "Content Marketing" },
+  { value: "email", label: "Email Marketing" },
+  { value: "ppc", label: "PPC & Paid Advertising" },
+  { value: "influencer", label: "Influencer Marketing" },
+  { value: "strategy", label: "Marketing Strategy" },
+  { value: "branding", label: "Brand Marketing" }
+];
+
 const Add = () => {
   const [singleFile, setSingleFile] = useState(undefined);
   const [files, setFiles] = useState([]);
@@ -28,22 +39,41 @@ const Add = () => {
     e.target[0].value = "";
   };
 
-  const handleUpload = async () => {
+  const clearCoverImage = () => {
+    setSingleFile(undefined);
+    // Reset the file input
+    const coverInput = document.querySelector('input[type="file"]:not([multiple])');
+    if (coverInput) coverInput.value = '';
+  };
+
+  const clearGalleryImages = () => {
+    setFiles([]);
+    // Reset the file input
+    const galleryInput = document.querySelector('input[type="file"][multiple]');
+    if (galleryInput) galleryInput.value = '';
+  };
+
+  const handleUpload = async (type) => {
     setUploading(true);
     try {
-      const cover = await upload(singleFile);
-
-      const images = await Promise.all(
-        [...files].map(async (file) => {
-          const url = await upload(file);
-          return url;
-        })
-      );
-      setUploading(false);
-      dispatch({ type: "ADD_IMAGES", payload: { cover, images } });
+      if (type === 'cover' && singleFile) {
+        const cover = await upload(singleFile);
+        dispatch({ type: "ADD_IMAGES", payload: { cover, images: state.images } });
+        clearCoverImage();
+      } else if (type === 'gallery' && files.length > 0) {
+        const images = await Promise.all(
+          [...files].map(async (file) => {
+            const url = await upload(file);
+            return url;
+          })
+        );
+        dispatch({ type: "ADD_IMAGES", payload: { cover: state.cover, images } });
+        clearGalleryImages();
+      }
     } catch (err) {
       console.log(err);
     }
+    setUploading(false);
   };
 
   const navigate = useNavigate();
@@ -56,13 +86,13 @@ const Add = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["myGigs"]);
+      navigate("/mygigs");
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate(state);
-    // navigate("/mygigs")
   };
 
   return (
@@ -79,35 +109,54 @@ const Add = () => {
               onChange={handleChange}
             />
             <label htmlFor="">Category</label>
-            <select name="cat" id="cat" onChange={handleChange}>
-              <option value="design">Design</option>
-              <option value="web">Web Development</option>
-              <option value="animation">Animation</option>
-              <option value="music">Music</option>
+            <select name="cat" onChange={handleChange}>
+              <option value="">Select a category</option>
+              {categories.map((cat) => (
+                <option key={cat.value} value={cat.value}>
+                  {cat.label}
+                </option>
+              ))}
             </select>
-            <div className="images">
-              <div className="imagesInputs">
-                <label htmlFor="">Cover Image</label>
-                <input
-                  type="file"
-                  onChange={(e) => setSingleFile(e.target.files[0])}
-                />
-                <label htmlFor="">Upload Images</label>
-                <input
-                  type="file"
-                  multiple
-                  onChange={(e) => setFiles(e.target.files)}
-                />
-              </div>
-              <button onClick={handleUpload}>
+            <label htmlFor="">Cover Image</label>
+            <div className="imageInput">
+              <input
+                type="file"
+                onChange={(e) => setSingleFile(e.target.files[0])}
+              />
+              <button onClick={() => handleUpload('cover')} disabled={!singleFile || uploading}>
                 {uploading ? "uploading" : "Upload"}
+              </button>
+              <button 
+                onClick={clearCoverImage} 
+                disabled={!singleFile || uploading}
+                className="clearBtn"
+              >
+                Clear
+              </button>
+            </div>
+            <label htmlFor="">Upload Images</label>
+            <div className="imageInput">
+              <input
+                type="file"
+                multiple
+                onChange={(e) => setFiles(e.target.files)}
+              />
+              <button onClick={() => handleUpload('gallery')} disabled={!files.length || uploading}>
+                {uploading ? "uploading" : "Upload"}
+              </button>
+              <button 
+                onClick={clearGalleryImages} 
+                disabled={!files.length || uploading}
+                className="clearBtn"
+              >
+                Clear
               </button>
             </div>
             <label htmlFor="">Description</label>
             <textarea
               name="desc"
               id=""
-              placeholder="Brief descriptions to introduce your service to customers"
+              placeholder="Brief description of your service"
               cols="0"
               rows="16"
               onChange={handleChange}
