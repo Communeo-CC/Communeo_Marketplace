@@ -22,7 +22,43 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
   // Fetch initial data
   useEffect(() => {
     fetchAllCreators();
+    fetchAllVideos();
   }, []);
+
+  // Fetch videos from database
+  const fetchAllVideos = async () => {
+    try {
+      setVideoLoading(true);
+      const response = await newRequest.get('/videos');
+      const savedVideos = response.data;
+
+      // Fetch fresh YouTube details for each video
+      const videosWithDetails = await Promise.all(
+        savedVideos.map(async (video) => {
+          try {
+            const youtubeDetails = await fetchVideoDetails(video.videoId);
+            return {
+              ...youtubeDetails,
+              addedAt: video.addedAt || video.createdAt,
+              _id: video._id
+            };
+          } catch (err) {
+            console.error(`Error fetching details for video ${video.videoId}:`, err);
+            return null;
+          }
+        })
+      );
+
+      // Filter out failed fetches
+      const validVideos = videosWithDetails.filter(video => video !== null);
+      setVideos(validVideos);
+    } catch (err) {
+      console.error('Error fetching videos:', err);
+      setVideoError('Failed to fetch videos');
+    } finally {
+      setVideoLoading(false);
+    }
+  };
 
   // Fetch both registered and unregistered creators
   const fetchAllCreators = async () => {
@@ -182,23 +218,41 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
 
       const videoDetails = await fetchVideoDetails(videoId);
       
-      // Add to videos list
+      // Save to database
+      const response = await newRequest.post('/videos', {
+        videoId: videoId,
+        title: videoDetails.title,
+        channelId: videoDetails.channelId,
+        channelTitle: videoDetails.channelTitle,
+        thumbnailUrl: videoDetails.thumbnailUrl,
+        statistics: videoDetails.statistics,
+        publishedAt: videoDetails.publishedAt
+      });
+
+      // Add to videos list with database ID
       const newVideo = {
         ...videoDetails,
+        _id: response.data._id,
         addedAt: new Date().toISOString()
       };
 
       setVideos(prev => [...prev, newVideo]);
       setVideoUrl('');
     } catch (err) {
-      setVideoError(err.message);
+      setVideoError(err.response?.data?.message || err.message);
     } finally {
       setVideoLoading(false);
     }
   };
 
-  const removeVideo = (id) => {
-    setVideos(prev => prev.filter(v => v.id !== id));
+  const removeVideo = async (id) => {
+    try {
+      await newRequest.delete(`/videos/${id}`);
+      setVideos(prev => prev.filter(v => v._id !== id));
+    } catch (err) {
+      setVideoError('Failed to remove video');
+      console.error('Error removing video:', err);
+    }
   };
 
   return (
@@ -249,6 +303,14 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
               <Plus className="btn-icon" />
               {videoLoading ? 'Adding...' : 'Add Video'}
             </Button>
+            <Button 
+              onClick={fetchAllVideos} 
+              disabled={videoLoading}
+              variant="secondary"
+            >
+              <RefreshCw className={`btn-icon mr-2 ${videoLoading ? 'animate-spin' : ''}`} />
+              {videoLoading ? 'Refreshing...' : 'Refresh Videos'}
+            </Button>
           </div>
           {videoError && <p className="error-message">{videoError}</p>}
           <p className="help-text">
@@ -256,8 +318,14 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
           </p>
           
           <div className="videos-list">
-            {videos.map((video) => (
-              <div key={video.id} className="video-item">
+            {videoLoading && (
+              <div className="loading-state">
+                <RefreshCw className="animate-spin h-8 w-8 text-gray-400" />
+                <p>Loading videos...</p>
+              </div>
+            )}
+            {!videoLoading && videos.map((video) => (
+              <div key={video._id} className="video-item">
                 <div className="item-content">
                   <img
                     src={video.thumbnailUrl}
@@ -273,21 +341,23 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
                       {video.channelTitle}
                     </p>
                     <p className="video-stats">
-                      Views: {video.statistics.viewCount} • Added: {new Date(video.addedAt).toLocaleDateString()}
+                      Views: {video.statistics.viewCount.toLocaleString()} • 
+                      Likes: {video.statistics.likeCount?.toLocaleString() || 'N/A'} •
+                      Added: {new Date(video.addedAt).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => removeVideo(video.id)}
+                  onClick={() => removeVideo(video._id)}
                   title="Remove video"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
               </div>
             ))}
-            {videos.length === 0 && (
+            {!videoLoading && videos.length === 0 && (
               <div className="empty-state">No videos added for analysis</div>
             )}
           </div>
