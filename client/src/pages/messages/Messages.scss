@@ -9,48 +9,90 @@
     .title {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 30px;
 
-      button {
-        background-color: #1dbf73;
-        color: white;
+      h1 {
+        font-size: 24px;
+        color: #333;
         font-weight: 500;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
       }
     }
 
     table {
       width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-      tr {
-        height: 100px;
+      thead {
+        background-color: #f5f5f5;
+        
         th {
           text-align: left;
+          padding: 15px 20px;
+          font-weight: 500;
+          color: #555;
+          font-size: 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
-        td {
-          padding: 10px;
+      }
 
-          &:first-child {
-            font-weight: 500;
+      tbody {
+        tr {
+          border-bottom: 1px solid #eee;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: #f9f9f9;
           }
-          
-          &:nth-child(2),
-          &:nth-child(3) {
-            color: gray;
+
+          &.active {
+            background-color: #1dbf730f;
+            
+            &:hover {
+              background-color: #1dbf7315;
+            }
           }
-        }
 
-        button {
-          background-color: #1dbf73;
-          color: white;
-          padding: 10px;
-          border: none;
-          cursor: pointer;
-        }
+          td {
+            padding: 20px;
+            color: #333;
+            font-size: 15px;
 
-        &.active {
-          background-color: #1dbf730f;
+            &:first-child {
+              font-weight: 500;
+              color: #404145;
+            }
+
+            .link {
+              text-decoration: none;
+              color: inherit;
+              
+              &:hover {
+                text-decoration: underline;
+                color: #1dbf73;
+              }
+            }
+
+            button {
+              background-color: #1dbf73;
+              color: white;
+              padding: 8px 15px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 14px;
+              transition: background-color 0.2s;
+
+              &:hover {
+                background-color: darken(#1dbf73, 5%);
+              }
+            }
+          }
         }
       }
     }
