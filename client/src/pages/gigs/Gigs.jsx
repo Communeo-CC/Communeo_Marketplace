@@ -5,6 +5,17 @@ import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useLocation } from "react-router-dom";
 
+const categoryTitles = {
+  'social-media': 'Social Media Marketing',
+  'seo-analytics': 'SEO & Analytics',
+  'content': 'Content Marketing',
+  'email': 'Email Marketing',
+  'ppc': 'PPC & Paid Advertising',
+  'influencer': 'Influencer Marketing',
+  'strategy': 'Marketing Strategy',
+  'branding': 'Brand Marketing'
+};
+
 function Gigs() {
   const [sort, setSort] = useState("sales");
   const [open, setOpen] = useState(false);
@@ -12,9 +23,11 @@ function Gigs() {
   const maxRef = useRef();
 
   const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const category = params.get('cat');
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["gigs"],
+    queryKey: ["gigs", category],
     queryFn: () =>
       newRequest
         .get(
@@ -43,10 +56,12 @@ function Gigs() {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">Liverr &gt; Graphics & Design &gt;</span>
-        <h1>AI Artists</h1>
+        <span className="breadcrumbs">
+          Communeo &gt; Digital Marketing &gt; {categoryTitles[category] || 'All Services'}
+        </span>
+        <h1>{categoryTitles[category] || 'Digital Marketing Services'}</h1>
         <p>
-          Explore the boundaries of art and technology with Liverr's AI artists
+          Find the perfect digital marketing professional for your business
         </p>
         <div className="menu">
           <div className="left">
@@ -74,11 +89,15 @@ function Gigs() {
           </div>
         </div>
         <div className="cards">
-          {isLoading
-            ? "loading"
-            : error
-            ? "Something went wrong!"
-            : data.map((gig) => <GigCard key={gig._id} item={gig} />)}
+          {isLoading ? (
+            <div className="loading">Loading...</div>
+          ) : error ? (
+            <div className="error">Something went wrong!</div>
+          ) : data.length === 0 ? (
+            <div className="no-results">No services found for this category.</div>
+          ) : (
+            data.map((gig) => <GigCard key={gig._id} item={gig} />)
+          )}
         </div>
       </div>
     </div>
