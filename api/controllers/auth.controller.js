@@ -1,7 +1,9 @@
 import User from "../models/user.model.js";
+import { Channel } from "../models/channel.model.js";
 import createError from "../utils/createError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { fetchChannelDetails } from "../utils/youtube.js";
 
 export const register = async (req, res, next) => {
   try {
@@ -11,12 +13,51 @@ export const register = async (req, res, next) => {
       password: hash,
     });
 
-    await newUser.save();
-    res.status(201).send("User has been created.");
+    const savedUser = await newUser.save();
+
+    // If user is registering as an influencer and has provided a channel ID
+    if (req.body.userrole === "Influencer" && req.body.channelId) {
+      try {
+        // Fetch fresh channel details from YouTube
+        const channelDetails = await fetchChannelDetails(req.body.channelId, process.env.YOUTUBE_API_KEY);
+        console.log('Fetched channel details:', channelDetails);
+        
+        // Create or update channel record
+        const channelData = {
+          channelId: req.body.channelId,
+          userId: savedUser._id,
+          username: savedUser.username,
+          email: savedUser.email,
+          isRegistered: true,
+          title: channelDetails.title,
+          thumbnailUrl: channelDetails.thumbnailUrl,
+          statistics: {
+            subscriberCount: channelDetails.subscriberCount,
+            videoCount: channelDetails.videoCount,
+            viewCount: channelDetails.viewCount
+          },
+          registeredAt: new Date()
+        };
+
+        console.log('Saving channel data:', channelData);
+        const savedChannel = await Channel.findOneAndUpdate(
+          { channelId: req.body.channelId },
+          channelData,
+          { upsert: true, new: true }
+        );
+        console.log('Saved channel:', savedChannel);
+      } catch (error) {
+        console.error('Error updating channel during registration:', error);
+        // Don't fail registration if channel update fails
+      }
+    }
+
+    res.status(201).json("User has been created.");
   } catch (err) {
     next(err);
   }
 };
+
 export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
