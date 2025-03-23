@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { Channel } from "./channel.model.js"; // Import the Channel model
+
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -31,7 +33,7 @@ const userSchema = new Schema({
   },
   isSeller: {
     type: Boolean,
-    default:false
+    default: false,
   },
   userrole: {
     type: String,
@@ -44,8 +46,32 @@ const userSchema = new Schema({
       return this.userrole === "Influencer"; // Conditionally required
     },
   },
-},{
-  timestamps:true
+}, {
+  timestamps: true,
 });
 
-export default mongoose.model("User", userSchema)
+// Post-save middleware to extract influencer details and save to Channel collection
+userSchema.post('save', async function (doc) {
+  if (doc.userrole === "Influencer" && doc.channelId) {
+    try {
+      // Extract influencer details from the User document
+      const influencerDetails = {
+        channelId: doc.channelId,
+        userId: doc._id,
+        username: doc.username,
+        email: doc.email,
+        userrole: doc.userrole,
+      };
+
+      // Save the details to the Channel collection
+      const newChannel = new Channel(influencerDetails);
+      await newChannel.save();
+
+      console.log("Influencer details saved to Channel collection:", newChannel);
+    } catch (error) {
+      console.error("Error saving influencer details to Channel collection:", error.message);
+    }
+  }
+});
+
+export default mongoose.model("User", userSchema);
