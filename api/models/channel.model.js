@@ -20,6 +20,27 @@ const channelSchema = new Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: false,
+  },
+  thumbnailUrl: {
+    type: String,
+    required: false,
+  },
+  statistics: {
+    subscriberCount: String,
+    videoCount: String,
+    viewCount: String,
+  },
+  isRegistered: {
+    type: Boolean,
+    default: true,
+  },
+  registeredAt: {
+    type: Date,
+    default: Date.now,
+  },
   userrole: {
     type: String,
     required: true,
