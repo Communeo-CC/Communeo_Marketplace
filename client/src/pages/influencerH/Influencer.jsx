@@ -11,8 +11,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
-import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
-
+import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
