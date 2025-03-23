@@ -63,3 +63,5 @@ function InfluencerFeatured() {
     </div>
   );
 }
+
+export default InfluencerFeatured;
