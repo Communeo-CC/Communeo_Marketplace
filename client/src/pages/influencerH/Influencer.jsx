@@ -12,6 +12,7 @@ import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoA
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
 import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
+import QuickActions from '../../components/QuickActions/QuickActions';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -130,6 +131,7 @@ function Influencer() {
           } />
         </Routes>
       </div>
+        <QuickActions />
         <VideoAnalyticsSummary />
         <UpcomingFeatures />
     </div>
