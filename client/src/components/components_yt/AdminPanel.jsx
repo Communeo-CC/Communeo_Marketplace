@@ -291,36 +291,7 @@ export function AdminPanel({ apiKey, onCreatorsChange }) {
 
   return (
     <div className="admin-panel">
-      <Card>
-        <CardHeader>
-          <CardTitle>Add Creator</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="add-form">
-            <Input
-              value={channelId}
-              onChange={(e) => setChannelId(e.target.value)}
-              placeholder="Enter YouTube channel ID (e.g., UC...)"
-            />
-            <Button onClick={handleAddCreator} disabled={loading}>
-              <Plus className="btn-icon" />
-              {loading ? 'Adding...' : 'Add Creator'}
-            </Button>
-            <Button 
-              onClick={fetchAllCreators} 
-              disabled={loading}
-              variant="secondary"
-            >
-              <RefreshCw className={`btn-icon mr-2 ${loading ? 'animate-spin' : ''}`} />
-              {loading ? 'Refreshing...' : 'Refresh Creators'}
-            </Button>
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <p className="help-text">
-            You can find a channel ID in the channel's URL after "/channel/" or in the channel's advanced settings.
-          </p>
-        </CardContent>
-      </Card>
+      
 
       <Card className="mt-6">
         <CardHeader>
