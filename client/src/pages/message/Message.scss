@@ -1,87 +1,152 @@
 .message {
   display: flex;
   justify-content: center;
+  
   .container {
     width: 1200px;
     margin: 50px;
+    
     .breadcrumbs {
       font-weight: 300;
       font-size: 13px;
       color: #555;
+      margin-bottom: 20px;
+      display: block;
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
-    .messages {
-      margin: 30px 0px;
-      padding: 50px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      height: 500px;
-      overflow: scroll;
 
-      .item {
+    .messages-container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      
+      .loading, .error {
+        padding: 20px;
+        text-align: center;
+        color: #666;
+      }
+
+      .messages {
+        padding: 30px;
+        height: 500px;
+        overflow-y: auto;
         display: flex;
+        flex-direction: column;
         gap: 20px;
-        max-width: 600px;
-        font-size: 18px;
 
-        &.owner {
-          flex-direction: row-reverse;
-          align-self: flex-end;
+        .item {
+          display: flex;
+          gap: 20px;
+          max-width: 600px;
+          font-size: 16px;
+          align-items: flex-start;
 
-          p {
-            max-width: 500px;
-            border-radius: 20px 0px 20px 20px;
-            background-color: royalblue;
-            color: white;
+          &.owner {
+            flex-direction: row-reverse;
+            align-self: flex-end;
+
+            .message-content {
+              align-items: flex-end;
+              
+              p {
+                background-color: #1dbf73;
+                color: white;
+                border-radius: 20px 4px 20px 20px;
+              }
+              
+              .timestamp {
+                text-align: right;
+              }
+            }
           }
-        }
 
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
 
-        p {
-          max-width: 500px;
-          padding: 20px;
-          background-color: rgb(244, 241, 241);
-          border-radius: 0px 20px 20px 20px;
-          color: gray;
-          font-weight: 300;
+          .message-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            
+            p {
+              max-width: 500px;
+              padding: 15px 20px;
+              background-color: #f5f5f5;
+              border-radius: 4px 20px 20px 20px;
+              color: #333;
+              font-weight: 400;
+              line-height: 1.4;
+            }
+            
+            .timestamp {
+              font-size: 12px;
+              color: #999;
+              margin-top: 2px;
+            }
+          }
         }
       }
     }
 
     hr {
       height: 0;
-      border: 0.5px solid rgb(232, 230, 230);
-      margin-bottom: 20px;
+      border: 0.5px solid #eee;
+      margin: 20px 0;
     }
 
     .write {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 0 30px;
 
       textarea {
-        width: 80%;
-        height: 100px;
-        padding: 10px;
-        border: 1px solid lightgray;
-        border-radius: 10px;
+        flex: 1;
+        height: auto;
+        padding: 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+        resize: none;
+        
+        &:focus {
+          outline: none;
+          border-color: #1dbf73;
+        }
       }
 
-      button{
+      button {
+        padding: 12px 24px;
         background-color: #1dbf73;
-        padding: 20px;
         color: white;
         font-weight: 500;
         border: none;
-        border-radius: 10px;
+        border-radius: 8px;
         cursor: pointer;
-        width: 100px;
+        transition: background-color 0.2s;
+        min-width: 100px;
+
+        &:hover {
+          background-color: darken(#1dbf73, 5%);
+        }
+        
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
       }
     }
   }

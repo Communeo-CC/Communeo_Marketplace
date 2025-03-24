@@ -3,11 +3,11 @@ import Conversation from "../models/conversation.model.js";
 
 export const createConversation = async (req, res, next) => {
   const newConversation = new Conversation({
-    id: req.isSeller ? req.userId + req.body.to : req.body.to + req.userId,
-    sellerId: req.isSeller ? req.userId : req.body.to,
-    buyerId: req.isSeller ? req.body.to : req.userId,
-    readBySeller: req.isSeller,
-    readByBuyer: !req.isSeller,
+    id: req.body.id || (req.isSeller ? req.userId + req.body.to : req.body.to + req.userId),
+    sellerId: req.body.sellerId || (req.isSeller ? req.userId : req.body.to),
+    buyerId: req.body.buyerId || (req.isSeller ? req.body.to : req.userId),
+    readBySeller: true,
+    readByBuyer: true,
   });
 
   try {
@@ -24,8 +24,6 @@ export const updateConversation = async (req, res, next) => {
       { id: req.params.id },
       {
         $set: {
-          // readBySeller: true,
-          // readByBuyer: true,
           ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
         },
       },
@@ -50,9 +48,14 @@ export const getSingleConversation = async (req, res, next) => {
 
 export const getConversations = async (req, res, next) => {
   try {
-    const conversations = await Conversation.find(
-      req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
-    ).sort({ updatedAt: -1 });
+    // Find conversations where the user is either seller or buyer
+    const conversations = await Conversation.find({
+      $or: [
+        { sellerId: req.userId },
+        { buyerId: req.userId }
+      ]
+    }).sort({ updatedAt: -1 });
+    
     res.status(200).send(conversations);
   } catch (err) {
     next(err);

@@ -1,16 +1,19 @@
 .add {
   display: flex;
   justify-content: center;
+  padding: 50px 0;
 
   .container {
     width: 1400px;
-    padding: 50px 0px;
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 
     h1 {
-      width: max-content;
+      color: #333;
       margin-bottom: 30px;
-      color: gray;
-      font-weight: 300;
+      font-size: 28px;
     }
 
     .sections {
@@ -18,70 +21,207 @@
       justify-content: space-between;
       gap: 100px;
 
-      label {
-        color: gray;
-        font-size: 18px;
-      }
-
-      .info,
-      .details {
+      .info {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        justify-content: space-between;
+        gap: 15px;
 
-        input,
-        select,
-        textarea {
-          padding: 20px;
+        label {
+          color: #555;
+          font-size: 16px;
+          font-weight: 500;
         }
 
-        .images{
-          display: flex;
-          align-items: center;
-          gap: 20px;
+        input, select, textarea {
+          padding: 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          outline: none;
+          transition: border-color 0.3s ease;
+          font-size: 15px;
 
-          .imagesInputs{
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+          &:focus {
+            border-color: #a53b14;
+          }
+        }
+
+        select {
+          color: #333;
+          cursor: pointer;
+
+          option {
+            padding: 10px;
+          }
+        }
+
+        .imageInput {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          input[type="file"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px dashed #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            
+            &:hover {
+              border-color: #a53b14;
+            }
+
+            &::-webkit-file-upload-button {
+              background: #f5f5f5;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 8px 12px;
+              cursor: pointer;
+              color: #555;
+              font-size: 14px;
+              margin-right: 10px;
+              transition: all 0.3s ease;
+
+              &:hover {
+                background: #eee;
+              }
+            }
+          }
+
+          button {
+            padding: 12px 20px;
+            white-space: nowrap;
+            background-color: #a53b14;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background-color: darken(#a53b14, 10%);
+            }
+
+            &:disabled {
+              background-color: #ccc;
+              cursor: not-allowed;
+            }
+
+            &.clearBtn {
+              background-color: transparent;
+              border: 1px solid #a53b14;
+              color: #a53b14;
+
+              &:hover:not(:disabled) {
+                background-color: #fff5f3;
+              }
+
+              &:disabled {
+                border-color: #ccc;
+                color: #ccc;
+                background-color: transparent;
+              }
+            }
           }
         }
 
         button {
-          border: none;
-          padding: 20px;
+          padding: 15px;
+          background-color: #a53b14;
           color: white;
           font-weight: 500;
-          font-size: 18px;
-          background-color: #1dbf73;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
           cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: darken(#a53b14, 10%);
+          }
+        }
+      }
+
+      .details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        label {
+          color: #555;
+          font-size: 16px;
+          font-weight: 500;
         }
 
-        .add{
-          display: flex;
-          justify-content: space-between;
+        input, textarea {
+          padding: 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          outline: none;
+          transition: border-color 0.3s ease;
+          font-size: 15px;
 
-          input{
-            width: 80%;
+          &:focus {
+            border-color: #a53b14;
           }
         }
 
-        .addedFeatures{
+        .add {
           display: flex;
-          gap: 20px;
+          gap: 10px;
 
-          button{
-            height: 30px;
-            font-size: 12px;
-            font-weight: 400;
-            background: transparent;
-            color: red;
-            border: 1px solid red;
-            display: flex;
-            align-items: center;
-            gap: 20px;
+          input {
+            width: 80%;
+          }
+
+          button {
+            padding: 15px;
+            background-color: #a53b14;
+            color: white;
+            font-weight: 500;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+              background-color: darken(#a53b14, 10%);
+            }
+          }
+        }
+
+        .addedFeatures {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+
+          .item {
+            button {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              padding: 8px 15px;
+              background-color: transparent;
+              border: 1px solid #a53b14;
+              color: #a53b14;
+              border-radius: 20px;
+              font-size: 14px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+
+              &:hover {
+                background-color: #a53b14;
+                color: white;
+              }
+
+              span {
+                font-size: 12px;
+                font-weight: bold;
+              }
+            }
           }
         }
       }
