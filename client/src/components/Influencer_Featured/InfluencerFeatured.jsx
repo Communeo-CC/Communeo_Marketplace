@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./InfluencerFeatured.scss";
 import { useNavigate } from "react-router-dom";
-import GIF3 from "../../assets/GIF3.gif";
+import GIF3 from "../../assets/influencer.gif";
 
 function InfluencerFeatured() {
   const [input, setInput] = useState("");

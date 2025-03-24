@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
 
-  background: linear-gradient(145deg, #ff9d00 75% , #fb771f 25% ); 
+  background: linear-gradient(145deg, #f3c18c 75% , #a53b14 25% ); 
   padding: 20px;
   color: rgb(17, 16, 16);
   box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.3);
@@ -34,7 +34,7 @@
     }
 
     .search {
-      background-color: #fb771f;
+      background-color: #ecd9ab;
       border-radius: 5px;
       display: flex;
       align-items: center;
@@ -42,7 +42,7 @@
       overflow: hidden;
 
       .searchInput {
-        background-color: #fb771f;
+        background-color: #ecd9ab;
         border-radius: 5px;
         display: flex;
         align-items: center;
@@ -55,7 +55,7 @@
         }
 
         input {
-          background-color: #fb771f;
+          background-color: #ecd9ab;
           border: 5px;
           outline: none;
 
@@ -69,7 +69,7 @@
         width: 120px;
           height: 50px;
           border: none;
-          background-color: #ff5608;
+          background-color: #fc841b;
           color: rgb(22, 21, 21);
           align-self: flex-end;
           cursor: pointer;
