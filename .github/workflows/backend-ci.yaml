@@ -9,35 +9,31 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'yarn'
+          cache-dependency-path: api/yarn.lock  # Pointing to the backend yarn.lock
 
       - name: Install dependencies
         run: |
           cd api
           yarn install
 
-      - name: Lint (Optional)
+      - name: Run tests (if available)
         run: |
           cd api
-          yarn lint || echo "Linting failed but continuing..."
+          yarn test
 
-      - name: Run Tests (If applicable)
+      - name: Lint code
         run: |
           cd api
-          yarn test || echo "No tests found, skipping..."
-
-      - name: Start Backend Server
-        run: |
-          cd api
-          yarn start &
+          yarn lint
