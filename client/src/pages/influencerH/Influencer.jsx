@@ -14,6 +14,7 @@ import '../../styles/main.scss'
 import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
 import QuickActions from '../../components/QuickActions/QuickActions';
 import BenchmarkComparison from '../../components/BenchmarkComparison/BenchmarkComparison';
+import DarkModeToggle from '../../components/DarkModeToggle/DarkModeToggle';
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -50,6 +51,7 @@ function Influencer() {
 
   return (
     <div classname = "Influencer">
+      <DarkModeToggle />
       <InfluencerFeatured />
     <div className="app">
       <div className="header">
