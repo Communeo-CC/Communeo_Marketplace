@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 18
           cache: 'yarn'
-          cache-dependency-path: api\yarn.lock  # ✅ Correct path for backend yarn.lock
+          cache-dependency-path: Communeo_Marketplace/api/yarn.lock  # ✅ Correct path for backend yarn.lock
 
       # 3. Install backend dependencies
       - name: Install dependencies
