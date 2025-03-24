@@ -10,8 +10,12 @@ import { Card, CardContent } from '../../components/components_yt/ui/card';
 import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
-import '../../styles/main.scss';
-import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
+import '../../styles/main.scss'
+import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
+import QuickActions from '../../components/QuickActions/QuickActions';
+import BenchmarkComparison from '../../components/BenchmarkComparison/BenchmarkComparison';
+import DarkModeToggle from '../../components/DarkModeToggle/DarkModeToggle';
+
 
 function Influencer() {
   const [apiKey] = useState(import.meta.env.VITE_YOUTUBE_API_KEY || '');
@@ -52,6 +56,11 @@ function Influencer() {
   const isCreatorProfileRoute = location.pathname.includes('/influencer/');
 
   return (
+
+    <div classname = "Influencer">
+      <DarkModeToggle />
+      <InfluencerFeatured />
+
     <div className="app">
       {!isCreatorProfileRoute && <InfluencerFeatured />}
       {!isCreatorProfileRoute && 
@@ -136,8 +145,14 @@ function Influencer() {
             }
           />
         </Routes>
-      </div>
 
+      </div> 
+        <BenchmarkComparison />
+        <QuickActions />
+        <VideoAnalyticsSummary />
+        <UpcomingFeatures />
+      </div>
+      
       {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
       {!isCreatorProfileRoute && <UpcomingFeatures />}
     </div>

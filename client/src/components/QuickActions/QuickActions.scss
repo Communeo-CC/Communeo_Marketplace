@@ -1,0 +1,88 @@
+.quick-actions {
+    padding: 40px 0;
+    background-color: white;
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    
+    .actions-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    
+    .action-button {
+      display: flex;
+      align-items: center;
+      background-color: #f8f9fa;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: calc(50% - 8px);
+      max-width: 320px;
+      text-align: left;
+      
+      &:hover {
+        background-color: #f0f4f8;
+        border-color: #d1d5db;
+        transform: translateY(-2px);
+      }
+      
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+    
+    .action-icon {
+      font-size: 24px;
+      margin-right: 16px;
+      min-width: 30px;
+      text-align: center;
+    }
+    
+    .action-info {
+      h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin: 0 0 4px 0;
+      }
+      
+      p {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .action-button {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .actions-container {
+        flex-direction: column;
+      }
+      
+      .action-button {
+        width: 100%;
+      }
+    }
+  }

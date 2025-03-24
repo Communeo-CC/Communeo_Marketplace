@@ -1,0 +1,163 @@
+.benchmark-comparison {
+    padding: 50px 0;
+    background-color: #f5f7fa;
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    
+    .section-description {
+      font-size: 16px;
+      color: #d50404;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .benchmarks-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .benchmark-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    .metric-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    
+    .score-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .score-item {
+      flex: 1;
+      text-align: center;
+    }
+    
+    .your-score .score-value {
+      color: #f67f00;
+      font-weight: 700;
+    }
+    
+    .industry-avg .score-value {
+      color: #bb3535;
+    }
+    
+    .score-value {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    
+    .score-label {
+      font-size: 14px;
+      color: #d73f3f;
+    }
+    
+    .comparison-indicator {
+      width: 40px;
+      text-align: center;
+      font-size: 24px;
+      
+      .positive {
+        color: #10b981;
+      }
+      
+      .negative {
+        color: #ef4444;
+      }
+    }
+    
+    .benchmark-bar {
+      position: relative;
+      height: 12px;
+      background-color: #ffffff;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    
+    .your-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: #fd7600;
+      border-radius: 6px;
+    }
+    
+    .industry-marker, .top-marker {
+      position: absolute;
+      top: -10px;
+      transform: translateX(-50%);
+      
+      .marker-line {
+        width: 2px;
+        height: 32px;
+        background-color: #dba770;
+      }
+      
+      .marker-label {
+        font-size: 12px;
+        color: #6b7280;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        margin-top: 4px;
+      }
+    }
+    
+    .industry-marker .marker-line {
+      background-color: #6b7280;
+    }
+    
+    .top-marker .marker-line {
+      background-color: #ffa203;
+    }
+    
+    .benchmark-footer {
+      margin-top: 25px;
+      text-align: center;
+    }
+    
+    .view-details-link {
+      font-size: 14px;
+      color: #f6993b;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .score-value {
+        font-size: 20px;
+      }
+      
+      .benchmark-card {
+        padding: 15px;
+      }
+    }
+  }
