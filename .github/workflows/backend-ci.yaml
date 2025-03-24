@@ -13,40 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Set up Node.js and Cache Yarn dependencies
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'yarn'
-          cache-dependency-path: api\yarn.lock  # ✅ Correct path for backend yarn.lock
+          cache-dependency-path: api/yarn.lock  # Pointing to the backend yarn.lock
 
-      # 3. Install backend dependencies
       - name: Install dependencies
         run: |
           cd api
           yarn install
 
-      # 4. Lint the code (Optional)
-      - name: Lint (Optional)
+      - name: Run tests (if available)
         run: |
           cd api
           yarn test
 
-      # 5. Run Tests (If applicable)
-      - name: Run Tests (If applicable)
+      - name: Lint code
         run: |
           cd api
-          yarn test || echo "No tests found, skipping..."
-
-      # 6. You don't need to start the server in CI unless necessary
-      # If running the server is part of your test, you can keep this.
-      # Otherwise, remove this section for CI-only testing.
-      - name: Start Backend Server (Optional)
-        run: |
-          cd api
-          yarn start &
+          yarn lint
