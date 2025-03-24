@@ -36,4 +36,18 @@
       font-size: 14px;
       font-weight: 500;
     }
+    // Add to your SCSS file
+:root {
+    --primary-color: #3b82f6;
+    --secondary-color: #4f46e5;
+    --background-light: #f8f9fa;
+    --text-primary: #333;
+    --text-secondary: #666;
+  }
+  
+  // Then update color values in your CSS
+  .element {
+    color: var(--primary-color);
+    background-color: var(--background-light);
+  }
   }
