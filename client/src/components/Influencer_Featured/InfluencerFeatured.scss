@@ -1,0 +1,108 @@
+.influencerFeatured {
+  height: 600px;
+  display: flex;
+  justify-content: center;
+
+  background: linear-gradient(145deg, #f3c18c 75% , #a53b14 25% ); 
+  padding: 20px;
+  color: rgb(17, 16, 16);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.3);
+
+  .container {
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    // flex: 1;
+
+    h1 {
+      font-size: 50px;
+      // color: rgb(255, 255, 255);
+      // margin-bottom: 20px;
+
+      span {
+        font-style: italic;
+        font-weight: 300;
+        color: black; // Change this to your desired color for the span
+      }
+    }
+
+    .search {
+      background-color: #ecd9ab;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .searchInput {
+        background-color: #ecd9ab;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        img {
+          width: 20px;
+          height: 20px;
+          margin: 10px;
+        }
+
+        input {
+          background-color: #ecd9ab;
+          border: 5px;
+          outline: none;
+
+          &::placeholder {
+            color: rgb(16, 15, 15);
+          }
+        }
+      }
+
+      button {
+        width: 120px;
+          height: 50px;
+          border: none;
+          background-color: #fc841b;
+          color: rgb(22, 21, 21);
+          align-self: flex-end;
+          cursor: pointer;
+      }
+    }
+
+    .popular {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      span {
+        width: max-content;
+        color: black;
+      }
+
+      button {
+        width: max-content;
+        color: black;
+        border: 1px solid rgb(12, 12, 12);
+        padding: 5px 10px;
+        border-radius: 20px;
+        background-color: transparent;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .right {
+    height: 100%;
+
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}

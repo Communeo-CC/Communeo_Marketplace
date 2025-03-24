@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { Users, Search, SlidersHorizontal, Filter, ExternalLink, Youtube, ArrowUpDown } from 'lucide-react';
+import { Users, Search, SlidersHorizontal, Filter, ExternalLink, Youtube, ArrowUpDown, MessagesSquare, RefreshCw } from 'lucide-react';
 import { formatNumber } from '../../utils/formatNumber';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import newRequest from '../../utils/newRequest';
+import axios from 'axios';
+import './CreatorsList.scss';
 
 const SUBSCRIBER_RANGES = {
   'all': 'All Influencers',
@@ -26,13 +29,129 @@ const SORT_OPTIONS = {
   'views-asc': 'Least Views'
 };
 
-export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
+export function CreatorsList() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [subscriberRange, setSubscriberRange] = useState('all');
   const [activeFilters, setActiveFilters] = useState([]);
   const [sortBy, setSortBy] = useState('name-asc');
+  const [creators, setCreators] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+
+  // Load creators on component mount
+  useEffect(() => {
+    loadCreators();
+  }, []);
+
+  const fetchYouTubeDetails = async (channelId) => {
+    try {
+      if (!channelId || !channelId.startsWith('UC')) {
+        console.warn('Invalid channel ID format:', channelId);
+        setError('Invalid channel ID format. Channel ID must start with "UC"');
+        return null;
+      }
+
+      console.log('Fetching details for channel:', channelId);
+      const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`;
+      console.log('API URL:', url);
+
+      const response = await axios.get(url);
+      console.log('YouTube API Response:', response.data);
+
+      if (!response.data.items || response.data.items.length === 0) {
+        console.warn(`No channel found for ID: ${channelId}`);
+        setError(`Channel not found: ${channelId}. Please verify the channel ID is correct.`);
+        return null;
+      }
+
+      const channel = response.data.items[0];
+      return {
+        title: channel.snippet.title,
+        description: channel.snippet.description,
+        thumbnailUrl: channel.snippet.thumbnails.default.url,
+        statistics: channel.statistics,
+        channelId: channelId,
+        id: channelId
+      };
+    } catch (err) {
+      console.error('YouTube API Error:', {
+        message: err.message,
+        response: err.response?.data,
+        channelId: channelId
+      });
+      
+      if (err.response?.status === 403) {
+        setError('YouTube API key error: Please check your API key configuration');
+      } else if (err.response?.status === 400) {
+        setError(`Invalid channel ID format: ${channelId}. Please verify the channel ID is correct.`);
+      } else {
+        setError(`Failed to fetch YouTube channel details: ${err.message}`);
+      }
+      return null;
+    }
+  };
+
+  const loadCreators = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      // First, get all channels from our database
+      const response = await newRequest.get('/channels');
+      const channels = response.data;
+      console.log('Loaded channels from database:', channels);
+
+      // Fetch YouTube details for each channel
+      const creatorPromises = channels.map(async (channel) => {
+        const youtubeDetails = await fetchYouTubeDetails(channel.channelId);
+        if (youtubeDetails) {
+          return {
+            ...youtubeDetails,
+            id: channel.channelId,
+            isRegistered: true,
+            email: channel.email || '',
+            username: channel.username || '',
+            userId: channel.userId || '',
+            statistics: youtubeDetails.statistics
+          };
+        }
+        return null;
+      });
+
+      const creatorDetails = (await Promise.all(creatorPromises)).filter(creator => creator !== null);
+      console.log('Processed creator details:', creatorDetails);
+      
+      // Save to localStorage and update state
+      localStorage.setItem('youtubeInfluencers', JSON.stringify(creatorDetails));
+      setCreators(creatorDetails);
+    } catch (err) {
+      const errorMessage = 'Failed to load creators: ' + (err.response?.data?.message || err.message);
+      setError(errorMessage);
+      console.error('Error loading creators:', {
+        error: err,
+        message: err.message,
+        response: err.response?.data
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const syncCreators = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      await loadCreators(); // Just reload the creators since we're fetching from channels
+    } catch (err) {
+      setError('Failed to sync creators');
+      console.error('Error syncing creators:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const isInSubscriberRange = (subscriberCount) => {
     const count = parseInt(subscriberCount);
@@ -77,13 +196,13 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
         case 'name-desc':
           return b.title.localeCompare(a.title);
         case 'subscribers-desc':
-          return parseInt(b.subscriberCount) - parseInt(a.subscriberCount);
+          return parseInt(b.statistics?.subscriberCount || 0) - parseInt(a.statistics?.subscriberCount || 0);
         case 'subscribers-asc':
-          return parseInt(a.subscriberCount) - parseInt(b.subscriberCount);
+          return parseInt(a.statistics?.subscriberCount || 0) - parseInt(b.statistics?.subscriberCount || 0);
         case 'views-desc':
-          return parseInt(b.viewCount) - parseInt(a.viewCount);
+          return parseInt(b.statistics?.viewCount || 0) - parseInt(a.statistics?.viewCount || 0);
         case 'views-asc':
-          return parseInt(a.viewCount) - parseInt(b.viewCount);
+          return parseInt(a.statistics?.viewCount || 0) - parseInt(b.statistics?.viewCount || 0);
         default:
           return 0;
       }
@@ -93,18 +212,56 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
   const filteredCreators = sortCreators(
     creators.filter(creator => {
       const matchesSearch = creator.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesSubscribers = isInSubscriberRange(creator.subscriberCount);
+      const matchesSubscribers = isInSubscriberRange(creator.statistics?.subscriberCount || 0);
       return matchesSearch && matchesSubscribers;
     })
   );
 
-  const openYouTubeChannel = (channelId) => {
-    window.open(`https://youtube.com/channel/${channelId}`, '_blank');
-  };
-
   const handleViewProfile = (creator) => {
     const urlSafeTitle = creator.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     navigate(`/influencer/${creator.id}/${urlSafeTitle}`);
+  };
+
+  const handleContact = async (creator) => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+
+    if (!creator.userId) {
+      alert("This influencer hasn't registered on the platform yet.");
+      return;
+    }
+
+    try {
+      // Generate a unique conversation ID that's consistent regardless of who initiates
+      const conversationId = [currentUser._id, creator.userId].sort().join('_');
+      
+      try {
+        // Try to get existing conversation
+        const res = await newRequest.get(`/conversations/single/${conversationId}`);
+        navigate(`/message/${res.data.id}`);
+      } catch (err) {
+        if (err.response?.status === 404) {
+          // Create new conversation
+          const res = await newRequest.post(`/conversations/`, {
+            to: creator.userId,
+            sellerId: creator.userId, // Influencer is considered the seller
+            buyerId: currentUser._id,
+            id: conversationId
+          });
+          navigate(`/message/${res.data.id}`);
+        } else {
+          console.error("Error creating conversation:", err);
+          alert("Failed to start conversation. Please try again.");
+        }
+      }
+    } catch (err) {
+      console.error("Error in handleContact:", err);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -123,6 +280,15 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
                 </div>
               )}
               <div className="flex items-center gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={syncCreators}
+                  disabled={loading}
+                >
+                  <RefreshCw className={`btn-icon ${loading ? 'animate-spin' : ''}`} />
+                  {loading ? 'Syncing...' : 'Sync Creators'}
+                </Button>
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-[180px]">
                     <ArrowUpDown className="mr-2 h-4 w-4" />
@@ -143,6 +309,11 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
               </div>
             </div>
           </div>
+          {error && (
+            <div className="error-message mt-2 text-red-500">
+              {error}
+            </div>
+          )}
         </CardHeader>
         <CardContent>
           <div className="search-container">
@@ -166,47 +337,54 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
                     />
                   </div>
                   <div className="creator-info">
-                    <h3 className="creator-name">{creator.title}</h3>
+                    <h3 className="creator-name">
+                      {creator.title}
+                      {creator.isRegistered && (
+                        <span className="registered-badge">Registered</span>
+                      )}
+                    </h3>
                     <div className="creator-stats">
                       <div className="stat-item">
                         <p className="stat-label">Subscribers</p>
                         <p className="stat-value">
-                          {formatNumber(parseInt(creator.subscriberCount))}
+                          {formatNumber(parseInt(creator.statistics?.subscriberCount || 0))}
                         </p>
                       </div>
                       <div className="stat-item">
                         <p className="stat-label">Views</p>
                         <p className="stat-value">
-                          {formatNumber(parseInt(creator.viewCount))}
+                          {formatNumber(parseInt(creator.statistics?.viewCount || 0))}
                         </p>
                       </div>
                       <div className="stat-item">
                         <p className="stat-label">Videos</p>
                         <p className="stat-value">
-                          {formatNumber(parseInt(creator.videoCount))}
+                          {formatNumber(parseInt(creator.statistics?.videoCount || 0))}
                         </p>
                       </div>
                     </div>
+                    {creator.isRegistered && (
+                      <div className="creator-contact">
+
+                      </div>
+                    )}
                     <div className="creator-footer">
-                      <p className="creator-about">
-                        {creator.about || 'No notes added yet'}
-                      </p>
                       <div className="creator-actions">
                         <Button
                           variant="outline"
-                          size="sm"
-                          onClick={() => openYouTubeChannel(creator.id)}
-                        >
-                          <Youtube className="btn-icon" />
-                          View Channel
-                        </Button>
-                        <Button
-                          variant="default"
                           size="sm"
                           onClick={() => handleViewProfile(creator)}
                         >
                           <ExternalLink className="btn-icon" />
                           View Profile
+                        </Button>
+                        <Button
+                          variant="default"
+                          size="sm"
+                          onClick={() => handleContact(creator)}
+                        >
+                          <MessagesSquare className="btn-icon" />
+                          Connect Now
                         </Button>
                       </div>
                     </div>
@@ -215,9 +393,16 @@ export function CreatorsList({ apiKey, creators, onCreatorsChange }) {
               </Card>
             ))}
 
-            {filteredCreators.length === 0 && (
+            {filteredCreators.length === 0 && !loading && (
               <div className="empty-state">
                 No influencers found matching your criteria
+              </div>
+            )}
+
+            {loading && (
+              <div className="loading-state">
+                <RefreshCw className="animate-spin h-8 w-8 text-gray-400" />
+                <p>Loading creators...</p>
               </div>
             )}
           </div>

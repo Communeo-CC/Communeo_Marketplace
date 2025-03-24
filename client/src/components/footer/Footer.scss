@@ -1,223 +1,251 @@
-
-//$primary-color: #a53b14;
-//$background-color: rgb(255, 116, 16);
-// Variables
-$primary-color: #a53b14;
-$background-color: rgb(255, 116, 16);
-$text-color: #0a0a0a;
-$text-muted: #0c0c0c;
-$border-color: #040000;
-$border-color-light: #000000;
-$hover-transition: all 0.3s ease;
-
-// Footer Styles
 .footer {
-  background-color: $background-color;
-  color: $text-color;
-  padding: 3rem 0;
-
+  background-color: #a53b14;
+  color: white;
+  padding: 50px 0 20px;
+  font-family: "Montserrat", sans-serif;
+  
   .container {
-    width: 100%;
-    max-width: 1200px;
+    width: 1400px;
     margin: 0 auto;
-    padding: 0 1rem;
-  }
-
-  // Grid Layout
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-
-    @media (min-width: 576px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    @media (min-width: 992px) {
-      grid-template-columns: 2fr 1fr 1fr 1fr;
+    padding: 0 20px;
+    
+    @media (max-width: 1400px) {
+      width: 100%;
     }
   }
-
-  // Company Section
-  .footer-company {
-    @media (min-width: 992px) {
-      grid-column: span 2;
-    }
-  }
-
-  .footer-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
-  .footer-description {
-    color: $text-muted;
-    margin-bottom: 1rem;
-    max-width: 400px;
-  }
-
-  // Social Links
-  .social-links {
+  
+  .top {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .social-link {
-    color: $text-color;
-    transition: $hover-transition;
-
-    &:hover {
-      color: $primary-color;
-    }
-
-    i {
-      font-size: 1.25rem;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
     }
   }
-
-  // Section Headings
-  .footer-heading {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid $border-color;
-  }
-
-  // Link Lists
-  .footer-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
-    li {
-      margin-bottom: 0.5rem;
+  
+  .logo-section {
+    flex: 2;
+    max-width: 320px;
+    
+    .logo {
+      font-size: 34px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      
+      .dot {
+        font-weight: bold;
+        color: #ffffff;
+      }
+    }
+    
+    .tagline {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 16px;
+      
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: white;
+          color: #a53b14;
+          transform: translateY(-3px);
+        }
+        
+        i {
+          font-size: 16px;
+        }
+      }
     }
   }
-
-  .footer-link {
-    color: $text-color;
-    text-decoration: none;
-    transition: $hover-transition;
-
-    &:hover {
-      color: $primary-color;
-    }
-  }
-
-  // Contact Items
-  .contact-item {
+  
+  .footer-nav {
+    flex: 3;
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-
-    i {
-      margin-right: 0.5rem;
-      color: $text-muted;
-      margin-top: 0.125rem;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    
+    @media (max-width: 768px) {
+      gap: 30px;
+    }
+    
+    @media (max-width: 576px) {
+      flex-direction: column;
+      gap: 25px;
     }
   }
-
-  // Newsletter
-  .newsletter-text {
-    color: $text-muted;
-    margin-bottom: 1rem;
+  
+  .footer-column {
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: relative;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 30px;
+        height: 2px;
+        background-color: white;
+      }
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        margin-bottom: 12px;
+        
+        .link {
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          transition: all 0.3s ease;
+          display: inline-block;
+          
+          &:hover {
+            color: white;
+            transform: translateX(3px);
+          }
+        }
+      }
+    }
+    
+    .contact-info {
+      li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        
+        i {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 16px;
+        }
+        
+        span {
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
   }
-
-  .newsletter-form {
+  
+  .bottom {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .newsletter-input {
-    padding: 0.5rem;
-    background-color: darken($background-color, 3%);
-    border: 1px solid $border-color;
-    border-radius: 0.25rem;
-    color: $text-color;
-
-    &::placeholder {
-      color: $text-muted;
-    }
-
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
-    }
-  }
-
-  .newsletter-button {
-    padding: 0.5rem;
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: $hover-transition;
-
-    &:hover {
-      background-color: darken($primary-color, 10%);
-    }
-  }
-
-  // Footer Bottom
-  .footer-bottom {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid $border-color;
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
+    
+    @media (max-width: 576px) {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+    
+    .copyright {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+    }
+    
+    .legal {
+      display: flex;
+      gap: 24px;
+      
+      .link {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-weight: 300;
+        
+        &:hover {
+          color: white;
+        }
+      }
     }
   }
+}
 
-  .copyright {
-    font-size: 0.875rem;
-    color: $text-muted;
+// If header has a light/dark state, add this to match
+.light-mode .footer {
+  background-color: white;
+  color: black;
+  
+  .logo .dot {
+    color: #a53b14;
   }
-
-  .legal-links {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
-
-    @media (min-width: 768px) {
-      margin-top: 0;
-    }
-  }
-
-  .legal-link {
-    font-size: 0.875rem;
-    color: $text-muted;
-    text-decoration: none;
-    transition: $hover-transition;
-
+  
+  .social-link {
+    background-color: rgba(165, 59, 20, 0.1);
+    color: #a53b14;
+    
     &:hover {
-      color: $primary-color;
+      background-color: #a53b14;
+      color: white;
     }
   }
-
-  // Utility
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+  
+  .footer-column {
+    h3:after {
+      background-color: #a53b14;
+    }
+    
+    .link {
+      color: rgba(0, 0, 0, 0.7);
+      
+      &:hover {
+        color: #a53b14;
+      }
+    }
+    
+    .contact-info {
+      li {
+        i {
+          color: #a53b14;
+        }
+        
+        span {
+          color: rgba(0, 0, 0, 0.7);
+        }
+      }
+    }
+  }
+  
+  .bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    
+    .copyright {
+      color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .legal .link {
+      color: rgba(0, 0, 0, 0.7);
+      
+      &:hover {
+        color: #a53b14;
+      }
+    }
   }
 }

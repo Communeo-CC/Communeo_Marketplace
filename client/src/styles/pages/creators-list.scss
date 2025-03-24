@@ -89,7 +89,11 @@
           }
           
           .creator-actions {
-            @include flex(row, flex-start, center, $spacing-2);
+            @include flex(row, flex-end, center, $spacing-2); // Align buttons to the right
+
+            @include responsive(md) {
+              margin-left: auto; // Push buttons to the right on medium+ screens
+            }
           }
         }
       }

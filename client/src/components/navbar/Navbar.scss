@@ -3,79 +3,77 @@
   flex-direction: column;
   align-items: center;
   background-color: #a53b14;
-  color: rgb(255, 255, 255);
+  color: white;
   position: sticky;
   top: 0;
   z-index: 999;
   transition: 0.5s all ease;
   border-bottom: 1px solid #00000014;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
+  
   &.active {
-    background-color: rgb(255, 116, 16);
+    background-color: #a53b14;
     color: black;
-
-    button {
-      background-color:rgb(255, 116, 16)!important;
-      color: #0f0e0e !important;
-      border: 1px solid #0d0d0d !important;
+    
+    .container .logo .dot {
+      color: #0c0c0c;
     }
-
-    .dot {
-      font-weight: bold !important;
-      color: #070707 !important;
+    
+    button {
+      background-color: #a53b14 !important;
+      color: #0c0c0c !important;
+      border: 1px solid rgb(10, 10, 10) !important;
     }
   }
-
+  
   .container {
-    width: 100%;
-    max-width: 1400px;
+    width: 1400px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 20px;
-
+    padding: 20px 0px;
+    
     .logo {
       font-size: 34px;
       font-weight: bold;
-
+      
       .dot {
         font-weight: bold;
         color: #ffffff;
       }
     }
-
+    
     .links {
       display: flex;
       align-items: center;
       gap: 24px;
       font-family: "Montserrat", sans-serif;
       font-weight: 500;
-
+      
       span {
         white-space: nowrap;
       }
-
+      
       .user {
         display: flex;
         align-items: center;
         gap: 10px;
         cursor: pointer;
         position: relative;
-
+        
         img {
           width: 32px;
           height: 32px;
           border-radius: 50%;
           object-fit: cover;
         }
-
+        
         .options {
           position: absolute;
           top: 50px;
           right: 0;
           padding: 20px;
-          background-color: rgb(255, 255, 255);
+          background-color: white;
           border-radius: 10px;
           z-index: 999;
           border: 1px solid lightgrey;
@@ -85,9 +83,22 @@
           width: 200px;
           font-weight: 300;
           color: gray;
+
+          .user-info {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
+            
+            .username {
+              font-weight: 500;
+              color: #404145;
+              font-size: 16px;
+              display: block;
+            }
+          }
         }
       }
-
+      
       button {
         color: white;
         padding: 10px 20px;
@@ -95,164 +106,29 @@
         border: 1px solid white;
         background-color: transparent;
         cursor: pointer;
-
+        
         &:hover {
           background-color: #a53b14;
           border-color: #a53b14;
         }
       }
     }
-
-    // Mobile menu button
-    .menuButton {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 20px;
-      cursor: pointer;
-
-      .line {
-        width: 100%;
-        height: 3px;
-        background-color: white;
-        transition: all 0.3s ease;
-      }
-
-      &.active {
-        .line {
-          background-color: #333;
-        }
-      }
-    }
-
-    // Mobile menu
-    .mobileMenu {
-      display: none;
-      position: absolute;
-      top: 80px;
-      left: 0;
-      width: 100%;
-      padding: 20px;
-      background-color: rgb(255, 255, 255);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      flex-direction: column;
-      gap: 15px;
-      z-index: 998;
-
-      a, span {
-        color: #333;
-        text-decoration: none;
-        font-weight: 500;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-        width: 100%;
-        display: block;
-      }
-
-      button {
-        margin-top: 10px;
-        width: 100%;
-        color: white;
-        background-color: #a53b14;
-        border: none;
-        padding: 12px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      .userMobile {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        .userInfo {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px 0;
-          border-bottom: 1px solid #eee;
-
-          img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-          }
-        }
-
-        .optionsMobile {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          padding: 10px 0;
-
-          a {
-            border-bottom: none;
-            padding: 5px 0;
-          }
-        }
-      }
-    }
   }
-
+  
   hr {
     width: calc(100% - 2px);
     height: 0;
     border-top: 0.5px solid #ebe9e9;
     border-bottom: 0.5px solid #ebe9e9;
   }
-
+  
   .menu {
-    width: 100%;
-    max-width: 1400px;
-    padding: 10px 20px;
+    width: 1400px;
+    padding: 10px 0px;
     display: flex;
     justify-content: space-between;
     color: gray;
     font-weight: 300;
     font-family: "Montserrat", sans-serif;
-    overflow-x: auto;
-  }
-}
-
-// Media queries for responsive design
-@media screen and (max-width: 768px) {
-  .navbar {
-    .container {
-      .links {
-        display: none; // Hide desktop links on mobile
-      }
-
-      .menuButton {
-        display: flex; // Show mobile menu button
-      }
-
-      .mobileMenu.active {
-        display: flex; // Show mobile menu when active
-      }
-
-      .logo {
-        font-size: 28px; // Smaller logo on mobile
-      }
-    }
-
-    .menu {
-      padding: 10px 15px;
-      font-size: 14px;
-    }
-  }
-}
-
-// Extra small devices
-@media screen and (max-width: 480px) {
-  .navbar {
-    .container {
-      padding: 15px;
-
-      .logo {
-        font-size: 24px;
-      }
-    }
   }
 }

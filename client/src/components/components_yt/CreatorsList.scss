@@ -1,0 +1,110 @@
+.creators-list {
+  /* Loading State */
+  .loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 16px;
+    width: 100%;
+    color: #666;
+    font-size: 14px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  /* Error Message */
+  .error-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d32f2f;
+    font-size: 14px;
+    font-weight: 500;
+
+    &::before {
+      content: "⚠";
+      font-size: 16px;
+    }
+  }
+
+  /* Registered Badge */
+  .registered-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #14a536;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+    vertical-align: middle;
+    font-weight: 500;
+  }
+
+  /* Creator Contact Info */
+  .creator-contact {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* Button Icons */
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+
+    &.animate-spin {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  /* Creator Footer */
+  .creator-footer {
+    display: flex;
+    justify-content: flex-end; /* Aligns children to the right */
+    width: 100%; /* Ensures the footer takes full width */
+    margin-top: 15px; /* Adds spacing above the buttons */
+  }
+
+  /* Creator Actions (Buttons) */
+  .creator-actions {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 5px; /* Adds spacing between icon and text */
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      .btn-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+/* Keyframes for Spinning Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
