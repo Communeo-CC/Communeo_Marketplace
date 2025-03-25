@@ -146,9 +146,11 @@ function Influencer() {
 
       </div> 
       </div>
-      
+      {!isCreatorProfileRoute && <BenchmarkComparison />}
+      {!isCreatorProfileRoute && <QuickActions />}
       {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
       {!isCreatorProfileRoute && <UpcomingFeatures />}
+
     </div>
   );
 }
