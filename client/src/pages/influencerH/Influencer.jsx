@@ -11,7 +11,7 @@ import { formatNumber } from '../../utils/formatNumber';
 import VideoAnalyticsSummary from '../../components/VideoAnalyticsSummary/VideoAnalyticsSummary';
 import UpcomingFeatures from '../../components/UpcomingFeatures/UpcomingFeatures';
 import '../../styles/main.scss'
-import InfluencerFeatured from '../../components/InfluencerFeatured/InfluencerFeatured';
+import InfluencerFeatured from '../../components/Influencer_Featured/InfluencerFeatured';
 import QuickActions from '../../components/QuickActions/QuickActions';
 import BenchmarkComparison from '../../components/BenchmarkComparison/BenchmarkComparison';
 import DarkModeToggle from '../../components/DarkModeToggle/DarkModeToggle';
@@ -58,8 +58,6 @@ function Influencer() {
   return (
 
     <div classname = "Influencer">
-      <DarkModeToggle />
-      <InfluencerFeatured />
 
     <div className="app">
       {!isCreatorProfileRoute && <InfluencerFeatured />}
@@ -147,10 +145,6 @@ function Influencer() {
         </Routes>
 
       </div> 
-        <BenchmarkComparison />
-        <QuickActions />
-        <VideoAnalyticsSummary />
-        <UpcomingFeatures />
       </div>
       
       {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
