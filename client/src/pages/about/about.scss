@@ -282,7 +282,7 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background: linear-gradient(45deg, #FF8C00, #FFD700);
+        background: linear-gradient(45deg, #FF8C00, #a53b14);
         padding: 4px; /* Border thickness */
         
         &::before {
@@ -292,7 +292,7 @@
           left: -3px;
           right: -3px;
           bottom: -3px;
-          background: linear-gradient(45deg, #FF8C00, #FFD700);
+          background: linear-gradient(45deg, #FF8C00, #a53b14);
           border-radius: 50%;
           z-index: -1;
           opacity: 0.5;
@@ -328,8 +328,8 @@
     }
     
     .linkedin-button {
-      background-color: #FF8C00;
-      color: white;
+      background-color: #a53b14;
+      color: rgb(5, 5, 5);
       border: none;
       padding: 0.6rem 1.2rem;
       border-radius: 25px;
@@ -343,7 +343,7 @@
       box-shadow: 0 2px 10px rgba(255, 140, 0, 0.3);
       
       &:hover {
-        background-color: #E67E00;
+        background-color: #fb6507;
         transform: scale(1.05);
       }
       
@@ -384,10 +384,11 @@
 // Vision Section
 .about-future {
   margin-bottom: 4rem;
-  background-color: #E67E00;
+  background: linear-gradient(45deg, #a53b14, #fb6507);
   padding: 3rem;
   border-radius: 10px;
   text-align: center;
+  color: rgb(9, 9, 9);
   
   h2 {
     font-size: 2rem;
@@ -419,8 +420,8 @@
   }
   
   .contact-btn {
-    background: linear-gradient(45deg, #fdc613, #fb3c07);
-    color: white;
+    background: linear-gradient(45deg, #a53b14, #fb6507);
+    color: rgb(10, 10, 10);
     border: none;
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
