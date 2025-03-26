@@ -12,6 +12,8 @@ import channelRoute from "./routes/channel.route.js";
 import videoRoute from "./routes/video.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
 import healthRoute from "./routes/health.route.js";
 import { router as sideProjectRouter } from './routes/api.js';
 
@@ -30,15 +32,35 @@ const connect = async () => {
     console.log("Connected to MongoDB!");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
+    process.exit(1); // Exit if cannot connect to database
   }
 };
 
-// Middleware
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-app.use(express.json());
+// CORS configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL 
+    : "http://localhost:5173",
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+// Security and logging middleware
+app.use(helmet());
+app.use(morgan('dev'));
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
-// Routes
+// Basic health check route
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'API is running' });
+});
+
+// API Routes
 app.use("/api/health", healthRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
@@ -49,19 +71,32 @@ app.use("/api/messages", messageRoute);
 app.use("/api/reviews", reviewRoute);
 app.use("/api/channels", channelRoute);
 app.use("/api/videos", videoRoute);
+app.use("/api/side", sideProjectRouter);
 
-// Side Project Routes
-app.use("/api/side", sideProjectRouter);  // Mount side project API under /api/side
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong!";
-  return res.status(errorStatus).send(errorMessage);
+  
+  // Log error for debugging
+  console.error(`Error ${errorStatus}: ${errorMessage}`);
+  
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+  });
 });
 
 // Start the server
-app.listen(8800, () => {
+const PORT = process.env.PORT || 8800;
+app.listen(PORT, () => {
   connect(); // Connect to MongoDB
-  console.log("Backend server is running on port 8800!");
+  console.log(`Backend server is running on port ${PORT}!`);
 });
