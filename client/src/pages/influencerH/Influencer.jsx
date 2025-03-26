@@ -56,15 +56,12 @@ function Influencer() {
   const isCreatorProfileRoute = location.pathname.includes('/influencer/');
 
   return (
-
-    <div classname = "Influencer">
-
-    <div className="app">
+    <div className="Influencer">
       {!isCreatorProfileRoute && <InfluencerFeatured />}
       {!isCreatorProfileRoute && 
       <div className="header">
         <div className="header-content">
-          <div className="stats-grid" style={{ paddingTop: '30px' }}>
+          <div className="stats-grid">
             <Card>
               <CardContent className="stat-content">
                 <div className="stat-value">{formatNumber(totalSubscribers)}</div>
@@ -143,14 +140,12 @@ function Influencer() {
             }
           />
         </Routes>
-
-      </div> 
       </div>
+
       {!isCreatorProfileRoute && <BenchmarkComparison />}
       {!isCreatorProfileRoute && <QuickActions />}
       {!isCreatorProfileRoute && <VideoAnalyticsSummary />}
       {!isCreatorProfileRoute && <UpcomingFeatures />}
-
     </div>
   );
 }
