@@ -1,0 +1,189 @@
+.edit {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  background-color: #f7f7f7;
+
+  .container {
+    width: 1400px;
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    h1 {
+      color: #333;
+      font-weight: 300;
+      margin-bottom: 30px;
+    }
+
+    .sections {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+
+      .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: space-between;
+
+        label {
+          color: #555;
+          font-size: 18px;
+        }
+
+        input, select, textarea {
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          width: 100%;
+        }
+
+        .imageInput {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          input {
+            flex: 1;
+          }
+
+          button {
+            padding: 10px 20px;
+            background-color: #1dbf73;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+
+            &:disabled {
+              background-color: #ccc;
+              cursor: not-allowed;
+            }
+
+            &.clearBtn {
+              background-color: #ff4d4d;
+            }
+          }
+        }
+
+        button {
+          padding: 20px;
+          background-color: #1dbf73;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 18px;
+          margin-top: 20px;
+
+          &:hover {
+            background-color: #19a463;
+          }
+        }
+      }
+
+      .details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        label {
+          color: #555;
+          font-size: 18px;
+        }
+
+        input, select, textarea {
+          padding: 20px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          width: 100%;
+        }
+
+        .add {
+          display: flex;
+          gap: 10px;
+
+          input {
+            flex: 1;
+          }
+
+          button {
+            padding: 10px 20px;
+            background-color: #1dbf73;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+          }
+        }
+
+        .addedFeatures {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+
+          .item {
+            background-color: #f7f7f7;
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button {
+              background: none;
+              border: none;
+              color: #ff4d4d;
+              cursor: pointer;
+              padding: 0;
+              font-size: 16px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+
+              span {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 18px;
+  color: #555;
+}
+
+.error {
+  color: #ff4d4d;
+}
+
+@media (max-width: 768px) {
+  .edit {
+    .container {
+      width: 100%;
+      padding: 20px;
+
+      .sections {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+  }
+} 
