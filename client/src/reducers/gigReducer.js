@@ -38,7 +38,11 @@ export const gigReducer = (state, action) => {
           (feature) => feature !== action.payload
         ),
       };
-
+    case "SET_GIG":
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }
