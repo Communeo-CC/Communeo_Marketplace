@@ -1,10 +1,11 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState, useEffect } from "react";
 import "./Add.scss";
 import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer";
 import upload from "../../utils/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
+import getCurrentUser from "../../utils/getCurrentUser";
 
 const categories = [
   { value: "social-media", label: "Social Media Marketing" },
@@ -18,11 +19,22 @@ const categories = [
 ];
 
 const Add = () => {
+  const currentUser = getCurrentUser();
   const [singleFile, setSingleFile] = useState(undefined);
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [state, dispatch] = useReducer(gigReducer, {
+    ...INITIAL_STATE,
+    userId: currentUser?._id
+  });
 
-  const [state, dispatch] = useReducer(gigReducer, INITIAL_STATE);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentUser?.isSeller) {
+      navigate("/");
+    }
+  }, [currentUser]);
 
   const handleChange = (e) => {
     dispatch({
@@ -76,8 +88,6 @@ const Add = () => {
     setUploading(false);
   };
 
-  const navigate = useNavigate();
-
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -92,6 +102,20 @@ const Add = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!state.title || !state.cat || !state.cover || !state.desc || !state.price) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    // Ensure user ID is set
+    if (!state.userId) {
+      alert("User session expired. Please log in again.");
+      navigate("/login");
+      return;
+    }
+
     mutation.mutate(state);
   };
 
