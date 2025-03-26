@@ -10,6 +10,7 @@ import Login from "./pages/login/Login";
 import About from "./pages/about/about";
 import Register from "./pages/register/Register";
 import Add from "./pages/add/Add";
+import Edit from "./pages/edit/Edit";
 import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
@@ -30,7 +31,9 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Navbar />
           <ScrollToTop />
-          <Outlet />
+          <main>
+            <Outlet />
+          </main>
           <Footer />
         </QueryClientProvider>
       </div>
@@ -52,6 +55,7 @@ function App() {
         { path: "/messages", element: <Messages /> },
         { path: "/message/:id", element: <Message /> },
         { path: "/add", element: <Add /> },
+        { path: "/edit/:id", element: <Edit /> },
         { path: "/gig/:id", element: <Gig /> },
         { path: "/register", element: <Register /> },
         { path: "/login", element: <Login /> },
