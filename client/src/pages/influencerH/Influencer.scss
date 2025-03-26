@@ -1,0 +1,64 @@
+.Influencer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  .app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .main-content {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .header {
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .Influencer {
+    .header {
+      padding: 15px 0;
+
+      .header-content {
+        padding: 0 15px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+    }
+
+    .main-content {
+      padding: 15px;
+    }
+  }
+}
+
+// ... existing styles ... 
