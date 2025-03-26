@@ -3,6 +3,8 @@
   color: rgb(15, 14, 14);
   padding: 40px 0 20px;
   font-family: "Montserrat", sans-serif;
+  flex-shrink: 0;
+  margin-top: auto;
   
   .container {
     width: 1200px;
