@@ -40,7 +40,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
-        {error && error}
+        {error && <div className="error-message">{error.message}</div>}
       </form>
     </div>
   );
